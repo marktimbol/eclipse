@@ -12,45 +12,47 @@ class PagesController extends Controller
 
     protected $package;
 
-    public function __construct(PackageRepositoryInterface $package) {
-
+    public function __construct(PackageRepositoryInterface $package)
+    {
         $this->package = $package;
-
     }
 
-    public function home() {
-            
-        $packages = $this->package->all();
-    	
+    public function home()
+    {        
+        $packages = $this->package->take(9);
+
         return view('public.home', compact('packages'));
     }
     
-    public function deals() {
+    public function deals()
+    {
         return view('public.deals');
     }
 
-    public function touristInformation() {
+    public function touristInformation()
+    {
     	return view('public.tourist-information');
     }
 
-    public function corporate() {
+    public function corporate()
+    {
     	return view('public.corporate');
     }
 
-    public function about() {
+    public function about()
+    {
     	return view('public.about');
-
     }
 
-    public function contact() {
+    public function contact()
+    {
     	return view('public.contact');
     }
 
-    public function changeCurrency(Request $request) {  
-
+    public function changeCurrency(Request $request)
+    {  
         session(['currency' => $request->currency]);
 
         return redirect()->back();
-
     }
 }

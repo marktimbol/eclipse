@@ -8,8 +8,6 @@
 
 @section('body_class', 'home')
 
-@inject('time', 'Eclipse\Services\Time')
-
 @section('content')
 
 	@include('public.partials._home-slideshow')
@@ -60,7 +58,6 @@
 							>
 								<defs>
 									<clipPath id="clipPath{{ $package->id }}">
-										<!-- r = 992 = hyp = Math.sqrt(960*960+250*250) -->
 										<circle class="clip" cx="960" cy="250" r="992"></circle>
 									</clipPath>
 								</defs>
@@ -131,13 +128,11 @@
 										</div><!-- .package -->
 									</div>		
 								</div>
-
-						
 							</div>
 						</div>
 					</div>
 				</div>
-
+			
 			@endforeach
 
 			<div class="text-center">

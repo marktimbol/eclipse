@@ -6,6 +6,8 @@ interface PackageRepositoryInterface {
 	
 	public function all();
 
+	public function take($number);
+
 	public function related($packageId);
 
 	public function find($id);

@@ -12,8 +12,8 @@ use Eclipse\ShoppingCart\ShoppingCart;
 |--------------------------------------------------------------------------
 */
 
-Route::get('purchase-check', function(UserRepositoryInterface $userRepo) {
-		
+Route::get('purchase-check', function(UserRepositoryInterface $userRepo)
+{		
 	$user = $userRepo->find(5);
 
 	$booking_reference = "1448455881";
@@ -23,8 +23,8 @@ Route::get('purchase-check', function(UserRepositoryInterface $userRepo) {
 	return 'done';
 });
 
-Route::get('booking-check', function(UserRepositoryInterface $userRepo) {
-		
+Route::get('booking-check', function(UserRepositoryInterface $userRepo)
+{		
 	$user = $userRepo->find(6);
 
 	$booking_reference = "1448535337";
@@ -34,8 +34,8 @@ Route::get('booking-check', function(UserRepositoryInterface $userRepo) {
 	return 'done';
 });
 
-Route::get('confirm-booking-check', function() {
-		
+Route::get('confirm-booking-check', function()
+{		
 	$booking_reference = "1448535337";
 
 	$user_id = 6;
@@ -47,12 +47,19 @@ Route::get('confirm-booking-check', function() {
 
 
 
-Route::get('cart-instance', function(ShoppingCart $cart) {
+Route::get('cart-instance', function(ShoppingCart $cart)
+{
 	return $cart->content();
 });
 
-Route::get('booking-instance', function(ShoppingCart $cart) {
+Route::get('booking-instance', function(ShoppingCart $cart)
+{
 	return $cart->contentBooking();
+});
+
+Event::listen('illuminate.query', function($query)
+{
+	// var_dump($query);
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
@@ -107,8 +114,8 @@ Route::post('auth/register', 'AuthController@postRegister');
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-	
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
+{	
 	Route::get('/', ['as' => 'admin.home', 'uses' => 'Admin\AdminController@home']);
 	
 	Route::put('packages/photos/upload', [

@@ -6,11 +6,11 @@ use App\Category;
 class CategoryRepository implements CategoryRepositoryInterface {
 	
 	public function all() {
-		return Category::latest()->get();
+		return Category::with('packages')->latest()->get();
 	}
 
 	public function find($id) {
-		return Category::findOrFail($id);
+		return Category::with('packages')->findOrFail($id);
 	}
 
 	public function store($data) {

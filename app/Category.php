@@ -8,15 +8,15 @@ class Category extends Model
 {
     protected $fillable = ['name', 'slug'];
 
-    public function setNameAttribute($name) {
-
+    public function setNameAttribute($name)
+    {
         $this->attributes['name'] = $name;
 
         $this->makeSlug($name);
     }
 
-    public function makeSlug($name) {
-        
+    public function makeSlug($name)
+    {    
         $this->attributes['slug'] = str_slug($name);
 
         $slug = str_slug($name);
@@ -36,7 +36,13 @@ class Category extends Model
         }
     }    
 
-    public function packages() {
+    public function packages()
+    {
         return $this->hasMany(Package::class);
+    }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
     }
 }
