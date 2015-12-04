@@ -1,6 +1,8 @@
 <?php
 
+use App\Package;
 use Illuminate\Database\Seeder;
+
 
 class PackageTableSeeder extends Seeder
 {
@@ -283,18 +285,163 @@ class PackageTableSeeder extends Seeder
     			'name'			=> 'Wonder Bus Tours',
     			'subtitle'		=> 'A sea & Land Adventure',
     			'description'	=>	'',
-    			'departs'		=>	'08:00',
-    			'returns'		=> 	'15:00',
-    			'duration'		=>	'7 Hours',
-    			'adult_price'	=>	'350',
-    			'child_price'	=>	'250',
+    			'departs'		=>	'12:00, 14:00',
+    			'returns'		=> 	'13:30, 15:30',
+    			'duration'		=>	'1.5 Hours',
+    			'adult_price'	=>	'145',
+    			'child_price'	=>	'95',
     			'has_time_options'	=> 0,
     			'confirm_availability'	=> 0
-    		],        				        		 		     		   		    		          		 		  		   		         		 		 	
+    		],     
 
+            [
+                'category_id'   => 5,
+                'name'          => 'Big Bus Tours',
+                'subtitle'      => 'Hop on & Hop Off',
+                'description'   =>  '',
+                'departs'       =>  '09:00',
+                'returns'       =>  '',
+                'duration'      =>  '1.5 Hours',
+                'adult_price'   =>  '220',
+                'child_price'   =>  '100',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ],  
+
+            [
+                'category_id'   => 6,
+                'name'          => 'Sea Wings Pearl Tour',
+                'subtitle'      => 'See Dubai as you’ve never seen it before',
+                'description'   =>  '',
+                'departs'       =>  '09:00',
+                'returns'       =>  '',
+                'duration'      =>  '1-2 Hours',
+                'adult_price'   =>  '950',
+                'child_price'   =>  '820',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ],    
+
+            [
+                'category_id'   => 6,
+                'name'          => 'Sea Wings Silver Tour',
+                'subtitle'      => 'See Dubai as you’ve never seen it before',
+                'description'   =>  '',
+                'departs'       =>  '09:00',
+                'returns'       =>  '',
+                'duration'      =>  '1-2 Hours',
+                'adult_price'   =>  '1199',
+                'child_price'   =>  '999',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ], 
+
+            [
+                'category_id'   => 6,
+                'name'          => 'Sea Wings Gold Tour',
+                'subtitle'      => 'See Dubai as you’ve never seen it before',
+                'description'   =>  '',
+                'departs'       =>  '09:00',
+                'returns'       =>  '',
+                'duration'      =>  '1-2 Hours',
+                'adult_price'   =>  '1225',
+                'child_price'   =>  '1115',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ], 
+
+            [
+                'category_id'   => 6,
+                'name'          => 'Helicopter Tour',
+                'subtitle'      => 'An Enchanting Birds eye view',
+                'description'   =>  '',
+                'departs'       =>  '09:00',
+                'returns'       =>  '',
+                'duration'      =>  '1-2 Hours',
+                'adult_price'   =>  '700',
+                'child_price'   =>  '700',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ],    
+
+            [
+                'category_id'   => 6,
+                'name'          => 'Hot Air Balloon Ride',
+                'subtitle'      => 'Out of this World Experience',
+                'description'   =>  '',
+                'departs'       =>  '04:30 - 05:00',
+                'returns'       =>  '08:30 - 09:30',
+                'duration'      =>  '4-5 Hours',
+                'adult_price'   =>  '950',
+                'child_price'   =>  '800',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 1
+            ],     
+
+            [
+                'category_id'   => 6,
+                'name'          => 'Sky Diving Tour',
+                'subtitle'      => 'Experience the world beneath you',
+                'description'   =>  '',
+                'departs'       =>  '',
+                'returns'       =>  '',
+                'duration'      =>  '2 Hours',
+                'adult_price'   =>  '1750',
+                'child_price'   =>  '1750',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 1
+            ],  
+
+            [
+                'category_id'   => 7,
+                'name'          => 'Deep Sea Fishing',
+                'subtitle'      => 'The catch of the day',
+                'description'   =>  '',
+                'departs'       =>  '',
+                'returns'       =>  '',
+                'duration'      =>  '4 Hours',
+                'adult_price'   =>  '350',
+                'child_price'   =>  0,
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ],   
+
+            [
+                'category_id'   => 7,
+                'name'          => 'Crab Hunting',
+                'subtitle'      => 'A Rare Crab hunting Programme',
+                'description'   =>  '',
+                'departs'       =>  '18:00',
+                'returns'       =>  '',
+                'duration'      =>  '5 Hours',
+                'adult_price'   =>  '200',
+                'child_price'   =>  '125',
+                'has_time_options'  => 0,
+                'confirm_availability'  => 0
+            ],     
 
 
     	];
+
+         foreach( $packages as $package ) {
+
+            $newPackage = new Package;
+
+            $newPackage->category_id = $package['category_id'];
+            $newPackage->name = $package['name'];
+            $newPackage->subtitle = $package['subtitle'];
+            $newPackage->description = $package['description'];
+            $newPackage->departs = $package['departs'];
+            $newPackage->returns = $package['returns'];
+            $newPackage->duration = $package['duration'];
+            $newPackage->adult_price = $package['adult_price'];
+            $newPackage->child_price  = $package['child_price'];
+            $newPackage->has_time_options = $package['has_time_options'];
+            $newPackage->confirm_availability = $package['confirm_availability'];
+
+            $newPackage->save();
+
+         }
         
     }
 }

@@ -5,6 +5,7 @@ use App\Events\UserBookedAPackage;
 use App\Events\UserPurchasedAPackage;
 use Eclipse\Repositories\User\UserRepositoryInterface;
 use Eclipse\ShoppingCart\ShoppingCart;
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes

@@ -6,15 +6,13 @@
     <div class="row">
         <div class="col-md-12">
 
-            <h1 class="page-header">All Packages</h1>
+            <h1 class="page-header">All Packages ({{ count($packages) }})</h1>
 
             <table class="table table-hover">
             	<thead>
             		<tr>
                         <th>Name</th>
                         <th>Category</th>
-            			<th>Departs</th>
-            			<th>Returns</th>
             			<th>Duration</th>
             			<th>Adult Price</th>
             			<th>Child Price</th>
@@ -35,8 +33,6 @@
                                 {{ $package->category->name }}
                             </a>
                         </td>
-            			<td>{{ $package->departs }}</td>
-            			<td>{{ $package->returns }}</td>
             			<td>{{ $package->duration }}</td>
             			<td>{{ $package->adult_price }} AED</td>
             			<td>{{ $package->child_price }} AED</td>
