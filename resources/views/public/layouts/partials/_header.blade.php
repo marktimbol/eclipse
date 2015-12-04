@@ -15,36 +15,19 @@
 						<ul class="menu">
 							<li><a href="{{ route('home') }}">Home</a></li>
 							<li><a href="{{ route('packages') }}">Packages</a>
-
 								<div class="mega-menu">
-										
 									<div class="row">
-
-										@foreach( $categories->all()->chunk(3) as $categories )
-											
-											@foreach( $categories as $category )
-
-												<div class="col m4">
-													<h4>{{ $category->name }}</h4>
-
-													<ol>
-														@foreach( $category->packages as $package )
-															<li>
-																<a href="{{ route('package', $package->slug) }}">
-																	{{ $package->name }}
-																</a>
-															</li>
-														@endforeach
-													</ol>
-
+										@foreach( $categories->all() as $category )
+											<div class="col m4">
+												<div class="category-menu">
+													<div class="category-menu__image">
+														<a href="{{ route('category', $category->slug) }}">
+															<img src="http://placehold.it/200x150" class="img-responsive">
+														</a>
+													</div>
 												</div>
-
-											@endforeach
-
-											<div class="clearfix"></div>
-
+											</div>
 										@endforeach
-
 									</div>
 								</div>
 							</li>

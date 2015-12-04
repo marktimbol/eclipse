@@ -27,7 +27,19 @@
         }
 
         .col {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
+        }
+
+        .category-menu {
+            .category-menu__image {
+                a {
+                    display: block;
+                    transition: all 0.1s ease-in;
+                    &:hover {
+                        outline: 5px solid $blue;
+                    }
+                }
+            }
         }
     }
 

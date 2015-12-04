@@ -461,7 +461,16 @@ footer .footer__links li a:hover {
 }
 
 .menu .mega-menu .col {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.menu .mega-menu .category-menu .category-menu__image a {
+  display: block;
+  transition: all 0.1s ease-in;
+}
+
+.menu .mega-menu .category-menu .category-menu__image a:hover {
+  outline: 5px solid #328fcc;
 }
 
 .menu ul ul,
