@@ -1,0 +1,74 @@
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.mt-26 {
+	margin-top: 26px;
+}
+
+.mb-35 {
+	margin-bottom: 35px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mb-0 {
+	margin-bottom: 0 !important;
+}
+
+.center-content {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	i {
+		margin: 0 5px 0px 0px;
+	}
+}
+
+.border-right {
+	border-right: 1px solid #ddd;
+}
+
+.padding-right-20 {
+	padding-right: 20px !important;
+}
+
+.padding-left-20 {
+	padding-left: 20px !important; 
+}
+
+.white-background {
+	background: white;
+}
+
+.white {
+	color: white;
+	background-color: transparent !important; //overwrite in materialize.css
+}

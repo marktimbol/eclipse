@@ -1,0 +1,102 @@
+
+header {
+	nav {
+		box-shadow: none;
+	}
+}
+
+.btn-flat {
+	padding: 0 !important;
+}
+
+.cd-hero {
+	margin-bottom: 40px;
+	.cd-hero-slider {
+		margin-top: 0;
+
+		.cd-full-width {
+			// display: flex;
+			// align-items: center;
+			// align-content: center;	
+			// flex-direction: column;
+		}
+	}
+}
+
+.owl-carousel {
+	.owl-controls {
+		position: absolute;
+		right: 30px;
+		bottom: 30px;
+
+		.owl-page {
+			span {
+				background: white !important;
+			}
+		}
+	}
+}
+
+.row {
+	margin-bottom: 20px;
+	&.no-margin-bottom {
+		margin-bottom: 0;
+	}
+}
+
+.form-control[readonly] {
+	background: white;
+}
+
+.alert {
+	ul {
+		margin: 0;
+	}
+}
+
+.fixed-action-btn {
+	bottom: 45px;
+	right: 24px;	
+	z-index: 9999 !important;
+	&.mobile-menu {
+		top: -5px;
+		right: 20px;
+
+		.btn-floating {
+			box-shadow: none !important;
+			i {
+				color: white;
+			}
+		}
+	}
+}
+
+.collapsible-header {
+	font-weight: bold;
+}
+
+.collapsible-body {
+	p, ul {
+    	padding: 1rem 2rem;
+	}
+
+	ul {
+		margin-left: 15px;
+		li {
+			list-style-type: disc !important;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.img-rounded {
+	border-radius: 3px !important;
+}
+
+.featured_package {
+	.card {
+		background: none !important;
+    	background-color: transparent !important;	
+    	box-shadow: none !important;
+	}
+}
