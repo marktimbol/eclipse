@@ -13,10 +13,9 @@ class CartController extends Controller
 {
     protected $cart;
 
-    public function __construct(ShoppingCart $cart) {
-
+    public function __construct(ShoppingCart $cart)
+    {
         $this->cart = $cart;
-
     }
 
     /**
@@ -47,10 +46,10 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-
-        if( ! $request->date ) {
-
+    public function store(Request $request)
+    {
+        if( ! $request->date )
+        {
             flash()->error('Preferred Date!', 'Please select your preferred date.');
             
             return redirect()->back();
@@ -97,7 +96,8 @@ class CartController extends Controller
     {   
         $child_quantity = intval($request->child_quantity);
 
-        if( $child_quantity < 0 ) {
+        if( $child_quantity < 0 )
+        {
             $child_quantity = 0;
         }
 

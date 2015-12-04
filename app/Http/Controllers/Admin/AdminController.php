@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    public function home() {
+    public function home()
+    {
     	return view('admin.home');
     }
 }

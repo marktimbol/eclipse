@@ -11,18 +11,20 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login() {
+    public function login()
+    {
     	return view('auth.login');
     }
 
-    public function postLogin(AuthLoginRequest $request) {
-
+    public function postLogin(AuthLoginRequest $request)
+    {
         $credentials = [
             'email' => $request->email,
             'password'  => $request->password
         ];
 
-        if( auth()->attempt($credentials, $request->remember) ) {
+        if( auth()->attempt($credentials, $request->remember) )
+        {
             return redirect()->intended('admin');
         }
 
@@ -30,21 +32,25 @@ class AuthController extends Controller
 
     }
 
-    public function register() {
+    public function register()
+    {
     	return view('auth.register');
     }
 
-    public function postRegister(AuthRegisterRequest $request) {
+    public function postRegister(AuthRegisterRequest $request)
+    {
         $user = User::create($request->all());
+     
         auth()->login($user);
 
         //fire an event that sends welcome email.
-
         return redirect()->intended('admin');
     }
 
-    public function logout() {
+    public function logout()
+    {
     	auth()->logout();
+    
     	return redirect()->route('home');
     }
 }

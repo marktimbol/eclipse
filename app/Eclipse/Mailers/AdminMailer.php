@@ -1,4 +1,5 @@
 <?php
+
 namespace Eclipse\Mailers;
 
 use App\User;
@@ -11,15 +12,15 @@ class AdminMailer extends Mailer {
 
 	protected $booking;
 
-	public function __construct(UserRepositoryInterface $user, BookingRepositoryInterface $booking) {
-
+	public function __construct(UserRepositoryInterface $user, BookingRepositoryInterface $booking)
+	{
 		$this->user = $user;
 
 		$this->booking = $booking;
 	}
 
-	public function sendPurchaseNotification(User $user, $booking_reference) {
-
+	public function sendPurchaseNotification(User $user, $booking_reference)
+	{
 		$subject = sprintf('%s: %s', companyName(), 'New Online Booking Notification');
 
 		$view = 'emails.admin.new-purchase-notification';
@@ -34,8 +35,8 @@ class AdminMailer extends Mailer {
 
 	}
 
-	public function sendBookingNotification(User $user, $booking_reference) {
-
+	public function sendBookingNotification(User $user, $booking_reference)
+	{
 		$subject = sprintf('%s: %s', companyName(), 'New Online Booking Notification.');
 
 		$view = 'emails.admin.new-booking-notification';

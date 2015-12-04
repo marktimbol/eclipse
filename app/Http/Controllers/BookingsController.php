@@ -12,23 +12,22 @@ class BookingsController extends Controller
 {
     protected $cart;
 
-    public function __construct(ShoppingCart $cart) {
-        
+    public function __construct(ShoppingCart $cart)
+    {    
         $this->cart = $cart;
     }
 	
-    public function index() {
-		
+    public function index()
+    {	
         $cart =  $this->cart->contentBooking();
 
         return view('public.booking.index', compact('cart'));
-
 	}
 
-    public function store(Request $request) {	
-
-        if( ! $request->date ) {
-
+    public function store(Request $request)
+    {	
+        if( ! $request->date )
+        {
             flash()->error('Preferred Date!', 'Please select your preferred date.');
             
             return redirect()->back();
@@ -39,14 +38,14 @@ class BookingsController extends Controller
         flash()->success(companyName(), 'The Packages has been successfully added to the booked items.');
 
         return redirect()->route('booking.checkout');
-
     }	
 
-    public function update(Request $request, $rowId) {
-
+    public function update(Request $request, $rowId)
+    {
         $child_quantity = intval($request->child_quantity);
 
-        if( $child_quantity < 0 ) {
+        if( $child_quantity < 0 )
+        {
             $child_quantity = 0;
         }
 
@@ -61,16 +60,14 @@ class BookingsController extends Controller
         flash()->success(companyName(), 'You successfully updated an item from the booking.');
 
         return redirect()->route('booking.index');
-
     }
 
-    public function destroy($rowId) {
-
+    public function destroy($rowId)
+    {
         $this->cart->removeBooking($rowId);
 
         flash()->success(companyName(), 'You successfully remove an item from the booking.');
 
         return redirect()->route('booking.index');
-
     }
 }

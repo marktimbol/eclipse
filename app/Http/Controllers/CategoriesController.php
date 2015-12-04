@@ -11,14 +11,13 @@ class CategoriesController extends Controller
 {
     protected $category;
 
-    public function __construct(CategoryRepositoryInterface $category) {
-
+    public function __construct(CategoryRepositoryInterface $category)
+    {
     	$this->category = $category;
-
     }
 
-    public function getPackagesPerCategory($category) {
-
+    public function getPackagesPerCategory($category)
+    {
     	$packages = $category->packages()->get();
 
     	return view('public.packages.index', compact('packages'));

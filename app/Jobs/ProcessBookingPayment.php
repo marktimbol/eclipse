@@ -49,14 +49,13 @@ class ProcessBookingPayment extends Job implements SelfHandling
 
         $chargeWasSuccessful = $gateway->charge($user, $total, $this->token);
 
-        if( $chargeWasSuccessful ) {
-
+        if( $chargeWasSuccessful )
+        {
             $bookingRepo->update($booking->id, ['status' => 1]);
-
             //event( new UserPaidTheBooking($user) );
-
-        } else {
-
+        } 
+        else 
+        {
             //event( new UserPurchaseWasNotSuccessful($user) );
 
             /**

@@ -15,37 +15,32 @@ class PhotosController extends Controller
 
     protected $package;
 
-    public function __construct(PackageRepositoryInterface $package) {
-
+    public function __construct(PackageRepositoryInterface $package)
+    {
         $this->package = $package;
-
     }
 
-    public function uploadPackagePhoto(Request $request) {
-
-        if( $request->hasFile('photo') ) {
-
+    public function uploadPackagePhoto(Request $request)
+    {
+        if( $request->hasFile('photo') )
+        {
             $file = $request->file('photo');
 
             $filename = $this->makeThumbnail($file);
 
             return $this->package->addPhoto($request->package_id, $filename);
-      
         }
-
     }
 
-    public function deletePackagePhoto($path) {
-
+    public function deletePackagePhoto($path)
+    {
         $this->package->deletePhoto($path);
 
         return redirect()->back();
-
     }
 
     protected function makeThumbnail(UploadedFile $photo)
     {   
-
         $filename = sprintf('%s-%s', time(), $photo->getClientOriginalName()); //87947839749.jpg
 
         $image = Image::make($photo->getRealPath());
@@ -60,10 +55,9 @@ class PhotosController extends Controller
         
     }    
 
-    protected function fullPath($filename) {
-    
+    protected function fullPath($filename)
+    {
         return public_path() . $this->uploadsDirectory . $filename;
-    
     }
 
 }

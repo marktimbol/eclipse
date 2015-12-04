@@ -16,12 +16,11 @@ class BookingsController extends Controller
 
     protected $user;
 
-    public function __construct(BookingRepositoryInterface $booking, UserRepositoryInterface $user) {
-
+    public function __construct(BookingRepositoryInterface $booking, UserRepositoryInterface $user)
+    {
         $this->booking = $booking;
 
         $this->user = $user;
-
     }
     /**
      * Display a listing of the resource.
@@ -101,8 +100,8 @@ class BookingsController extends Controller
         //
     }
 
-    public function confirm($booking_reference, $user_id) {
-
+    public function confirm($booking_reference, $user_id)
+    {
         event( new BookingWasConfirmed($user_id, $booking_reference) );
 
         flash()->success( companyName(), 'An email was sent to the customer.');

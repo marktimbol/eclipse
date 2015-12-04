@@ -44,15 +44,18 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function setPasswordAttribute($password) {
+    public function setPasswordAttribute($password)
+    {
         return $this->attributes['password'] = Hash::make($password);
     }
 
-    public function packages() {
+    public function packages()
+    {
         return $this->hasMany(Package::class);
     }
 
-    public function bookings() {
+    public function bookings()
+    {
         return $this->hasMany(Booking::class);
     }
 }

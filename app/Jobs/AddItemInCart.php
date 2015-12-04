@@ -21,15 +21,14 @@ class AddItemInCart extends Job implements SelfHandling
 
     public $time;
 
-    public function __construct($package_id, $quantity, $child_quantity, $date, $date_submit, $time = '') {
-
+    public function __construct($package_id, $quantity, $child_quantity, $date, $date_submit, $time = '')
+    {
         $this->package_id = $package_id;
         $this->quantity = $quantity;
         $this->child_quantity = $child_quantity;
         $this->date = $date;
         $this->date_submit = $date_submit;
         $this->time = $time;
-
     }
 
     /**

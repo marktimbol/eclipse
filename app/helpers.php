@@ -11,22 +11,24 @@ function flash($title = null, $message = null)
 	return $flash->info($title, $message);
 }
 
-function companyName() {
+function companyName()
+{
 	return env('COMPANY_NAME');
 }
 
-function companyEmail() {
+function companyEmail()
+{
 	return env('COMPANY_EMAIL');
 }
 
-function calculateTotalAmount($packages) {
-
+function calculateTotalAmount($packages)
+{
     $subtotal = 0;
 
     $total = 0;
 
-    foreach( $packages as $package ) {
-
+    foreach( $packages as $package )
+    {
         $subtotal = ( $package->adult_price * $package->pivot->adult_quantity ) +
                     ( $package->child_price * $package->pivot->child_quantity );
 
@@ -34,58 +36,53 @@ function calculateTotalAmount($packages) {
     }
 
     return $total;
-
 }
 
 /**
  * Check to see if the package is subject for availability or no
  */
-function subjectForAvailability($package) {
-
+function subjectForAvailability($package)
+{
 	return $package->options->package->confirm_availability;
-
 }
 
-function bookingReference($data) {
-
+function bookingReference($data)
+{
     $paymentGateway = env('PAYMENT_GATEWAY');
 
-    if($paymentGateway == 'stripe') {
-        
+    if ( $paymentGateway == 'stripe' )
+    {    
         return time();
-    
-    } elseif( $paymentGateway == 'twocheckout') {
-
+    }
+    elseif ( $paymentGateway == 'twocheckout' )
+    {
         return $data['response']['orderNumber'];
-
     }
 
 }
 
-function currentCurrency() {
-
-    if( empty( session('currency') ) ) {
-
+function currentCurrency()
+{
+    if( empty( session('currency') ) )
+    {
         session(['currency' => 'AED']);
     	
     	return session('currency');
-    	
     }
 
     return session('currency');
 }
 
-function formatNumber($number) {
-
-	return number_format($number);
-	
+function formatNumber($number)
+{
+	return number_format($number);	
 }
 
 /**
  * Display the converted amount and currency format
  */
-function convertedAmountWithCurrency($amount) {
-
+function convertedAmountWithCurrency($amount)
+{
 	$converter = app('Eclipse\CurrencyConverter\CurrencyConverter');
 
 	$result = $converter->convert($amount, currentCurrency());
@@ -95,33 +92,34 @@ function convertedAmountWithCurrency($amount) {
 	$html = $formattedResult . '&nbsp; <span class="current-currency">' . currentCurrency() .'</span>';
 
 	return $html;
-
 }
 
 /**
  * Convert the amount in USD for Stripe payment
  */
-function convertAmountInUSD($amount) {
-
+function convertAmountInUSD($amount)
+{
 	$toCurrency = 'USD';
 
 	$converter = app('Eclipse\CurrencyConverter\CurrencyConverter');
 
 	return $converter->convert($amount, $toCurrency);
-
 }
 
-function photoUrl($path) {
+function photoUrl($path)
+{
 	return '<img src="'. asset($path) .'" 
 			alt="" 
 			title=""
 			class="responsive-img img-rounded" />';
 }
 
-function display($photos, $class='', $width = '') {
-	
-	if( count($photos) > 0 ) {
-		foreach( $photos as $photo ) {
+function display($photos, $class='', $width = '')
+{	
+	if( count($photos) > 0 )
+	{
+		foreach( $photos as $photo )
+		{
 			return '<img src="'. asset('/images/uploads/'.$photo->path) .'" 
 					alt="'.$photo->imageable->name .'" 
 					title="'.$photo->imageable->name.'" 
@@ -129,15 +127,20 @@ function display($photos, $class='', $width = '') {
 					class="responsive-img '.$class.'" />';
 		}
 
-	} else {
+	} 
+	else 
+	{
 		return defaultImage();
 	}
 }
 
-function displayAll($photos, $class='') {
-	if( count($photos) > 0 ) {
+function displayAll($photos, $class='')
+{
+	if( count($photos) > 0 )
+	{
 		$html = '';
-		foreach( $photos as $photo ) {
+		foreach( $photos as $photo )
+		{
 			$html .= '<img src="'. asset('/images/uploads/'.$photo->path) .'" 
 					alt="'.$photo->imageable->name .'" 
 					title="'.$photo->imageable->name.'" 
@@ -145,46 +148,61 @@ function displayAll($photos, $class='') {
 		}
 
 		return $html;
-		
-	} else {
+
+	} 
+	else 
+	{
 		return defaultImage();
 	}
 }
 
-function getUploadedPhoto($filename) {
-	if( ! empty($filename) ) {
+function getUploadedPhoto($filename)
+{
+	if( ! empty($filename) )
+	{
 		return '<img src="'.asset('images/uploads/'. $filename).'" 
 					alt="" 
 					title=""
 					class="img-responsive img-rounded" />';
-	} else {
+	} 
+	else 
+	{
 		return defaultImage($title);
 	}
 }
 
-function getPhoto($filename, $title = "Eclipse Tourism", $class="img-rounded") {
-	if( ! empty($filename) ) {
+function getPhoto($filename, $title = "Eclipse Tourism", $class="img-rounded")
+{
+	if( ! empty($filename) )
+	{
 		return '<img src="'.asset('images/'. $filename).'" 
 					alt="'. $title.'" 
 					title="'.$title .'"
 					class="responsive-img '.$class.'" />';
-	} else {
+	} 
+	else 
+	{
 		return defaultImage($title);
 	}
 }
 
-function getEmailAsset($filename, $title = "Eclipse Tourism") {
-	if( ! empty($filename) ) {
+function getEmailAsset($filename, $title = "Eclipse Tourism")
+{
+	if( ! empty($filename) )
+	{
 		return '<img src="'.asset('images/email/'. $filename).'" 
 					alt="'. $title.'" 
 					title="'.$title .'"
 					class="responsive-img" />';
-	} else {
+	} 
+	else 
+	{
 		return defaultImage($title);
 	}
 }
 
-function defaultImage($title = "Eclipse Tourism") {
+function defaultImage($title = "Eclipse Tourism")
+{
 	return '<img src="'.asset('/images/default.jpg').'" 
 				alt="'. $title.'" 
 				title="'.$title .'" 

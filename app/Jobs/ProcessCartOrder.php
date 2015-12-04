@@ -73,7 +73,8 @@ class ProcessCartOrder extends Job implements SelfHandling
 
         $chargeWasSuccessful = $gateway->charge($user, $cart->total(), $this->token);
 
-        if( $chargeWasSuccessful ) {
+        if( $chargeWasSuccessful )
+        {
             /**
              * Save the data to "bookings" table
              */
@@ -83,8 +84,8 @@ class ProcessCartOrder extends Job implements SelfHandling
                 'comments'          => ''
             ]); 
 
-            foreach( $cart->content() as $item ) {
-
+            foreach( $cart->content() as $item )
+            {
                 $packageId = $item->options->package->id;
                 $adult_quantity = $item->qty;
                 $child_quantity = $item->options->child_quantity;
@@ -105,7 +106,9 @@ class ProcessCartOrder extends Job implements SelfHandling
 
             event( new UserPurchasedAPackage($user, $booking->booking_reference) );
 
-        } else {
+        } 
+        else 
+        {
 
             event( new UserPurchaseWasNotSuccessful($user) );
 

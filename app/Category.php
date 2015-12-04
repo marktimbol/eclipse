@@ -25,8 +25,8 @@ class Category extends Model
                         ->latest('id')
                         ->pluck('slug');
 
-        if( $latestSlug ) {
-
+        if( $latestSlug )
+        {
             $pieces = explode('-', $latestSlug);
 
             $number = intval(end($pieces));

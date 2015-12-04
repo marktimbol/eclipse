@@ -63,7 +63,8 @@ class ProcessBookingOrder extends Job implements SelfHandling
 
         $user = $userRepo->store($data);
 
-        if( $user ) {
+        if( $user )
+        {
             /**
              * Save the data to "bookings" table
              */
@@ -73,8 +74,8 @@ class ProcessBookingOrder extends Job implements SelfHandling
                 'comments'          => ''
             ]); 
 
-            foreach( $cart->contentBooking() as $item ) {
-
+            foreach( $cart->contentBooking() as $item )
+            {
                 $packageId = $item->options->package->id;
                 $quantity = $item->qty;
                 $child_quantity = $item->options->child_quantity;
@@ -95,9 +96,9 @@ class ProcessBookingOrder extends Job implements SelfHandling
 
             event( new UserBookedAPackage($user, $booking->booking_reference) );
 
-
-        } else {
-
+        } 
+        else 
+        {
             event( new UserBookingWasNotSuccessful($user) );
             
             /**

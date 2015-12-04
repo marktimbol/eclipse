@@ -13,10 +13,9 @@ class CategoriesController extends Controller
 
     protected $category;
 
-    public function __construct(CategoryRepositoryInterface $category) {
-
+    public function __construct(CategoryRepositoryInterface $category)
+    {
         $this->category = $category;
-
     }
     /**
      * Display a listing of the resource.

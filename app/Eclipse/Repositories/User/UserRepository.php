@@ -6,41 +6,35 @@ use App\User;
 
 class UserRepository implements UserRepositoryInterface {
 	
-	public function all() {
-	
+	public function all()
+	{
 		return User::with('bookings.packages')->has('bookings')->latest()->get();
-	
 	}
 
-	public function find($id) {
-	
+	public function find($id)
+	{
 		return User::with('bookings')->findOrFail($id);
-	
 	}
 
-	public function store($data) {
-
+	public function store($data)
+	{
 		return User::create($data);
-	
 	}
 
-	public function update($id, $data) {
-		
+	public function update($id, $data)
+	{	
 		$user = $this->find($id);
 		
 		$user->fill($data);
 		
 		$user->save();
-
 	}
 
-	public function delete($id) {
-
+	public function delete($id)
+	{
 		$user = $this->find($id);
 		
 		$user->delete();
-
 	}
-
 
 }

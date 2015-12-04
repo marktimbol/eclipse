@@ -21,19 +21,20 @@ class Package extends Model
         'confirm_availability'
     ];
 
-    public function photos() {
+    public function photos()
+    {
         return $this->morphMany(Photo::class, 'imageable');
     }
 
-    public function setNameAttribute($name) {
-
+    public function setNameAttribute($name)
+    {
         $this->attributes['name'] = $name;
 
         $this->makeSlug($name);
     }
 
-    public function makeSlug($name) {
-        
+    public function makeSlug($name)
+    {    
         $this->attributes['slug'] = str_slug($name);
 
         $slug = str_slug($name);
@@ -42,25 +43,25 @@ class Package extends Model
                         ->latest('id')
                         ->pluck('slug');
 
-        if( $latestSlug ) {
-
+        if( $latestSlug )
+        {
             $pieces = explode('-', $latestSlug);
 
             $number = intval(end($pieces));
 
             $this->attributes['slug'] = $slug . '-' . ($number + 1);
-
         }
     }
 
-    public function bookings() {
+    public function bookings()
+    {
         return $this->belongsToMany(Booking::class, 'booking_details')
                     ->withPivot('adult_quantity', 'child_quantity', 'date', 'date_submit', 'time');
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
-
 
 }

@@ -17,8 +17,8 @@ class PackagesController extends Controller
 
     protected $category;
 
-    public function __construct(PackageRepositoryInterface $package, CategoryRepositoryInterface $category) {
-
+    public function __construct(PackageRepositoryInterface $package, CategoryRepositoryInterface $category)
+    {
         parent::__construct();
 
         $this->currentUser = auth()->user();
