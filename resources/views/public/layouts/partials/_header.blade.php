@@ -22,7 +22,7 @@
 												<div class="category-menu">
 													<div class="category-menu__image">
 														<a href="{{ route('category', $category->slug) }}">
-															<img src="http://placehold.it/200x150" class="img-responsive">
+															<img src="https://placehold.it/200x150" class="img-responsive">
 														</a>
 													</div>
 												</div>
