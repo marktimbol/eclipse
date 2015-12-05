@@ -20415,6 +20415,23 @@ header #bottomRightCorner {
   margin-top: 20px;
 }
 
+.filter-package .filter-package__title {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.filter-package ul {
+  margin-bottom: 30px;
+}
+
+.filter-package ul li {
+  line-height: 1.5em;
+}
+
+.filter-package ul li a {
+  color: #333;
+}
+
 .book-a-package-form .book-a-package-form__title {
   font-size: 18px;
   font-weight: bold;
