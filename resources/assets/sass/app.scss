@@ -185,19 +185,13 @@ header {
 }
 
 .card {
-
-	.card-content {
-		.card-title {
-			font-size: 16px;
-			line-height: 21px;
-		}
-	}
-
-	.card-reveal {
-		.card-title {
-			font-size: 16px;
-			font-style: italic;
-			margin-bottom: 10px;
+	.card-action {
+		a {
+			color: #333;
+			text-transform: capitalize;
+			&:hover {
+				color: #333;
+			}
 		}
 	}
 }

@@ -264,15 +264,13 @@ header #bottomRightCorner {
   text-transform: uppercase;
 }
 
-.card .card-content .card-title {
-  font-size: 16px;
-  line-height: 21px;
+.card .card-action a {
+  color: #333;
+  text-transform: capitalize;
 }
 
-.card .card-reveal .card-title {
-  font-size: 16px;
-  font-style: italic;
-  margin-bottom: 10px;
+.card .card-action a:hover {
+  color: #333;
 }
 
 /** Shopping Cart Table **/

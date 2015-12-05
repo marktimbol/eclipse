@@ -19,7 +19,7 @@ class PagesController extends Controller
 
     public function home()
     {        
-        $packages = $this->package->take(9);
+        $packages = $this->package->take(1);
 
         return view('public.home', compact('packages'));
     }
