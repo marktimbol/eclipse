@@ -348,6 +348,9 @@ footer {
         color: #fff;
         text-decoration: none; }
     .menu ul .mega-menu {
+      opacity: 0;
+      visibility: hidden;
+      display: none !important/9;
       position: absolute;
       top: 100%;
       padding: 18px 11px;
