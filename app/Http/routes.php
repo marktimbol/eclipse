@@ -13,24 +13,6 @@ use Eclipse\ShoppingCart\ShoppingCart;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/test', function() {
-
-    $packages = Package::orderBy('name', 'ASC')->get();
-
-    $filename = '';
-
-    foreach( $packages as $package )
-    {
-    	foreach( $package->photos as $photo )
-    	{
-    		var_dump($photo);
-    	}
-
-    	// var_dump($filename);
-    }
-
-});
-
 Route::get('purchase-check', function(UserRepositoryInterface $userRepo)
 {		
 	$user = $userRepo->find(5);

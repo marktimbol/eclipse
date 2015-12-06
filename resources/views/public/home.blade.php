@@ -46,17 +46,10 @@
 			<div class="pattern pattern--hidden"></div>
 			
 			@foreach( $packages as $package )
-				
-				<?php
-					$photoPath = '';
-				?>
-
 				@foreach( $package->photos as $photo )
-
 					<?php
 						$photoPath = $photo->path;
 					?>
-				
 				@endforeach
 
 				<div class="col s12 m4">
