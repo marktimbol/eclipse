@@ -47,6 +47,9 @@
 			
 			@foreach( $packages as $package )
 
+				<?php
+					$photoPath = head($package->photos->toArray())['path'];
+				?>	
 				<div class="col s12 m4">
 					<div class="card wow fadeInUp" data-wow-delay="0.{{$package->id}}s">
 						<div class="card__container card__container--closed">
@@ -64,7 +67,7 @@
 								<image clip-path="url(#clipPath{{ $package->id }})" 
 										width="1920" 
 										height="500" 
-										xlink:href="{{ packagePhoto( head( $package->photos->toArray() )['path'] ) }}"
+										xlink:href="{{ packagePhoto($photoPath) }}"
 								></image>
 							</svg>
 							<div class="card__content">
