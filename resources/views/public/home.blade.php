@@ -68,7 +68,7 @@
 								</defs>
 								<image clip-path="url(#clipPath{{ $package->id }})" 
 										width="1920" 
-										height="500" 
+										height="650" 
 										xlink:href="{{ packagePhoto($photoPath) }}"
 								></image>
 							</svg>
