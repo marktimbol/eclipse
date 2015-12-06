@@ -46,13 +46,19 @@
 			<div class="pattern pattern--hidden"></div>
 			
 			@foreach( $packages as $package )
+				
+				<?php
+					$photoPath = '';
+				?>
 
 				@foreach( $package->photos as $photo )
+
 					<?php
 						$photoPath = $photo->path;
 					?>
-				@endforeach
 				
+				@endforeach
+
 				<div class="col s12 m4">
 					<div class="card wow fadeInUp" data-wow-delay="0.{{$package->id}}s">
 						<div class="card__container card__container--closed">

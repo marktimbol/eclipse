@@ -17,6 +17,8 @@ Route::get('/test', function() {
 
     $packages = Package::orderBy('name', 'ASC')->get();
 
+    $filename = '';
+    
     foreach( $packages as $package )
     {
     	foreach( $package->photos as $photo )
