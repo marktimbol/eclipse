@@ -19,7 +19,12 @@ Route::get('/test', function() {
 
     foreach( $packages as $package )
     {
-    	var_dump(head($package->photos->toArray())['path']);
+    	foreach( $package->photos as $photo )
+    	{
+    		$filename = $photo->path;
+    	}
+
+    	var_dump($filename);
     }
 
 });
