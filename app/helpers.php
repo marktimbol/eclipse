@@ -113,7 +113,7 @@ function packagePhoto($path)
 
 function photoUrl($path)
 {
-	return '<img src="'. asset($path) .'" 
+	return '<img src="'. asset('/images/uploads/'.$path) .'" 
 			alt="" 
 			title=""
 			class="responsive-img img-rounded" />';

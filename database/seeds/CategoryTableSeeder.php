@@ -17,7 +17,7 @@ class CategoryTableSeeder extends Seeder
 			'Safari Adventure',
 			'Cruise / Boats',
 			'City Tours',
-			'Bus tours',
+			'Bus Tours',
 			'Air Tours',
 			'Fishing & Yachting',
 			'Water Parks / Entertainment',
@@ -26,12 +26,11 @@ class CategoryTableSeeder extends Seeder
 			'Souks'
 		];
 
-		foreach( $categories as $category ) {
-
+		foreach( $categories as $category )
+		{
 			$new_category = new Category;
 			$new_category->name = $category;
 			$new_category->save();
-
 		}
     }
 }

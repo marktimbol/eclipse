@@ -1721,8 +1721,8 @@ class PackageTableSeeder extends Seeder
 
     	];
 
-         foreach( $packages as $package ) {
-
+         foreach( $packages as $package )
+         {
             $newPackage = new Package;
 
             $newPackage->category_id = $package['category_id'];
@@ -1738,7 +1738,6 @@ class PackageTableSeeder extends Seeder
             $newPackage->confirm_availability = $package['confirm_availability'];
 
             $newPackage->save();
-
          }
         
     }

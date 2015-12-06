@@ -18,14 +18,20 @@
 								<div class="mega-menu">
 									<div class="row">
 										@foreach( $categories->all() as $category )
-											<div class="col m4">
-												<div class="category-menu">
-													<div class="category-menu__image">
+											@foreach( $category->photos as $photo )
+												<?php
+													$photoPath = $photo->path;
+												?>
+											@endforeach										
+											<div class="col m3">
+												<div class="card">
+													<div class="card-image card__image">
 														<a href="{{ route('category', $category->slug) }}">
-															<img src="https://placehold.it/200x150" class="img-responsive">
+															{!! photoUrl($photoPath) !!}
 														</a>
+														<span class="card-title card__title">{{ $category->name }}</span>
 													</div>
-												</div>
+												</div>			
 											</div>
 										@endforeach
 									</div>

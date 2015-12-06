@@ -337,137 +337,45 @@ footer {
     padding: 0;
     list-style: none;
     position: relative; }
-    .menu ul a {
+    .menu ul:after {
+      content: "";
+      clear: both;
+      display: block; }
+    .menu ul li {
       float: left; }
-    .menu ul ul a {
-      float: none; }
-  .menu .mega-menu a {
-    float: none;
-    padding: 0; }
-  .menu .mega-menu .col {
-    margin-bottom: 20px; }
-  .menu .mega-menu .category-menu .category-menu__image a {
-    display: block;
-    transition: all 0.1s ease-in; }
-    .menu .mega-menu .category-menu .category-menu__image a:hover {
-      outline: 5px solid #328fcc; }
-  .menu ul ul, .menu .mega-menu, .menu .mega-menu ol li {
-    opacity: 0;
-    visibility: hidden;
-    display: none !important/9;
-    transition: opacity 150ms ease-in-out; }
-  .menu li:hover > ul, .menu li:hover .mega-menu, .menu li:hover .mega-menu ol li {
-    opacity: 1;
-    visibility: visible;
-    display: block !important/9; }
-
-.menu ul:after {
-  content: "";
-  clear: both;
-  display: block; }
-
-.menu ul li {
-  float: left;
-  transition: all 150ms ease-in-out; }
-  .menu ul li a {
-    display: block;
-    color: #fff;
-    text-decoration: none; }
-
-.menu ul ul {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-top: 0;
-  position: absolute;
-  border-bottom: 0;
-  position: absolute;
-  top: 100%;
-  width: 170px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); }
-  .menu ul ul ul {
-    left: 100%;
-    border-top: 1px solid #e0e0e0;
-    top: -1px; }
-  .menu ul ul li {
-    float: none;
-    position: relative;
-    background: #fff !important;
-    transition: none; }
-    .menu ul ul li a {
-      padding: 8px 12px;
+      .menu ul li a {
+        display: block;
+        color: #fff;
+        text-decoration: none; }
+    .menu ul .mega-menu {
+      opacity: 0;
+      visibility: hidden;
+      display: none !important/9;
+      position: absolute;
+      top: 100%;
+      padding: 18px 11px;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-top: none;
       color: #777;
-      border-bottom: 1px solid #e4e4e4; }
-    .menu ul ul li:hover, .menu ul ul li a:active {
-      background: #f5f5f5 !important; }
-
-.menu .mega-menu {
-  position: absolute;
-  top: 100%;
-  padding: 18px 11px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-top: none;
-  color: #777;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-  box-sizing: border-box; }
-  .menu .mega-menu ol {
-    list-style: none;
-    padding: 0; }
-    .menu .mega-menu ol li {
-      width: 100%;
-      line-height: 2em; }
-      .menu .mega-menu ol li a {
-        font-size: 12px;
-        color: #777;
-        font-size: 12px;
-        padding: 0;
-        background-color: #fff;
-        background-image: none; }
-        .menu .mega-menu ol li a:hover {
-          color: #505050; }
-  .menu .mega-menu div h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #404040;
-    border-bottom: 1px solid #e4e4e4;
-    padding: 0 0 8px 0;
-    margin: 0 0 10px 0; }
-
-@media only screen and (max-width: 767px) {
-  .menu .mega-menu {
-    padding: 18px 0; }
-    .menu .mega-menu ol li {
-      height: 0; }
-      .menu .mega-menu ol li:last-child {
-        margin: 0 0 20px 0; }
-  .menu ul li {
-    width: 100%;
-    cursor: pointer;
-    position: relative; }
-  .menu ul:hover .mega-menu ol li {
-    height: auto; }
-  .menu .mega-menu, .menu ul ul {
-    z-index: 100; }
-  .menu ul ul {
-    width: 100%;
-    box-sizing: border-box; }
-    .menu ul ul ul {
-      left: 0; }
-    .menu ul ul li:hover > ul {
-      position: relative;
-      border: none;
-      border-top: 1px solid #e4e4e4;
-      box-shadow: none; } }
+      left: 0;
+      margin-left: -200px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+      transition: opacity 150ms ease-in-out; }
+      .menu ul .mega-menu a {
+        float: none;
+        padding: 0; }
+      .menu ul .mega-menu .card .card__title {
+        line-height: 1em;
+        font-size: 14px; }
+    .menu ul li:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      display: block !important/9; }
 
 .top-menu.menu,
-.top-menu.menu ul li {
-  background-color: #328fcc;
-  background-image: linear-gradient(bottom, transparent 50%, rgba(255, 255, 255, 0.04) 0%);
-  background-image: -ms-linear-gradient(bottom, transparent 50%, rgba(255, 255, 255, 0.04) 0%); }
-
-.top-menu ul li:hover {
-  background-image: linear-gradient(bottom, transparent 50%, rgba(255, 255, 255, 0.08) 0%);
-  background-image: -ms-linear-gradient(bottom, transparent 50%, rgba(255, 255, 255, 0.08) 0%); }
+.top-menu.menu li {
+  background-color: #328fcc; }
 
 .mobile-menu {
   display: none; }
