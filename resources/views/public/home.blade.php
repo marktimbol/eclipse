@@ -64,7 +64,7 @@
 								<image clip-path="url(#clipPath{{ $package->id }})" 
 										width="1920" 
 										height="500" 
-										xlink:href="{{ asset('images/card-expand-test-image.jpg') }}"
+										xlink:href="{{ packagePhoto($package->photos[0]->path) }}"
 								></image>
 							</svg>
 							<div class="card__content">
@@ -81,9 +81,7 @@
 										<div class="package">
 											<div class="row">
 												<div class="col m9 s12 wow fadeInLeft">
-													<div class="owl-carousel">
-														{!! displayAll($package->photos, 'img-rounded') !!}
-													</div>
+													{!! $package->description !!}
 												</div>
 
 												<div class="col m3 s12 wow fadeInRight">

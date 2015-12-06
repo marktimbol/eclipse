@@ -143,5 +143,5 @@
 @endsection
 
 @section('footer_scripts')
-	<script src="http://cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 @endsection

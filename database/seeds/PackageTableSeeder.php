@@ -62,7 +62,7 @@ class PackageTableSeeder extends Seeder
 
     		[
     			'category_id'	=> 1,
-    			'name'			=> 'Ovenight Desert Safari',
+    			'name'			=> 'Overnight Desert Safari',
     			'subtitle'		=> 'A night under the stars',
     			'description'	=>	'<p>As the night dawns itself, the mystical beauty of the deserts can be celebrated Arabic style, discovering the true essence of the desert on this overnight safari.</p>
 
@@ -633,7 +633,7 @@ class PackageTableSeeder extends Seeder
 
     		[
     			'category_id'	=> 4,
-    			'name'			=> 'East Coast (Fujaira) Tour',
+    			'name'			=> 'East Coast (Fujairah) Tour',
     			'subtitle'		=> 'A Cultural Experience',
     			'description'	=>	'<p>This full day tour takes you away from the hustle and bustle of the city. The journey begins through the Lush-green from Lands in the valleys of the Hajjar Mountains which consists of contrasting colors. We pass through the neighbouring Emirate of Sharjah and the EASTERN SIGHTS of the oasis of AL Dhaid, weekend market of Masafi, mountains of Dibba, the fishing village of Fujairah and the ocean at Khorfakkan.</p>
 

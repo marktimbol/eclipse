@@ -106,6 +106,11 @@ function convertAmountInUSD($amount)
 	return $converter->convert($amount, $toCurrency);
 }
 
+function packagePhoto($path)
+{
+	return asset('/images/uploads/' . $path);
+}
+
 function photoUrl($path)
 {
 	return '<img src="'. asset($path) .'" 
