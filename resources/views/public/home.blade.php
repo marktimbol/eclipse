@@ -64,7 +64,7 @@
 								<image clip-path="url(#clipPath{{ $package->id }})" 
 										width="1920" 
 										height="500" 
-										xlink:href="{{ packagePhoto($package->photos[0]->path) }}"
+										xlink:href="{{ packagePhoto( head( $package->photos->toArray() )['path'] ) }}"
 								></image>
 							</svg>
 							<div class="card__content">

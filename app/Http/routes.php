@@ -16,9 +16,10 @@ use Eclipse\ShoppingCart\ShoppingCart;
 Route::get('/test', function() {
 
     $packages = Package::orderBy('name', 'ASC')->get();
+
     foreach( $packages as $package )
     {
-    	var_dump(sprintf('%s-Tour.jpg', str_replace(' ', '-', $package->name)));
+    	var_dump(head($package->photos->toArray())['path']);
     }
 
 });
