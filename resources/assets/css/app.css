@@ -348,9 +348,6 @@ footer {
         color: #fff;
         text-decoration: none; }
     .menu ul .mega-menu {
-      opacity: 0;
-      visibility: hidden;
-      display: none !important/9;
       position: absolute;
       top: 100%;
       padding: 18px 11px;
@@ -365,9 +362,12 @@ footer {
       .menu ul .mega-menu a {
         float: none;
         padding: 0; }
-      .menu ul .mega-menu .card .card__title {
-        line-height: 1em;
-        font-size: 14px; }
+      .menu ul .mega-menu .card {
+        height: auto !important;
+        padding-bottom: 0 !important; }
+        .menu ul .mega-menu .card .card__title {
+          line-height: 1em;
+          font-size: 14px; }
     .menu ul li:hover .mega-menu {
       opacity: 1;
       visibility: visible;
