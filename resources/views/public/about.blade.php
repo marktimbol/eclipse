@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col s12 m12">
                         <div class="white-transparent">
-                            <h3 class="parallax__title">About Us</h3>
+                            <h1 class="parallax__title">About Us</h1>
 						    <p>
 						        Eclipse Tourism L.L.C - An established, professional tour company, providing you
 						        with a vast range of tourism related events, activities and services. The activities

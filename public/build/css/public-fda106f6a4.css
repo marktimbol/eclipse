@@ -20835,8 +20835,16 @@ footer .footer__links li a:hover {
   margin-bottom: 0;
 }
 
+.page.has-parallax .parallax__title {
+  font-size: 2.92rem;
+}
+
 .page .page__title {
   font-size: 30px;
+}
+
+.page .page__description {
+  margin-top: 20px;
 }
 
 .page .page__description h3 {

@@ -2,16 +2,33 @@
 
 @section('pageTitle', 'Packages')
 
-@section('body_class', 'page')
+@section('body_class', 'page has-parallax')
 
 @inject('categories', 'Eclipse\Repositories\Category\CategoryRepositoryInterface')
 
 @section('content')
+
+    <div class="parallax-container">
+        <div class="parallax">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="white-transparent">
+                            <h1 class="parallax__title">Packages</h1>
+						    <p>
+						        Please put a description of this page here. We will change also the picture.
+						    </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {!! getPhoto('dubai.jpg', 'Dubai') !!}
+        </div>
+    </div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col s12">
-				<h1 class="page__title">Packages</h1>
-
 				<div class="page__description">
 					<div class="row">
 						<div class="col s12 m3">

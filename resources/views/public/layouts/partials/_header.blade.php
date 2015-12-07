@@ -53,7 +53,6 @@
 
 		<div id="topLeftCorner" 
 			style="background-image: url({{ asset('images/top-left-corner.png') }});"
-			class="wow fadeInLeft" data-wow-delay="0.2s"
 		>
 		</div>		
 
