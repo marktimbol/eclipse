@@ -346,6 +346,16 @@ header {
 	font-size: 10px;
 }	
 
+.address {
+	&.has-icon {
+		li {
+			i {
+				padding-right: 15px;
+			}
+		}
+	}
+}
+
 footer {
 	background: $yellow;
 	padding: 20px;

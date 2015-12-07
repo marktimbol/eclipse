@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>@yield('pageTitle') | Eclipse Tourism</title>
+	<title>@yield('pageTitle') | {{ companyName() }}</title>
 	<meta id="token" name="token" value="{{ csrf_token() }}" />
 	<meta name="publishable-key" content="{{ env('STRIPE_KEY') }}" />
 	<meta name="twocheckout-account-number" content="{{ env('TWOCHECKOUT_ACCOUNT_NUMBER') }}" />

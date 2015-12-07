@@ -40,8 +40,8 @@
 							<li><a href="{{ route('deals') }}">Deals</a></li>
 							<li><a href="{{ route('tourist-information') }}">Tourist Info</a></li>
 							<li><a href="{{ route('corporate') }}">Corporate</a></li>
-							<li><a href="{{ route('about') }}">About Us</a></li>
-							<li><a href="{{ route('contact') }}">Contact Us</a></li>
+							<li><a href="{{ route('about') }}">About</a></li>
+							<li><a href="{{ route('contact') }}">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -57,9 +57,9 @@
 		>
 		</div>		
 
-		<div class="logo wow fadeInLeft" data-wow-delay="0.6s">
+		<div class="logo">
 			<a href="{{ route('home') }}">
-				{!! getPhoto('logo.png', 'Eclipse Tourism', '') !!}
+				{!! getPhoto('logo.png', companyName(), '') !!}
 			</a>
 		</div>
 	@endif	

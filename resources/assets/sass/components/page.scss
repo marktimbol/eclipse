@@ -40,6 +40,12 @@
 	header {
 		margin-bottom: 50px;
 	}
+
+	&.has-parallax {
+		header {
+			margin-bottom: 0;
+		}
+	}
 	
 	.page__title {
 		font-size: 30px;

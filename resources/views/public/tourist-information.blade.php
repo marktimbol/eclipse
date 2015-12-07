@@ -2,7 +2,7 @@
 
 @section('pageTitle', 'Tourist Information')
 
-@section('body_class', 'page')
+@section('body_class', 'page has-parallax')
 
 @section('content')
 
@@ -10,7 +10,7 @@
         <div class="parallax">
             <div class="container">
                 <div class="row">
-                    <div class="col s12 m8">
+                    <div class="col s12 m12">
                         <div class="white-transparent">
                             <h3 class="parallax__title">Dubai</h3>
                             <p>
