@@ -76,7 +76,7 @@
 								<li><i class="fa fa-mobile"></i> +971 50 2949626</li>
 							</ul>
 
-							<h4>Write to Us</h4>
+							<h3>Write to Us</h3>
 
 							<p>
 								Please use our address below for all postal correspondance.
