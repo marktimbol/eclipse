@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            {!! getPhoto('dubai.jpg', 'Dubai') !!}
+            {!! getPhoto('contact-us.jpg', 'Contact Us') !!}
         </div>
     </div>
 

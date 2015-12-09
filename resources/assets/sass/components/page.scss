@@ -11,10 +11,27 @@
 		}	
 	}
 
-	.featured__package__title {
-		font-size: 30px;
-		text-align: center;
-		margin-bottom: 30px;
+	.featured_package {
+		.featured__package__title {
+			font-size: 30px;
+			text-align: center;
+			margin-bottom: 30px;
+		}		
+
+		.card__content {
+			.card__copy {
+				.package {
+					ul {
+						margin-left: 20px;
+						list-style-type: disc;
+						li {
+							list-style-type: disc;
+						} 
+					}			
+				}
+			}
+
+		}
 	}
 
 	.home__package {

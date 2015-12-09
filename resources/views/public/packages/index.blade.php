@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            {!! getPhoto('dubai.jpg', 'Dubai') !!}
+            {!! getPhoto('packages.jpg', 'Packages') !!}
         </div>
     </div>
 
