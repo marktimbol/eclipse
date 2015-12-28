@@ -1,6 +1,3 @@
-//app.js
-//$b = jQuery.noConflict();
-
 $(document).ready(function() {
 
 	var currentDate = new Date();

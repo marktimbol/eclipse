@@ -14,6 +14,40 @@
 					<div class="menu top-menu right hide-on-small-and-down">
 						<ul class="menu">
 							<li><a href="{{ route('home') }}">Home</a></li>
+							<li><a href="{{ route('packages') }}">Packages</a>
+
+								<div class="mega-menu">
+										
+									<div class="row">
+
+										@foreach( $categories->all()->chunk(4) as $categories )
+											
+											@foreach( $categories as $category )
+
+												<div class="col m3">
+													<h6>{{ $category->name }}</h6>
+
+													<ol>
+														@foreach( $category->packages as $package )
+															<li>
+																<a href="{{ route('package', $package->slug) }}">
+																	{{ $package->name }}
+																</a>
+															</li>
+														@endforeach
+													</ol>
+
+												</div>
+
+											@endforeach
+
+											<div class="clearfix"></div>
+
+										@endforeach
+
+									</div>
+								</div>
+							</li>							
 							<li><a href="{{ route('deals') }}">Deals</a></li>
 							<li><a href="{{ route('tourist-information') }}">Tourist Info</a></li>
 							<li><a href="{{ route('corporate') }}">Corporate</a></li>

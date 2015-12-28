@@ -17,6 +17,8 @@
 		</button>
 	</div>
 
-	@include('spinner')	
+	<div class="progress" style="display: none;">
+	    <div class="indeterminate"></div>
+	</div>
 
 </form>

@@ -15558,9 +15558,6 @@ Picker.extend( 'pickadate', DatePicker )
 	triggerBttn.addEventListener( 'click', toggleOverlay );
 	closeBttn.addEventListener( 'click', toggleOverlay );
 })();
-//app.js
-//$b = jQuery.noConflict();
-
 $(document).ready(function() {
 
 	var currentDate = new Date();

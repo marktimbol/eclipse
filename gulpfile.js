@@ -43,12 +43,10 @@ elixir(function(mix) {
         ], 'public/css/owl-carousel.css')
 
       .scripts([
-        // bowers + 'jquery/dist/jquery.js',
         'libs/home-video.js'
         ], 'public/js/home-video.js')      
 
       .scripts([
-        bowers + 'jquery/dist/jquery.js',
         bowers + 'owl-carousel/owl-carousel/owl.carousel.js',
         'libs/owl-carousel.js'
         ], 'public/js/owl-carousel.js')

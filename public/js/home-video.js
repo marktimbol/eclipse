@@ -1,5 +1,3 @@
-// $a = jQuery.noConflict();
-
 $(document).ready(function() {
 
     $(".slideshow").css({
