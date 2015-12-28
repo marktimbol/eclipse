@@ -17575,8 +17575,6 @@ header #bottomRightCorner {
   background-repeat: no-repeat;
 }
 
-/** SLIDESHOW **/
-
 .slideshow {
   position: relative;
   width: 100%;
@@ -17704,8 +17702,6 @@ header #bottomRightCorner {
   color: #333;
 }
 
-/** Shopping Cart Table **/
-
 .cart img {
   float: left;
   margin-right: 20px;
@@ -17782,11 +17778,6 @@ header #bottomRightCorner {
 
 .place-order-button {
   margin-top: 30px;
-}
-
-.cvc {
-  float: right;
-  margin-top: -7px;
 }
 
 .input-container {

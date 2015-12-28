@@ -24,8 +24,10 @@ elixir(function(mix) {
           'libs/classie.js',
           bowers + 'sweetalert/dist/sweetalert.min.js',
           bowers + 'materialize/dist/js/materialize.js',
+          bowers + 'bLazy/blazy.js',
           'libs/mobile-menu.js',
           'materialize.js',
+
           'app.js'
       ], 'public/js/public.js')
 

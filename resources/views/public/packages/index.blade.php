@@ -34,7 +34,7 @@
 						<div class="col s12 m3">
 							<div class="card-panel">
 								<div class="filter-package">
-									<h5 class="filter-package__title">Filter</h5>
+									<h5 class="filter-package__title">Filters</h5>
 
 									@foreach( $categories->all() as $category )
 										<h6 class="filter-package__category">

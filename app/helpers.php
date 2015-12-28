@@ -111,6 +111,25 @@ function convertAmountInUSD($amount)
 	return $converter->convert($amount, $toCurrency);
 }
 
+function beLazy($photos)
+{
+	if( count($photos) > 0 )
+	{
+		foreach( $photos as $photo )
+		{
+			return '<img class="b-lazy responsive-img" 
+						src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+					 	data-src="'. asset('/images/uploads/'. $photo->path).'"		
+						alt="'.$photo->imageable->name .'" 
+					/>';
+		}
+
+	} 
+	
+	return defaultImage();
+	
+}
+
 function packagePhoto($path)
 {
 	return asset('/images/uploads/' . $path);
@@ -138,10 +157,9 @@ function display($photos, $class='', $width = '')
 		}
 
 	} 
-	else 
-	{
-		return defaultImage();
-	}
+
+	return defaultImage();
+	
 }
 
 function displayAll($photos, $class='')
@@ -160,10 +178,9 @@ function displayAll($photos, $class='')
 		return $html;
 
 	} 
-	else 
-	{
-		return defaultImage();
-	}
+	
+	return defaultImage();
+	
 }
 
 function getUploadedPhoto($filename)
@@ -175,10 +192,9 @@ function getUploadedPhoto($filename)
 					title=""
 					class="img-responsive img-rounded" />';
 	} 
-	else 
-	{
-		return defaultImage($title);
-	}
+	
+	return defaultImage($title);
+	
 }
 
 function getPhoto($filename, $title = "Eclipse Tourism", $class="img-rounded")
@@ -190,10 +206,9 @@ function getPhoto($filename, $title = "Eclipse Tourism", $class="img-rounded")
 					title="'.$title .'"
 					class="responsive-img '.$class.'" />';
 	} 
-	else 
-	{
-		return defaultImage($title);
-	}
+	
+	return defaultImage($title);
+	
 }
 
 function getEmailAsset($filename, $title = "Eclipse Tourism")
@@ -205,10 +220,9 @@ function getEmailAsset($filename, $title = "Eclipse Tourism")
 					title="'.$title .'"
 					class="responsive-img" />';
 	} 
-	else 
-	{
-		return defaultImage($title);
-	}
+	
+	return defaultImage($title);
+	
 }
 
 function defaultImage($title = "Eclipse Tourism")

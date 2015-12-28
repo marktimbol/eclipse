@@ -5,7 +5,7 @@
 			<div class="col m4 s12 wow fadeInLeft" data-wow-delay="0.{{$count}}s">
 				<div class="card">
 					<div class="card-image">
-						{!! display($package->photos, 'activator') !!}
+						{!! beLazy($package->photos) !!}
 					</div>
 
 					<div class="card-action">
