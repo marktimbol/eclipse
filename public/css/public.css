@@ -17681,6 +17681,7 @@ header #bottomRightCorner {
 
 .filter-package ul li {
   line-height: 1.5em;
+  margin-bottom: 20px;
 }
 
 .filter-package ul li a {

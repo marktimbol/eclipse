@@ -1,0 +1,63 @@
+.accordion-menu {
+	width: 213px;
+	padding: 40px 28px 25px 0;
+}
+
+ul.accordion-menu {
+	padding: 0;
+	margin: 0;
+	font-size: 1em;
+	line-height: 0.5em;
+	list-style: none;
+}
+
+ul.accordion-menu li a {
+	line-height: 10px;
+	font-size: 11px;
+	padding: 10px 5px;
+	color: #000;
+	display: block;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+ul.accordion-menu li a.filter-package__category {
+	color: #328fcc;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+ul.accordion-menu ul {
+	margin: 0;
+	padding: 0;
+	display: none;
+}
+
+ul.accordion-menu ul li {
+	margin: 0;
+	padding: 0;
+	clear: both;
+}
+
+ul.accordion-menu ul li a {
+	font-size: 13px;
+	font-weight: normal;
+	outline:0;
+}
+
+ul.accordion-menu ul li a:hover {
+	color: #333;
+	text-decoration: underline;
+}
+
+ul.accordion-menu ul ul li a {
+	padding-left: 40px;
+}
+
+ul.accordion-menu ul ul li a:hover {
+	color:#333;
+}
+
+ul.accordion-menu span{
+	float:right;
+}

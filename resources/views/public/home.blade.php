@@ -52,7 +52,7 @@
 				?>
 			
 				<div class="col s12 m4">
-					<div class="card wow fadeInUp" data-wow-delay="0.{{$package->id}}s">
+					<div class="card">
 						<div class="card__container card__container--closed">
 							<svg class="card__image" 
 								xmlns="http://www.w3.org/2000/svg" 
@@ -84,11 +84,11 @@
 									<div class="col m12 s12">
 										<div class="package">
 											<div class="row">
-												<div class="col m9 s12 wow fadeInLeft">
+												<div class="col m9 s12">
 													{!! $package->description !!}
 												</div>
 
-												<div class="col m3 s12 wow fadeInRight">
+												<div class="col m3 s12">
 													<h3 class="package__price">
 														{!! convertedAmountWithCurrency($package->adult_price) !!}
 													</h3>

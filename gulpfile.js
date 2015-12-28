@@ -31,6 +31,15 @@ elixir(function(mix) {
           'app.js'
       ], 'public/js/public.js')
 
+      .styles([
+        'libs/accordion-menu.css'
+        ], 'public/css/accordion-menu.css')
+
+      .scripts([
+        'libs/multilevel-accordion.js',
+        'libs/accordion-menu.js'
+        ], 'public/js/accordion-menu.js')
+
       .scripts([
         'libs/stripe-billing.js'
         ], 'public/js/stripe-billing.js')
@@ -116,6 +125,9 @@ elixir(function(mix) {
     .version([
       'css/public.css',
       'js/public.js',
+
+      'css/accordion-menu.css',
+      'js/accordion-menu.js',
 
       'js/stripe-billing.js',
       'js/twocheckout-billing.js',

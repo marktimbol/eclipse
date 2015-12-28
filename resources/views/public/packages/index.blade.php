@@ -6,6 +6,10 @@
 
 @inject('categories', 'Eclipse\Repositories\Category\CategoryRepositoryInterface')
 
+@section('header_styles')
+	<link rel="stylesheet" href="{{ elixir('css/accordion-menu.css') }}" />
+@endsection	
+
 @section('content')
 
     <div class="parallax-container">
@@ -36,7 +40,39 @@
 								<div class="filter-package">
 									<h5 class="filter-package__title">Filters</h5>
 
-									@foreach( $categories->all() as $category )
+									<ul class="accordion-menu">
+										@foreach( $categories->all() as $category)
+											<li>
+												<a href="#" class="filter-package__category">
+													{{ $category->name }}
+												</a>
+
+												@if( count( $category->packages ) )
+
+													<ul>
+
+														@foreach( $category->packages as $package )
+
+															<li>
+																<a href="{{ route('package', $package->slug) }}">
+																	{{ $package->name }}
+																</a>
+															</li>
+
+														@endforeach
+
+													</ul>
+
+												@endif
+
+												<ul>
+
+												</ul>	
+											</li>
+										@endforeach	
+									</ul>
+
+{{-- 									@foreach( $categories->all() as $category )
 										<h6 class="filter-package__category">
 											<a href="{{ route('category', $category->slug) }}">
 												{{ $category->name }}
@@ -54,7 +90,7 @@
 												@endforeach
 											</ul>
 										@endif
-									@endforeach
+									@endforeach --}}
 								</div>
 							</div>
 						</div>
@@ -71,3 +107,7 @@
 		</div>
 	</div>
 @endsection
+
+@section('footer_scripts')
+	<script src="{{ elixir('js/accordion-menu.js') }}"></script>
+@endsection	
