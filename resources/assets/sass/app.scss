@@ -75,7 +75,6 @@ header {
 
 }
 
-/** SLIDESHOW **/
 .slideshow {
     position: relative;
     width: 100%;
@@ -182,12 +181,6 @@ header {
 		margin-bottom: 30px;
 	}
 
-	.filter-package__category {
-		a {
-			
-		}
-	}
-
 	ul {
 		margin-bottom: 30px;
 		li {
@@ -220,9 +213,7 @@ header {
 }
 
 
-/** Shopping Cart Table **/
 .cart {
-
 	img {
 		float: left;
 		margin-right: 20px;
@@ -303,10 +294,6 @@ header {
 	margin-top: 30px;
 }
 
-.cvc {
-	float: right;
-	margin-top: -7px;
-}
 
 .input-container {
 	position: relative;
