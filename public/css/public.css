@@ -17914,12 +17914,15 @@ footer .footer__links li a:hover {
   transition: opacity 150ms ease-in-out;
 }
 
-.menu ul .mega-menu .col {
+.menu ul .mega-menu .column {
   margin-bottom: 20px;
+  float: left;
+  width: 200px;
 }
 
 .menu ul .mega-menu a {
   color: #333;
+  font-size: 12px;
   float: none;
   padding: 0;
   line-height: 2em;

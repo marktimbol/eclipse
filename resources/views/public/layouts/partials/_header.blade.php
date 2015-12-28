@@ -18,34 +18,29 @@
 
 								<div class="mega-menu">
 										
-									<div class="row">
+									@foreach( $categories->all()->chunk(4) as $categories )
+										
+										@foreach( $categories as $category )
 
-										@foreach( $categories->all()->chunk(4) as $categories )
-											
-											@foreach( $categories as $category )
+											<div class="column">
+												<h6>{{ $category->name }}</h6>
 
-												<div class="col m3">
-													<h6>{{ $category->name }}</h6>
+												<ol>
+													@foreach( $category->packages as $package )
+														<li>
+															<a href="{{ route('package', $package->slug) }}">
+																{{ $package->name }}
+															</a>
+														</li>
+													@endforeach
+												</ol>
 
-													<ol>
-														@foreach( $category->packages as $package )
-															<li>
-																<a href="{{ route('package', $package->slug) }}">
-																	{{ $package->name }}
-																</a>
-															</li>
-														@endforeach
-													</ol>
-
-												</div>
-
-											@endforeach
-
-											<div class="clearfix"></div>
+											</div>
 
 										@endforeach
 
-									</div>
+									@endforeach
+
 								</div>
 							</li>							
 							<li><a href="{{ route('deals') }}">Deals</a></li>

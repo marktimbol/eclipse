@@ -47,12 +47,15 @@
             -ms-transition: opacity 150ms ease-in-out;
             transition: opacity 150ms ease-in-out;
 
-            .col {
+            .column {
             	margin-bottom: 20px;
+			    float: left;
+			    width: 200px;
             } 
                     
             a {
             	color: #333;
+            	font-size: 12px;
                 float: none;
                 padding: 0; 
                 line-height: 2em;  
