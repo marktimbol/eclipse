@@ -19,6 +19,8 @@ class PagesController extends Controller
 
     public function home()
     {        
+        setDefaultCurrency();
+
         $packages = $this->package->take(9);
 
         return view('public.home', compact('packages'));

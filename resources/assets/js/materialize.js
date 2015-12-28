@@ -1,19 +1,19 @@
 //app.js
-$b = jQuery.noConflict();
+//$b = jQuery.noConflict();
 
-$b(document).ready(function() {
+$(document).ready(function() {
 
 	var currentDate = new Date();
 
-	$b('.materialboxed').materialbox();
+	$('.materialboxed').materialbox();
 
-	$b('.modal-trigger').leanModal();
+	$('.modal-trigger').leanModal();
 
-    $b('.collapsible').collapsible({
+    $('.collapsible').collapsible({
     	accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });	
 	
-	$b('.datepicker').pickadate({
+	$('.datepicker').pickadate({
 		formatSubmit: 'yyyy-mm-dd',
 		selectMonths: true, // Creates a dropdown to control month
 		selectYears: 3, // Creates a dropdown of 15 years to control year
@@ -22,6 +22,6 @@ $b(document).ready(function() {
 		max: false
 	});
 
-	$b('.parallax').parallax();
+	$('.parallax').parallax();
 
 });

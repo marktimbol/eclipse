@@ -1,90 +1,90 @@
-.menu {
-    display: block;
-    position: relative;
-    z-index: 9999;
+// .menu {
+//     display: block;
+//     position: relative;
+//     z-index: 9999;
 
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        position: relative;  
+//     ul {
+//         margin: 0;
+//         padding: 0;
+//         list-style: none;
+//         position: relative;  
 
-        &:after {
-            content: "";
-            clear: both;
-            display: block;    
-        }        
+//         &:after {
+//             content: "";
+//             clear: both;
+//             display: block;    
+//         }        
 
-        li {
-            float: left;
-            a {
-                display: block;
-                color: #fff;
-                text-decoration: none;     
-            }     
-        }               
+//         li {
+//             float: left;
+//             a {
+//                 display: block;
+//                 color: #fff;
+//                 text-decoration: none;     
+//             }     
+//         }               
 
-        .mega-menu {
-            opacity: 0;
-            visibility: hidden;
-            display: none ! important/9;
+//         .mega-menu {
+//             opacity: 0;
+//             visibility: hidden;
+//             display: none ! important/9;
 
-            position: absolute;
-            top: 100%;
-            padding: 18px 11px;
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-top: none;
-            color: #777;
-            left: 0;
-            margin-left: -200px;        
-            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+//             position: absolute;
+//             top: 100%;
+//             padding: 18px 11px;
+//             background-color: #fff;
+//             border: 1px solid #e0e0e0;
+//             border-top: none;
+//             color: #777;
+//             left: 0;
+//             margin-left: -200px;        
+//             -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+//             box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
 
-            -webkit-transition: opacity 150ms ease-in-out;
-            -moz-transition: opacity 150ms ease-in-out;
-            -o-transition: opacity 150ms ease-in-out;
-            -ms-transition: opacity 150ms ease-in-out;
-            transition: opacity 150ms ease-in-out; 
+//             -webkit-transition: opacity 150ms ease-in-out;
+//             -moz-transition: opacity 150ms ease-in-out;
+//             -o-transition: opacity 150ms ease-in-out;
+//             -ms-transition: opacity 150ms ease-in-out;
+//             transition: opacity 150ms ease-in-out; 
                     
-            a {
-                float: none;
-                padding: 0;     
-            }
+//             a {
+//                 float: none;
+//                 padding: 0;     
+//             }
 
-            .card {
-                height: auto !important;
-                padding-bottom: 0 !important;                
-                .card__title {
-                    line-height: 1em;
-                    font-size: 14px;
-                }
-            }
-        } 
+//             .card {
+//                 height: auto !important;
+//                 padding-bottom: 0 !important;                
+//                 .card__title {
+//                     line-height: 1em;
+//                     font-size: 14px;
+//                 }
+//             }
+//         } 
 
-        li {
-            &:hover {
-                .mega-menu {
-                    opacity: 1;
-                    visibility: visible;
-                    display: block ! important/9;   
-                }
-            }
-        }
-    }
-}
+//         li {
+//             &:hover {
+//                 .mega-menu {
+//                     opacity: 1;
+//                     visibility: visible;
+//                     display: block ! important/9;   
+//                 }
+//             }
+//         }
+//     }
+// }
 
-.top-menu {
-    &.menu, 
-    &.menu li {
-        background-color: $blue;
-    }
+// .top-menu {
+//     &.menu, 
+//     &.menu li {
+//         background-color: $blue;
+//     }
 
-    ul {
-        li {
-            &:hover {
-                // background-color: lighten(#blue, 10%);    
-            }
-        }
-    }
-}
+//     ul {
+//         li {
+//             &:hover {
+//                 // background-color: lighten(#blue, 10%);    
+//             }
+//         }
+//     }
+// }

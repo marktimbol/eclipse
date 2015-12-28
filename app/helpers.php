@@ -73,6 +73,11 @@ function currentCurrency()
     return session('currency');
 }
 
+function setDefaultCurrency()
+{
+	session(['currency' => 'AED']);
+}
+
 function formatNumber($number)
 {
 	return number_format($number);	

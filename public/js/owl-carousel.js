@@ -10723,12 +10723,10 @@ if (typeof Object.create !== "function") {
 }(jQuery, window, document));
 $(document).ready(function() {
 	$('.owl-carousel').owlCarousel({
-
       autoPlay: true,
       slideSpeed : 300,
       paginationSpeed : 400,
       singleItem:true
-
 	});
 });
 //# sourceMappingURL=owl-carousel.js.map

@@ -27,6 +27,9 @@
 						li {
 							list-style-type: disc;
 						} 
+						&.collection {
+							margin-left: 0;
+						}
 					}			
 				}
 			}

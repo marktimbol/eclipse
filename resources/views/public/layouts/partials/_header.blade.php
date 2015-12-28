@@ -14,29 +14,6 @@
 					<div class="menu top-menu right hide-on-small-and-down">
 						<ul class="menu">
 							<li><a href="{{ route('home') }}">Home</a></li>
-							<li><a href="{{ route('packages') }}">Packages</a>
-								<div class="mega-menu">
-									<div class="row">
-										@foreach( $categories->all() as $category )
-											@foreach( $category->photos as $photo )
-												<?php
-													$photoPath = $photo->path;
-												?>
-											@endforeach										
-											<div class="col m3">
-												<div class="card">
-													<div class="card-image card__image">
-														<a href="{{ route('category', $category->slug) }}">
-															{!! photoUrl($photoPath) !!}
-														</a>
-														<span class="card-title card__title">{{ $category->name }}</span>
-													</div>
-												</div>			
-											</div>
-										@endforeach
-									</div>
-								</div>
-							</li>
 							<li><a href="{{ route('deals') }}">Deals</a></li>
 							<li><a href="{{ route('tourist-information') }}">Tourist Info</a></li>
 							<li><a href="{{ route('corporate') }}">Corporate</a></li>

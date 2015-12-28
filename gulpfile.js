@@ -13,7 +13,6 @@ elixir(function(mix) {
     	.styles([
           'libs/bootstrap.custom.css',
           bowers + 'sweetalert/dist/sweetalert.css',
-          bowers + 'wowjs/css/libs/animate.css',
           bowers + 'fontawesome/css/font-awesome.css',
           bowers + 'materialize/dist/css/materialize.css',
           'app.css'
@@ -21,11 +20,10 @@ elixir(function(mix) {
 
       .scripts([
           bowers + 'jquery/dist/jquery.js',
-          bowers + 'sweetalert/dist/sweetalert.min.js',
-          bowers + 'wowjs/dist/wow.js',
-          bowers + 'materialize/dist/js/materialize.js',
           'libs/modernizr.custom.js',
           'libs/classie.js',
+          bowers + 'sweetalert/dist/sweetalert.min.js',
+          bowers + 'materialize/dist/js/materialize.js',
           'libs/mobile-menu.js',
           'materialize.js',
           'app.js'
@@ -39,14 +37,13 @@ elixir(function(mix) {
         'libs/twocheckout-billing.js'
         ], 'public/js/twocheckout-billing.js')
 
-
       .styles([
         bowers + 'owl-carousel/owl-carousel/owl.carousel.css',
         bowers + 'owl-carousel/owl-carousel/owl.theme.css'
         ], 'public/css/owl-carousel.css')
 
       .scripts([
-        bowers + 'jquery/dist/jquery.js',
+        // bowers + 'jquery/dist/jquery.js',
         'libs/home-video.js'
         ], 'public/js/home-video.js')      
 

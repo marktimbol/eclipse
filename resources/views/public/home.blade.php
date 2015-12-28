@@ -46,12 +46,11 @@
 			<div class="pattern pattern--hidden"></div>
 			
 			@foreach( $packages as $package )
-				@foreach( $package->photos as $photo )
-					<?php
-						$photoPath = $photo->path;
-					?>
-				@endforeach
-
+			
+				<?php
+					$photoPath = $package->photos[0]->path;
+				?>
+			
 				<div class="col s12 m4">
 					<div class="card wow fadeInUp" data-wow-delay="0.{{$package->id}}s">
 						<div class="card__container card__container--closed">
@@ -150,6 +149,6 @@
 @endsection
 
 @section('footer_scripts')
-	<script src="{{ elixir('js/home-video.js') }}"></script>
 	<script src="{{ elixir('js/triangle.js') }}"></script>
+	<script src="{{ elixir('js/home-video.js') }}"></script>
 @endsection
