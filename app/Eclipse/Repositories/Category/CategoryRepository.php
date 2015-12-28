@@ -11,6 +11,11 @@ class CategoryRepository implements CategoryRepositoryInterface {
 		return Category::with('packages')->latest()->get();
 	}
 
+	public function take($items)
+	{
+		return Category::with('packages')->take($items)->get();
+	}
+
 	public function find($id)
 	{
 		return Category::with('packages')->findOrFail($id);

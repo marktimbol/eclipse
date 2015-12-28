@@ -483,13 +483,13 @@ footer .footer__links li a:hover {
 }
 
 .menu ul .mega-menu {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
   display: none !important/9;
   position: absolute;
   top: 100%;
   width: 850px;
-  padding: 18px 11px;
+  padding: 18px 20px;
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-top: none;
@@ -506,7 +506,7 @@ footer .footer__links li a:hover {
   width: 200px;
 }
 
-.menu ul .mega-menu a {
+.menu ul .mega-menu .column a {
   color: #333;
   font-size: 12px;
   float: none;
@@ -514,26 +514,26 @@ footer .footer__links li a:hover {
   line-height: 2em;
 }
 
-.menu ul .mega-menu a:hover {
+.menu ul .mega-menu .column a:hover {
   text-decoration: underline !important;
 }
 
-.menu ul .mega-menu ol {
+.menu ul .mega-menu .column ol {
   padding-left: 0;
 }
 
-.menu ul .mega-menu ol li {
+.menu ul .mega-menu .column ol li {
   float: none;
 }
 
-.menu ul .mega-menu .card {
-  height: auto !important;
-  padding-bottom: 0 !important;
+.menu ul .mega-menu p .view-all {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.menu ul .mega-menu .card .card__title {
-  line-height: 1em;
-  font-size: 14px;
+.menu ul .mega-menu p .view-all:hover {
+  text-decoration: underline !important;
 }
 
 .menu ul li:hover .mega-menu {

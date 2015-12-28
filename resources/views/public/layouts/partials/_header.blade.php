@@ -18,7 +18,7 @@
 
 								<div class="mega-menu">
 										
-									@foreach( $categories->all()->chunk(4) as $categories )
+									@foreach( $categories->take(8)->chunk(4) as $categories )
 										
 										@foreach( $categories as $category )
 
@@ -40,6 +40,12 @@
 										@endforeach
 
 									@endforeach
+
+									<div class="clearfix"></div>
+									
+									<p class="text-center">
+										<a href="{{ route('packages') }}" class="view-all">View all packages</a>
+									</p>	
 
 								</div>
 							</li>							

@@ -25,14 +25,14 @@
         }               
 
         .mega-menu {
-            opacity: 1;
-            visibility: visible;
+            opacity: 0;
+            visibility: hidden;
             display: none ! important/9;
 
             position: absolute;
             top: 100%;
             width: 850px;
-            padding: 18px 11px;
+            padding: 18px 20px;
             background-color: #fff;
             border: 1px solid #e0e0e0;
             border-top: none;
@@ -51,34 +51,37 @@
             	margin-bottom: 20px;
 			    float: left;
 			    width: 200px;
+	            a {
+	            	color: #333;
+	            	font-size: 12px;
+	                float: none;
+	                padding: 0; 
+	                line-height: 2em;  
+	                &:hover {
+	                	text-decoration: underline !important;
+	                } 
+	            }
+
+	            ol {
+	            	padding-left: 0;
+	            	li {
+	            		float: none;
+	            	}
+	            }
+
             } 
-                    
-            a {
-            	color: #333;
-            	font-size: 12px;
-                float: none;
-                padding: 0; 
-                line-height: 2em;  
-                &:hover {
-                	text-decoration: underline !important;
-                } 
+                  
+            p {
+	            .view-all {
+	            	color: #333;
+	            	font-size: 14px;
+	            	font-weight: bold;
+	            	&:hover {
+	            		text-decoration: underline !important;
+	            	}
+	            }  	
             }
 
-            ol {
-            	padding-left: 0;
-            	li {
-            		float: none;
-            	}
-            }
-
-            .card {
-                height: auto !important;
-                padding-bottom: 0 !important;                
-                .card__title {
-                    line-height: 1em;
-                    font-size: 14px;
-                }
-            }
         } 
 
         li {
