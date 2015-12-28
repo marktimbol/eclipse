@@ -71,26 +71,6 @@
 											</li>
 										@endforeach	
 									</ul>
-
-{{-- 									@foreach( $categories->all() as $category )
-										<h6 class="filter-package__category">
-											<a href="{{ route('category', $category->slug) }}">
-												{{ $category->name }}
-											</a>
-										</h6>
-
-										@if( count( $category->packages ) )
-											<ul>
-												@foreach( $category->packages as $package )
-													<li>
-														<a href="{{ route('package', $package->slug) }}">
-															{{ $package->name }}
-														</a>
-													</li>
-												@endforeach
-											</ul>
-										@endif
-									@endforeach --}}
 								</div>
 							</div>
 						</div>

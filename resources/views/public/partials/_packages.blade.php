@@ -2,7 +2,7 @@
 	<div class="row">
 		<?php $count = 1; ?>
 		@foreach( $chunks as $package ) 
-			<div class="col m4 s12 wow fadeInLeft" data-wow-delay="0.{{$count}}s">
+			<div class="col m4 s12">
 				<div class="card">
 					<div class="card-image">
 						{!! beLazy($package->photos) !!}
