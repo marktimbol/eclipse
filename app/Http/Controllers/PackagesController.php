@@ -23,6 +23,11 @@ class PackagesController extends Controller
     	return view('public.packages.index', compact('packages'));
     }
 
+    public function indexVue()
+    {
+        return view('public.packages.index-vue');
+    }    
+
     public function package($package)
     {
     	$packages = $this->package->related($package->id);

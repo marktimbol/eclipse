@@ -16,7 +16,7 @@
 	@yield('header_styles')
 	
 </head>
-<body class="@yield('body_class')">
+<body class="@yield('body_class')" id="eclipseApp">
 
 	@include('public.layouts.partials._header', ['showLogo' => true])
 

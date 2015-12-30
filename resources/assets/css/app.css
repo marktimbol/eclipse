@@ -262,12 +262,21 @@ header #bottomRightCorner {
 }
 
 .filter-package ul {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .filter-package ul li {
   line-height: 1.5em;
   margin-bottom: 0;
+}
+
+.filter-package ul li .category__title {
+  color: #328fcc;
+  cursor: pointer;
+}
+
+.filter-package ul li ul {
+  margin-left: 10px;
 }
 
 .filter-package ul li a {

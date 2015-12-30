@@ -62,6 +62,15 @@ elixir(function(mix) {
         'libs/owl-carousel.js'
         ], 'public/js/owl-carousel.js')
 
+      .scripts([
+        bowers + 'vue/dist/vue.js',
+        bowers + 'vue-resource/dist/vue-resource.js'
+        ], 'public/js/vue.js')
+
+      .scripts([
+        'vue/package.js'
+        ], 'public/js/vue-package.js')
+
       .styles([
         'libs/triangle/card.css',
         'libs/triangle/pattern.css'
@@ -139,6 +148,10 @@ elixir(function(mix) {
       
       'css/owl-carousel.css',
       'js/owl-carousel.js',
+
+      'js/vue.js',
+
+      'js/vue-package.js',
 
       'css/admin.css',
       'js/admin.js',

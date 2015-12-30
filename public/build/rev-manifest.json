@@ -4,7 +4,7 @@
   "css/calendar.css": "css/calendar-ca3172a429.css",
   "css/dropzone.css": "css/dropzone-9d2912ce30.css",
   "css/owl-carousel.css": "css/owl-carousel-e62e6663ce.css",
-  "css/public.css": "css/public-1ca15a29e9.css",
+  "css/public.css": "css/public-dbd593c2e4.css",
   "css/triangle.css": "css/triangle-7727951a69.css",
   "js/accordion-menu.js": "js/accordion-menu-f48830f49a.js",
   "js/admin.js": "js/admin-3d23a4ad9f.js",
@@ -15,5 +15,7 @@
   "js/public.js": "js/public-f85c6e5600.js",
   "js/stripe-billing.js": "js/stripe-billing-90d81d9374.js",
   "js/triangle.js": "js/triangle-0358c5fc0d.js",
-  "js/twocheckout-billing.js": "js/twocheckout-billing-b891a40b4a.js"
+  "js/twocheckout-billing.js": "js/twocheckout-billing-b891a40b4a.js",
+  "js/vue-package.js": "js/vue-package-c86c858fed.js",
+  "js/vue.js": "js/vue-b6cf13a506.js"
 }

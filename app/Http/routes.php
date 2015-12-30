@@ -76,6 +76,7 @@ Route::get('contact', ['as' => 'contact', 'uses' => 'PagesController@contact']);
 /*========= PACKAGES or TOURS =========*/
 Route::get('category/{category}', ['as' => 'category', 'uses' => 'CategoriesController@getPackagesPerCategory']);
 Route::get('packages', ['as' => 'packages', 'uses' => 'PackagesController@index']);
+Route::get('packages-vue', ['as' => 'packages.vue', 'uses' => 'PackagesController@indexVue']);
 Route::get('package/{package}', ['as' => 'package', 'uses' => 'PackagesController@package']);
 
 /*========= CART =========*/
@@ -138,4 +139,37 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 	Route::resource('bookings', 'Admin\BookingsController');
 	
 });
+
+Route::group(['prefix' => 'api/v1'], function()
+{
+	Route::get('categories', ['as' => 'api.v1.categories', 'uses' => 'Api\CategoriesController@index']);
+
+	Route::get('packages', ['as' => 'api.v1.packages', 'uses' => 'Api\PackagesController@index']);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
