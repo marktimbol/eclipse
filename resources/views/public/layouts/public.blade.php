@@ -6,6 +6,7 @@
 	<meta name="publishable-key" content="{{ env('STRIPE_KEY') }}" />
 	<meta name="twocheckout-account-number" content="{{ env('TWOCHECKOUT_ACCOUNT_NUMBER') }}" />
 	<meta name="twocheckout-public-key" content="{{ env('TWOCHECKOUT_PUBLIC_KEY') }}" />
+	<meta name="uploads_path" content="{{ env('UPLOADS_PATH') }}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 {{-- 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> --}}
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>

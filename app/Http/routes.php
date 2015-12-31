@@ -76,7 +76,6 @@ Route::get('contact', ['as' => 'contact', 'uses' => 'PagesController@contact']);
 /*========= PACKAGES or TOURS =========*/
 Route::get('category/{category}', ['as' => 'category', 'uses' => 'CategoriesController@getPackagesPerCategory']);
 Route::get('packages', ['as' => 'packages', 'uses' => 'PackagesController@index']);
-Route::get('packages-vue', ['as' => 'packages.vue', 'uses' => 'PackagesController@indexVue']);
 Route::get('package/{package}', ['as' => 'package', 'uses' => 'PackagesController@package']);
 
 /*========= CART =========*/

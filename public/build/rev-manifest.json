@@ -1,11 +1,11 @@
 {
-  "css/accordion-menu.css": "css/accordion-menu-0f3b6d5e2e.css",
-  "css/admin.css": "css/admin-b654feb072.css",
-  "css/calendar.css": "css/calendar-ca3172a429.css",
-  "css/dropzone.css": "css/dropzone-9d2912ce30.css",
-  "css/owl-carousel.css": "css/owl-carousel-e62e6663ce.css",
-  "css/public.css": "css/public-dbd593c2e4.css",
-  "css/triangle.css": "css/triangle-7727951a69.css",
+  "css/accordion-menu.css": "css/accordion-menu-51652acc2e.css",
+  "css/admin.css": "css/admin-bd1137c033.css",
+  "css/calendar.css": "css/calendar-fc37176913.css",
+  "css/dropzone.css": "css/dropzone-b922773d30.css",
+  "css/owl-carousel.css": "css/owl-carousel-9d2383b376.css",
+  "css/public.css": "css/public-5ef987b5cf.css",
+  "css/triangle.css": "css/triangle-893082cc4a.css",
   "js/accordion-menu.js": "js/accordion-menu-f48830f49a.js",
   "js/admin.js": "js/admin-3d23a4ad9f.js",
   "js/calendar.js": "js/calendar-4f37b7111d.js",
@@ -15,7 +15,5 @@
   "js/public.js": "js/public-f85c6e5600.js",
   "js/stripe-billing.js": "js/stripe-billing-90d81d9374.js",
   "js/triangle.js": "js/triangle-0358c5fc0d.js",
-  "js/twocheckout-billing.js": "js/twocheckout-billing-b891a40b4a.js",
-  "js/vue-package.js": "js/vue-package-c86c858fed.js",
-  "js/vue.js": "js/vue-b6cf13a506.js"
+  "js/twocheckout-billing.js": "js/twocheckout-billing-b891a40b4a.js"
 }
