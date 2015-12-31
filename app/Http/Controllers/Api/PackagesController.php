@@ -21,4 +21,14 @@ class PackagesController extends Controller
     {
     	return $this->package->all();
     }
-}
+
+    public function package($package)
+    {
+    	return $package;
+    }
+
+    public function featuredPackages()
+    {
+        return $this->package->take(9);
+    }
+} 

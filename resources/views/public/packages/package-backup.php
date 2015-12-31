@@ -11,13 +11,11 @@
 @inject('time', 'Eclipse\Services\Time')
 
 @section('content')
-	
-
 	<div class="container">
 		<div class="row">
 			<div class="col m12 s12">
 				<div class="package">
-					<h1 class="package__title wow fadeInLeft">@{{ currentPackage.name }}</h1>
+					<h1 class="package__title wow fadeInLeft">{{ $package->name }}</h1>
 
 					<div class="row">
 						<div class="col m9 s12 wow fadeInLeft">
@@ -166,9 +164,6 @@
 			</div>
 		</div>
 	</div>
-
-	<input type="hidden" v-model="package_slug" value="{{ $package->slug }}" />
-
 @endsection
 
 @section('footer_scripts')

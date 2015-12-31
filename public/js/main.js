@@ -11289,6 +11289,85 @@ exports.default = {
 
 	props: ['package'],
 
+	components: {},
+
+	data: function data() {
+
+		return {
+
+			uploadsPath: $('meta[name="uploads_path"]').attr('content')
+
+		};
+	},
+
+	computed: {
+		imagePath: function imagePath() {
+
+			return this.uploadsPath + this.package.photos[0].path;
+		}
+	}
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col s12 m4\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__container card__container--closed\">\n\t\t\t\t<svg class=\"card__image\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 1920 500\" preserveAspectRatio=\"xMidYMid slice\">\n\t\t\t\t\t<defs>\n\t\t\t\t\t\t<clipPath id=\"clipPath{{ package.id }}\">\n\t\t\t\t\t\t\t<circle class=\"clip\" cx=\"960\" cy=\"250\" r=\"992\"></circle>\n\t\t\t\t\t\t</clipPath>\n\t\t\t\t\t</defs>\n\t\t\t\t\t<image clip-path=\"url(#clipPath{{ package.id }})\" width=\"1920\" height=\"650\" xlink:href=\"{{ imagePath }}\"></image>\n\t\t\t\t</svg>\n\t\t\t\t<div class=\"card__content\">\n\n\t\t\t\t\t<i class=\"card__btn-close fa fa-times\"></i>\n\t\t\t\t\n\t\t\t\t\t<div class=\"card__caption\">\n\t\t\t\t\t\t<h2 class=\"card__title\">{{ package.name }}</h2>\n\t\t\t\t\t\t<p class=\"card__subtitle\">{{ package.subtitle }}</p>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__copy\">\n\t\t\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t\t\t<div class=\"package\">\n\t\t\t\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t\t\t<div class=\"col m9 s12\">\n\t\t\t\t\t\t\t\t\t\t{{{ package.description }}}\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t<div class=\"col m3 s12\">\n\t\t\t\t\t\t\t\t\t\t<h3 class=\"package__price\">\n\t\t\t\t\t\t\t\t\t\t\t{{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t</h3>\n\n\t\t\t\t\t\t\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Adult:</strong> {{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Child:</strong> {{ package.child_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\t\t\t\t\t\t\t\t\tSubject for Availability\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t</ul>\n\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-large btn-block waves-effect waves-light blue\">View Package</a>\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"share-package\">\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<h6>Share this package</h6>\n\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\t\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\t\t\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackage.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":22,"vue-hot-reload-api":2}],27:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _FeaturedPackage = require('./FeaturedPackage.vue');
+
+var _FeaturedPackage2 = _interopRequireDefault(_FeaturedPackage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+	props: ['packages'],
+
+	components: {
+
+		FeaturedPackage: _FeaturedPackage2.default
+
+	}
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col s12 m12\">\n\t\t<h3 class=\"featured__package__title\">Featured Packages</h3>\n\t</div>\n\n\t<div class=\"pattern pattern--hidden\"></div>\n\n\t<featured-package v-for=\"package in packages\" :package=\"package\">\n\t</featured-package>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackages.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./FeaturedPackage.vue":26,"vue":22,"vue-hot-reload-api":2}],28:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+
+	props: ['package'],
+
 	data: function data() {
 
 		return {
@@ -11319,7 +11398,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],27:[function(require,module,exports){
+},{"vue":22,"vue-hot-reload-api":2}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11356,8 +11435,12 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Package.vue":26,"vue":22,"vue-hot-reload-api":2}],28:[function(require,module,exports){
+},{"./Package.vue":28,"vue":22,"vue-hot-reload-api":2}],30:[function(require,module,exports){
 'use strict';
+
+var _FeaturedPackages = require('./components/FeaturedPackages.vue');
+
+var _FeaturedPackages2 = _interopRequireDefault(_FeaturedPackages);
 
 var _CategoriesFilter = require('./components/CategoriesFilter.vue');
 
@@ -11379,6 +11462,8 @@ new Vue({
 
   components: {
 
+    FeaturedPackages: _FeaturedPackages2.default,
+
     CategoriesFilter: _CategoriesFilter2.default,
 
     PackageLists: _PackageLists2.default
@@ -11389,7 +11474,13 @@ new Vue({
 
     categories: [],
 
-    packages: []
+    packages: [],
+
+    featuredPackages: [],
+
+    currentPackage: [],
+
+    package_slug: ''
 
   },
 
@@ -11400,10 +11491,13 @@ new Vue({
     this.fetchCategories();
 
     this.fetchPackages();
+
+    this.fetchFeaturedPackages();
+
+    // this.getPackage();
   },
 
   methods: {
-
     fetchCategories: function fetchCategories() {
 
       this.$http.get('/api/v1/categories').then(function (response) {
@@ -11411,13 +11505,8 @@ new Vue({
         console.log('fetchCategories()');
 
         this.$set('categories', response.data);
-      }, function (response) {
-
-        //handle error here
-
       });
     },
-
     fetchPackages: function fetchPackages() {
 
       this.$http.get('/api/v1/packages').then(function (response) {
@@ -11425,13 +11514,30 @@ new Vue({
         console.log('fetchPackages()');
 
         this.$set('packages', response.data);
-      }, function (response) {});
-    }
+      });
+    },
+    fetchFeaturedPackages: function fetchFeaturedPackages() {
 
+      this.$http.get('/api/v1/featured-packages').then(function (response) {
+
+        console.log('fetchFeaturedPackages()');
+
+        this.$set('featuredPackages', response.data);
+      });
+    },
+    getPackage: function getPackage() {
+
+      this.$http.get('/api/v1/package/' + this.slug).then(function (response) {
+
+        console.log('getPackage()');
+
+        this.$set('currentPackage', response.data);
+      });
+    }
   }
 
 });
 
-},{"./components/CategoriesFilter.vue":23,"./components/PackageLists.vue":27,"vue":22,"vue-resource":7}]},{},[28]);
+},{"./components/CategoriesFilter.vue":23,"./components/FeaturedPackages.vue":27,"./components/PackageLists.vue":29,"vue":22,"vue-resource":7}]},{},[30]);
 
 //# sourceMappingURL=main.js.map

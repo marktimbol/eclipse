@@ -64,6 +64,7 @@ Event::listen('illuminate.query', function($query)
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
+Route::get('/home-vue', ['as' => 'home', 'uses' => 'PagesController@homeVue']);
 
 Route::post('change-currency', ['as' => 'change-currency', 'uses' => 'PagesController@changeCurrency']);
 
@@ -144,6 +145,10 @@ Route::group(['prefix' => 'api/v1'], function()
 	Route::get('categories', ['as' => 'api.v1.categories', 'uses' => 'Api\CategoriesController@index']);
 
 	Route::get('packages', ['as' => 'api.v1.packages', 'uses' => 'Api\PackagesController@index']);
+
+	Route::get('featured-packages', ['as' => 'api.v1.featured-packages', 'uses' => 'Api\PackagesController@featuredPackages']);
+
+	Route::get('package/{package}', ['as' => 'api.v1.package', 'uses' => 'Api\PackagesController@package']);
 });
 
 

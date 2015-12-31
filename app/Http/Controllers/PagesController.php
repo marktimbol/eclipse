@@ -20,11 +20,18 @@ class PagesController extends Controller
     public function home()
     {        
         setDefaultCurrency();
-
+        
         $packages = $this->package->take(9);
 
         return view('public.home', compact('packages'));
     }
+
+    public function homeVue()
+    {        
+        setDefaultCurrency();
+
+        return view('public.home-vue');
+    }    
     
     public function deals()
     {
