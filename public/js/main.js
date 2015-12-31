@@ -11198,7 +11198,7 @@ exports.default = {
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<h5 class=\"filter-package__title\">Filters</h5>\n\n\t<ul>\n\n\t\t<category v-for=\"category in categories\" :category=\"category\">\n\n\t\t</category>\n\n\t</ul>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<h5 class=\"filter-package__title\">Categories</h5>\n\n\t<ul>\n\n\t\t<category v-for=\"category in categories\" :category=\"category\">\n\n\t\t</category>\n\n\t</ul>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

@@ -1,6 +1,6 @@
 <template>
 
-	<h5 class="filter-package__title">Filters</h5>
+	<h5 class="filter-package__title">Categories</h5>
 
 	<ul>
 
