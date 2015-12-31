@@ -11344,7 +11344,7 @@ exports.default = {
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<package v-for=\"package in packages\" :package=\"package\"></package>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col m4 right\">\n\t\t<input type=\"text\" class=\"form-control\" v-model=\"filterPackage\" placeholder=\"Search package\">\n\t</div>\n\n\t<div class=\"clearfix\"></div>\n\n\t<hr>\n\n\t<package v-for=\"package in packages | filterBy filterPackage\" :package=\"package\"></package>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

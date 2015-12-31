@@ -2,7 +2,15 @@
 
 <template>
 
-	<package v-for="package in packages" :package="package"></package>
+	<div class="col m4 right">
+		<input type="text" class="form-control" v-model="filterPackage" placeholder="Search package" />
+	</div>
+
+	<div class="clearfix"></div>
+
+	<hr />
+
+	<package v-for="package in packages | filterBy filterPackage" :package="package"></package>
 
 </template>
 
