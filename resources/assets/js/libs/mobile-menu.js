@@ -1,4 +1,4 @@
-(function() {
+$(document).ready(function() {
 	var container = document.querySelector( 'div.container' ),
 		triggerBttn = document.getElementById( 'trigger-overlay' ),
 		overlay = document.querySelector( 'div.overlay' ),
@@ -40,4 +40,4 @@
 
 	triggerBttn.addEventListener( 'click', toggleOverlay );
 	closeBttn.addEventListener( 'click', toggleOverlay );
-})();
+});

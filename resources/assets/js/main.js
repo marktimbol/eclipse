@@ -3,9 +3,14 @@ var Vue = require('vue');
 
 Vue.use( require('vue-resource') );
 
+import MainMenu from './components/MainMenu.vue';
+import Slideshow from './components/Slideshow.vue';
 import FeaturedPackages from './components/FeaturedPackages.vue';
 import CategoriesFilter from './components/CategoriesFilter.vue';
 import PackageLists from './components/PackageLists.vue';
+import RelatedPackages from './components/RelatedPackages.vue';
+
+import AppFooter from './components/AppFooter.vue';
 
 new Vue({
 
@@ -13,11 +18,19 @@ new Vue({
 
 	components: { 
 
+        MainMenu,
+
+        Slideshow,
+
 		FeaturedPackages,
 
 		CategoriesFilter,
 
-		PackageLists
+		PackageLists,
+
+        RelatedPackages,
+
+        AppFooter
 
 	},
 

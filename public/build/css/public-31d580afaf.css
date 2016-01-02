@@ -13222,12 +13222,14 @@ header .logo {
 header #topLeftCorner {
   top: 0;
   left: 0;
-  background-position: top left; }
+  background-position: top left;
+  background-image: url("../../images/top-left-corner.png"); }
 
 header #bottomRightCorner {
   bottom: 0;
   right: 0;
-  background-position: bottom right; }
+  background-position: bottom right;
+  background-image: url("../../images/bottom-right-corner.png"); }
 
 header #topLeftCorner, header #bottomRightCorner {
   position: absolute;
@@ -13276,7 +13278,8 @@ header #topLeftCorner, header #bottomRightCorner {
     position: absolute;
     width: 40%;
     max-width: 500px;
-    margin-top: 60px; }
+    top: 20%;
+    left: 33%; }
     .slideshow #intro-title a {
       margin-top: 20px; }
 

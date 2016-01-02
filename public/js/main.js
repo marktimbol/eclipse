@@ -11180,6 +11180,40 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _OverlayMenu = require('./OverlayMenu.vue');
+
+var _OverlayMenu2 = _interopRequireDefault(_OverlayMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+	components: {
+
+		OverlayMenu: _OverlayMenu2.default
+
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<footer>\n\t\t<div class=\"container\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col m12\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<div class=\"col m2 s6\">\n\t\t\t\t\t\t\t<h5 class=\"footer__title\">Useful Links</h5>\n\t\t\t\t\t\t\t<ul class=\"footer__links\">\n\t\t\t\t\t\t\t\t<li><a href=\"#\">FAQs</a></li>\n\t\t\t\t\t\t\t\t<li><a href=\"#\">Terms &amp; Conditions</a></li>\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"col m2 s6\">\n\t\t\t\t\t\t\t<h5 class=\"footer__title\">Follow Us</h5>\n\t\t\t\t\t\t\t<ul class=\"footer__links\">\n\t\t\t\t\t\t\t\t<li><a href=\"#\">Twitter</a></li>\n\t\t\t\t\t\t\t\t<li><a href=\"#\">Facebook</a></li>\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\t\n\n\t\t\t\t\t\t<div class=\"col m3 s6\">\n\t\t\t\t\t\t\t<h5 class=\"footer__title\">Download our App</h5>\n\t\t\t\t\t\t\t<ul class=\"footer__links\">\n\t\t\t\t\t\t\t\t<li><a href=\"#\">iOS</a></li>\n\t\t\t\t\t\t\t\t<li><a href=\"#\">Android</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\t\n\n\t\t\t\t\t\t<div class=\"col m2 offset-m3\">\n\t\t\t\t\t\t\t<a href=\"http://expo2020dubai.ae/en/\" target=\"_blank\">\n\t\t\t\t\t\t\t\t<img v-bind=\"{src: '/images/dubai-expo-2020.png'}\" alt=\"Dubai Expo 2020\" class=\"right\">\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</div>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t</div>\n\t\t\t\t</div>\t\t\n\t\t\t</div>\n\t\t</div>\n\t</footer>\n\n\t<overlay-menu></overlay-menu>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/AppFooter.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./OverlayMenu.vue":31,"vue":22,"vue-hot-reload-api":2}],24:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _Category = require('./Category.vue');
 
 var _Category2 = _interopRequireDefault(_Category);
@@ -11203,14 +11237,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/CategoriesFilter.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/CategoriesFilter.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Category.vue":24,"vue":22,"vue-hot-reload-api":2}],24:[function(require,module,exports){
+},{"./Category.vue":25,"vue":22,"vue-hot-reload-api":2}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11248,14 +11282,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/Category.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/Category.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./CategoryPackages.vue":25,"vue":22,"vue-hot-reload-api":2}],25:[function(require,module,exports){
+},{"./CategoryPackages.vue":26,"vue":22,"vue-hot-reload-api":2}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11272,14 +11306,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/CategoryPackages.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/CategoryPackages.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],26:[function(require,module,exports){
+},{"vue":22,"vue-hot-reload-api":2}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11309,19 +11343,19 @@ exports.default = {
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col s12 m4\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__container card__container--closed\">\n\t\t\t\t<svg class=\"card__image\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 1920 500\" preserveAspectRatio=\"xMidYMid slice\">\n\t\t\t\t\t<defs>\n\t\t\t\t\t\t<clipPath id=\"clipPath{{ package.id }}\">\n\t\t\t\t\t\t\t<circle class=\"clip\" cx=\"960\" cy=\"250\" r=\"992\"></circle>\n\t\t\t\t\t\t</clipPath>\n\t\t\t\t\t</defs>\n\t\t\t\t\t<image clip-path=\"url(#clipPath{{ package.id }})\" width=\"1920\" height=\"650\" xlink:href=\"{{ imagePath }}\"></image>\n\t\t\t\t</svg>\n\t\t\t\t<div class=\"card__content\">\n\n\t\t\t\t\t<i class=\"card__btn-close fa fa-times\"></i>\n\t\t\t\t\n\t\t\t\t\t<div class=\"card__caption\">\n\t\t\t\t\t\t<h2 class=\"card__title\">{{ package.name }}</h2>\n\t\t\t\t\t\t<p class=\"card__subtitle\">{{ package.subtitle }}</p>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__copy\">\n\t\t\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t\t\t<div class=\"package\">\n\t\t\t\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t\t\t<div class=\"col m9 s12\">\n\t\t\t\t\t\t\t\t\t\t{{{ package.description }}}\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t<div class=\"col m3 s12\">\n\t\t\t\t\t\t\t\t\t\t<h3 class=\"package__price\">\n\t\t\t\t\t\t\t\t\t\t\t{{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t</h3>\n\n\t\t\t\t\t\t\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Adult:</strong> {{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Child:</strong> {{ package.child_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\t\t\t\t\t\t\t\t\tSubject for Availability\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t</ul>\n\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-large btn-block waves-effect waves-light blue\">View Package</a>\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"share-package\">\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<h6>Share this package</h6>\n\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\t\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\t\t\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col s12 m4\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__container card__container--closed\">\n\t\t\t\t<svg class=\"card__image\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 1920 500\" preserveAspectRatio=\"xMidYMid slice\">\n\t\t\t\t\t<defs>\n\t\t\t\t\t\t<clipPath id=\"clipPath{{ package.id }}\">\n\t\t\t\t\t\t\t<circle class=\"clip\" cx=\"960\" cy=\"250\" r=\"992\"></circle>\n\t\t\t\t\t\t</clipPath>\n\t\t\t\t\t</defs>\n\t\t\t\t\t<image clip-path=\"url(#clipPath{{ package.id }})\" width=\"1920\" height=\"650\" xlink:href=\"{{ imagePath }}\"></image>\n\t\t\t\t</svg>\n\t\t\t\t<div class=\"card__content\">\n\n\t\t\t\t\t<i class=\"card__btn-close fa fa-times\"></i>\n\t\t\t\t\n\t\t\t\t\t<div class=\"card__caption\">\n\t\t\t\t\t\t<h2 class=\"card__title\">{{ package.name }}</h2>\n\t\t\t\t\t\t<p class=\"card__subtitle\">{{ package.subtitle }}</p>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__copy\">\n\t\t\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t\t\t<div class=\"package\">\n\t\t\t\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t\t\t<div class=\"col m9 s12\">\n\t\t\t\t\t\t\t\t\t\t{{{ package.description }}}\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t<div class=\"col m3 s12\">\n\t\t\t\t\t\t\t\t\t\t<h3 class=\"package__price\">\n\t\t\t\t\t\t\t\t\t\t\t{{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t</h3>\n\n\t\t\t\t\t\t\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Adult:</strong> {{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Child:</strong> {{ package.child_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\t\t\t\t\t\t\t\t\tSubject for Availability\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t</ul>\n\n\t\t\t\t\t\t\t\t\t\t<a href=\"/package/{{ package.slug }}\" class=\"btn btn-large btn-block waves-effect waves-light blue\">View Package</a>\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"share-package\">\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<h6>Share this package</h6>\n\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\t\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\t\t\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackage.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackage.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],27:[function(require,module,exports){
+},{"vue":22,"vue-hot-reload-api":2}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11351,14 +11385,96 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackages.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackages.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./FeaturedPackage.vue":26,"vue":22,"vue-hot-reload-api":2}],28:[function(require,module,exports){
+},{"./FeaturedPackage.vue":27,"vue":22,"vue-hot-reload-api":2}],29:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _MegaMenu = require('./MegaMenu.vue');
+
+var _MegaMenu2 = _interopRequireDefault(_MegaMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+	props: ['categories'],
+
+	components: {
+
+		MegaMenu: _MegaMenu2.default
+
+	},
+
+	ready: function ready() {}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"navbar-fixed\">\n\t\t<nav>\n\t\t\t<div class=\"nav-wrapper\">\n\t\t\t\t<div class=\"menu top-menu right hide-on-small-and-down\">\n\t\t\t\t\t<ul class=\"menu\">\n\t\t\t\t\t\t<li><a href=\"/\">Home</a></li>\n\t\t\t\t\t\t<li><a href=\"/packages\">Packages</a>\n\t\t\t\t\t\t\t<mega-menu :categories=\"categories\"></mega-menu>\n\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\n\t\t\t\t\t\t<li><a href=\"/deals\">Deals</a></li>\n\t\t\t\t\t\t<li><a href=\"/tourist-information\">Tourist Info</a></li>\n\t\t\t\t\t\t<li><a href=\"/corporate\">Corporate</a></li>\n\t\t\t\t\t\t<li><a href=\"/about\">About</a></li>\n\t\t\t\t\t\t<li><a href=\"/contact\">Contact</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</nav>\n\t</div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/MainMenu.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./MegaMenu.vue":30,"vue":22,"vue-hot-reload-api":2}],30:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+
+	props: ['categories']
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"mega-menu\">\n\n\t\t<div class=\"column\" v-for=\"category in categories | limitBy 8\">\n\t\t\t<h6>{{ category.name }}</h6>\n\n\t\t\t<ol>\n\t\t\t\t<li v-for=\"package in category.packages\">\n\t\t\t\t\t<a href=\"/package/{{ package.slug }}\">\n\t\t\t\t\t\t{{ package.name }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ol>\n\t\t</div>\n\n\t</div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/MegaMenu.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":22,"vue-hot-reload-api":2}],31:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"overlay overlay-contentscale\">\n\t\t<button type=\"button\" class=\"overlay-close\">Close</button>\n\t\t<nav>\n\t\t\t<ul>\n\t\t\t\t<li><a href=\"/\">Home</a></li>\n\t\t\t\t<li><a href=\"/packages\">Packages</a></li>\n\t\t\t\t<li><a href=\"/deals\">Deals</a></li>\n\t\t\t\t<li><a href=\"/tourist-information\">Tourist Info</a></li>\n\t\t\t\t<li><a href=\"/corporate\">Corporate</a></li>\n\t\t\t\t<li><a href=\"/about\">About Us</a></li>\n\t\t\t\t<li><a href=\"/contact\">Contact Us</a></li>\n\t\t\t</ul>\n\t\t</nav>\n\t</div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/OverlayMenu.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":22,"vue-hot-reload-api":2}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11386,19 +11502,19 @@ exports.default = {
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col m4 s12\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card-image\">\n\t\t\t\t<img src=\"{{ imagePath }}\" alt=\"\">\n\t\t\t</div>\n\n\t\t\t<div class=\"card-action\">\n\t\t\t\t<a href=\"/package/{{ package.slug }}\">{{ package.name }}</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col m4 s12\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card-image\">\n\t\t\t\t<img v-bind=\"{src:imagePath}\" alt=\"{{ package.name }}\" title=\"{{ package.name }}\" class=\"img-responsive\">\n\t\t\t</div>\n\n\t\t\t<div class=\"card-action\">\n\t\t\t\t<a href=\"/package/{{ package.slug }}\">{{ package.name }}</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/Package.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/Package.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],29:[function(require,module,exports){
+},{"vue":22,"vue-hot-reload-api":2}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11428,15 +11544,109 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/PackageLists.vue"
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/PackageLists.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Package.vue":28,"vue":22,"vue-hot-reload-api":2}],30:[function(require,module,exports){
+},{"./Package.vue":32,"vue":22,"vue-hot-reload-api":2}],34:[function(require,module,exports){
 'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _Package = require('./Package.vue');
+
+var _Package2 = _interopRequireDefault(_Package);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+	props: ['packages'],
+
+	components: {
+
+		Package: _Package2.default
+
+	}
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<h4 class=\"package__related__title\">Related Packages</h4>\n\n\t<package v-for=\"package in packages | limitBy 3\" :package=\"package\"></package>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/RelatedPackages.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./Package.vue":32,"vue":22,"vue-hot-reload-api":2}],35:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	data: function data() {
+
+		return {
+
+			imagesPath: $('meta[name="images_path"]').attr('content'),
+
+			videosPath: $('meta[name="videos_path"]').attr('content')
+		};
+	},
+
+	computed: {
+		logoPath: function logoPath() {
+
+			return this.imagesPath + 'logo.png';
+		},
+		memorableExperiencePath: function memorableExperiencePath() {
+
+			return this.imagesPath + 'memorable-experience.png';
+		},
+		videoMp4Path: function videoMp4Path() {
+
+			return this.videosPath + 'video.mp4';
+		},
+		videoWebmPath: function videoWebmPath() {
+
+			return this.videosPath + 'video.webm';
+		}
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"slideshow\">\n\t\t\n\t\t<div id=\"topLeftCorner\"></div>\n\n\t\t<div class=\"logo\">\n\t\t\t<a href=\"/\">\n\t\t\t\t<img v-bind=\"{ src: logoPath }\" alt=\"Eclipse Tourism\" title=\"Eclipse Tourism\" class=\"img-responsive\">\n\t\t\t</a>\n\t\t</div>\n\n\t\t<div id=\"bottomRightCorner\"></div>\t\n\n\t\t<video id=\"top_video\" autoplay=\"\" loop=\"\" preload=\"\" muted=\"\" poster=\"\">\n\t\t\t<source v-bind=\"{ src: videoMp4Path }\" type=\"video/mp4\">\n\t\t\t<source v-bind=\"{ src: videoWebmPath }\" type=\"video/webm\">\n\t\t</video>\n\n\t\t<div id=\"intro-title\">\n\t\t\t<div>\n\t\t\t\t<img v-bind=\"{src: memorableExperiencePath}\" alt=\"A Memorable Experience\" title=\"A Memorable Experience\" class=\"img-responsive\">\n\t\t\t</div>\n\n\t\t\t<p>\n\t\t\t\t<a href=\"/packages\" class=\"btn waves-effect waves-light\">View our Packages</a>\n\t\t\t</p>\n\t\t</div>\n\n\t</div>\n\n\t<p>&nbsp;</p>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/Slideshow.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":22,"vue-hot-reload-api":2}],36:[function(require,module,exports){
+'use strict';
+
+var _MainMenu = require('./components/MainMenu.vue');
+
+var _MainMenu2 = _interopRequireDefault(_MainMenu);
+
+var _Slideshow = require('./components/Slideshow.vue');
+
+var _Slideshow2 = _interopRequireDefault(_Slideshow);
 
 var _FeaturedPackages = require('./components/FeaturedPackages.vue');
 
@@ -11450,6 +11660,14 @@ var _PackageLists = require('./components/PackageLists.vue');
 
 var _PackageLists2 = _interopRequireDefault(_PackageLists);
 
+var _RelatedPackages = require('./components/RelatedPackages.vue');
+
+var _RelatedPackages2 = _interopRequireDefault(_RelatedPackages);
+
+var _AppFooter = require('./components/AppFooter.vue');
+
+var _AppFooter2 = _interopRequireDefault(_AppFooter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Vue = require('vue');
@@ -11462,11 +11680,19 @@ new Vue({
 
   components: {
 
+    MainMenu: _MainMenu2.default,
+
+    Slideshow: _Slideshow2.default,
+
     FeaturedPackages: _FeaturedPackages2.default,
 
     CategoriesFilter: _CategoriesFilter2.default,
 
-    PackageLists: _PackageLists2.default
+    PackageLists: _PackageLists2.default,
+
+    RelatedPackages: _RelatedPackages2.default,
+
+    AppFooter: _AppFooter2.default
 
   },
 
@@ -11538,6 +11764,6 @@ new Vue({
 
 });
 
-},{"./components/CategoriesFilter.vue":23,"./components/FeaturedPackages.vue":27,"./components/PackageLists.vue":29,"vue":22,"vue-resource":7}]},{},[30]);
+},{"./components/AppFooter.vue":23,"./components/CategoriesFilter.vue":24,"./components/FeaturedPackages.vue":28,"./components/MainMenu.vue":29,"./components/PackageLists.vue":33,"./components/RelatedPackages.vue":34,"./components/Slideshow.vue":35,"vue":22,"vue-resource":7}]},{},[36]);
 
 //# sourceMappingURL=main.js.map

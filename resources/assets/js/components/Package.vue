@@ -5,8 +5,7 @@
 	<div class="col m4 s12">
 		<div class="card">
 			<div class="card-image">
-				<img src="{{ imagePath }}" alt="" 
-				/>
+				<img v-bind="{src:imagePath}" alt="{{ package.name }}" title="{{ package.name }}" class="img-responsive" />
 			</div>
 
 			<div class="card-action">

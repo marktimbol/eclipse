@@ -155,9 +155,9 @@
 					<div class="row">
 						<div class="col m12 s12">
 							<div class="package__related">
-								<h4 class="package__related__title">Related Packages</h4>
-							
-								@include('public.partials._packages')	
+
+								<related-packages :packages="packages"></related-packages>
+
 							</div>
 						
 						</div>				

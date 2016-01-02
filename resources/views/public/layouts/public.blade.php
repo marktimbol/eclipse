@@ -7,6 +7,8 @@
 	<meta name="twocheckout-account-number" content="{{ env('TWOCHECKOUT_ACCOUNT_NUMBER') }}" />
 	<meta name="twocheckout-public-key" content="{{ env('TWOCHECKOUT_PUBLIC_KEY') }}" />
 	<meta name="uploads_path" content="{{ env('UPLOADS_PATH') }}" />
+	<meta name="images_path" content="{{ env('IMAGES_PATH') }}" />
+	<meta name="videos_path" content="{{ env('VIDEOS_PATH') }}" />	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 {{-- 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> --}}
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
@@ -25,7 +27,7 @@
 
 	@include('public.partials._floating-cart')
 
-	@include('public.layouts.partials._footer')
+	<app-footer></app-footer>
 
 	<script src="{{ elixir('js/public.js') }}"></script>
 	<script src="{{ '/js/main.js' }}"></script>

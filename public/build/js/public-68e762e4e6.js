@@ -15774,7 +15774,7 @@ Picker.extend( 'pickadate', DatePicker )
     }
 });
 
-(function() {
+$(document).ready(function() {
 	var container = document.querySelector( 'div.container' ),
 		triggerBttn = document.getElementById( 'trigger-overlay' ),
 		overlay = document.querySelector( 'div.overlay' ),
@@ -15816,7 +15816,7 @@ Picker.extend( 'pickadate', DatePicker )
 
 	triggerBttn.addEventListener( 'click', toggleOverlay );
 	closeBttn.addEventListener( 'click', toggleOverlay );
-})();
+});
 $(document).ready(function() {
 
 	var currentDate = new Date();

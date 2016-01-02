@@ -10,7 +10,9 @@
 
 @section('content')
 
-	@include('public.partials._home-slideshow')
+	{{-- @include('public.partials._home-slideshow') --}}
+	
+	<slideshow></slideshow>
 	
 	<div class="container">
 		<div class="row">

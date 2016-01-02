@@ -64,7 +64,7 @@
 											</li>								
 										</ul>
 
-										<a href="#" class="btn btn-large btn-block waves-effect waves-light blue">View Package</a>
+										<a href="/package/{{ package.slug }}" class="btn btn-large btn-block waves-effect waves-light blue">View Package</a>
 
 										<div class="share-package">
 											
