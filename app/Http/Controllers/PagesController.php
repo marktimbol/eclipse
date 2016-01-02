@@ -17,7 +17,7 @@ class PagesController extends Controller
         $this->package = $package;
     }
 
-    public function home()
+    public function homeOld()
     {        
         setDefaultCurrency();
         
@@ -26,7 +26,7 @@ class PagesController extends Controller
         return view('public.home', compact('packages'));
     }
 
-    public function homeVue()
+    public function home()
     {        
         setDefaultCurrency();
 
