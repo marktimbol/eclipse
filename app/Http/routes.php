@@ -47,7 +47,6 @@ Route::get('confirm-booking-check', function()
 });
 
 
-
 Route::get('cart-instance', function(ShoppingCart $cart)
 {
 	return $cart->content();
@@ -58,13 +57,22 @@ Route::get('booking-instance', function(ShoppingCart $cart)
 	return $cart->contentBooking();
 });
 
+Route::get('clear-booking', function(ShoppingCart $booking)
+{
+	$booking->destroyBooking();
+});
+
+Route::get('clear-cart', function(ShoppingCart $cart)
+{
+	$cart->destroy();
+});
+
 Event::listen('illuminate.query', function($query)
 {
 	// var_dump($query);
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
-Route::get('/home-vue', ['as' => 'home', 'uses' => 'PagesController@homeVue']);
 
 Route::post('change-currency', ['as' => 'change-currency', 'uses' => 'PagesController@changeCurrency']);
 

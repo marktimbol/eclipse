@@ -1743,6 +1743,838 @@ module.exports = function (_) {
 };
 
 },{"./lib/url-template":17}],22:[function(require,module,exports){
+/**
+ * Import(s)
+ */
+
+var validates = require('./lib/validates')
+var _ = require('./lib/util')
+
+
+/**
+ * Export(s)
+ */
+
+module.exports = install
+
+
+/**
+ * Install plugin
+ */
+
+function install (Vue, options) {
+  options = options || {}
+  var componentName = options.component = options.component || '$validator'
+  var directiveName = options.directive = options.directive || 'validate'
+  var path = Vue.parsers.path
+  var util = Vue.util
+
+
+  // custom validators merge strategy setting
+  Vue.config.optionMergeStrategies.validator = function (parent, child, vm, k) {
+    var validatorOptions = { validates: {}, namespace: {} }
+    if (!parent && !child) {
+      return validatorOptions
+    } else if (!parent && child) {
+      util.extend(validatorOptions['validates'], child['validates'])
+      util.extend(validatorOptions['namespace'], child['namespace'])
+      return validatorOptions
+    } else if (parent && !child) {
+      util.extend(validatorOptions['validates'], parent['validates'])
+      util.extend(validatorOptions['namespace'], parent['namespace'])
+      return validatorOptions
+    } else if (parent && child) {
+      var key
+      if ('validates' in parent) {
+        util.extend(validatorOptions['validates'], parent['validates'])
+      }
+      if ('namespace' in parent) {
+        util.extend(validatorOptions['namespace'], parent['namespace'])
+      }
+      if ('validates' in child) {
+        for (key in child['validates']) {
+          if ('validates' in parent && !parent['validates'].hasOwnProperty(key)) {
+            validatorOptions['validates'][key] = child['validates'][key]
+          }
+        }
+      }
+      if ('namespace' in child) {
+        for (key in child['namespace']) {
+          if ('namespace' in parent && !parent['namespace'].hasOwnProperty(key)) {
+            validatorOptions['namespace'][key] = child['namespace'][key]
+          }
+        }
+      }
+      return validatorOptions
+    } else {
+      _.warn('unexpected validator option merge strategy')
+      return validatorOptions
+    }
+  }
+
+
+  function getVal (obj, keypath) {
+    var ret = null
+    try {
+      ret = path.get(obj, keypath)
+    } catch (e) { }
+    return ret
+  }
+
+
+  Vue.directive(directiveName, {
+
+    priority: 1024,
+
+    bind: function () {
+      var vm = this.vm
+      var el = this.el
+      var $validator = vm[componentName]
+      var keypath = this._keypath = this._parseModelAttribute(el.getAttribute(Vue.config.prefix + 'model'))
+      var validator = this.arg ? this.arg : this.expression
+      var arg = this.arg ? this.expression : null
+
+      var customs = _.getCustomValidators(vm.$options)
+      if (!this._checkValidator(validator, validates, customs)) {
+        _.warn("specified invalid '"
+          + validator + "' validator at v-validate directive !! please check '"
+          + validator + "' validator !!")
+        this._ignore = true
+        return
+      }
+
+      if (!$validator) {
+        vm[componentName] = $validator = vm.$addChild(
+          {}, // null option
+          Vue.extend(require('./lib/validator'))
+        )
+      }
+
+      var value = el.getAttribute('value')
+      if (el.getAttribute('number') !== null) {
+        value = util.toNumber(value)
+      }
+      this._init = value
+
+      var validation = $validator._getValidationNamespace('validation')
+      var init = value || vm.$get(keypath)
+      var readyEvent = el.getAttribute('wait-for')
+
+      if (readyEvent && !$validator._isRegistedReadyEvent(keypath)) {
+        $validator._addReadyEvents(keypath, this._checkParam('wait-for'))
+      }
+      
+      this._setupValidator($validator, keypath, validation, validator, el, arg, init)
+    },
+
+    update: function (val, old) {
+      if (this._ignore) { return }
+
+      var self = this
+      var vm = this.vm
+      var keypath = this._keypath
+      var validator = this.arg ? this.arg : this.expression
+      var $validator = vm[componentName]
+
+      $validator._changeValidator(keypath, validator, val)
+      if (!$validator._isRegistedReadyEvent(keypath)) { // normal
+        this._updateValidator($validator, validator, keypath)
+      } else { // wait-for
+        vm.$once($validator._getReadyEvents(keypath), function (val) {
+          $validator._setInitialValue(keypath, val)
+          vm.$set(keypath, val)
+          self._updateValidator($validator, validator, keypath)
+        })
+      }
+    },
+
+     
+    unbind: function () {
+      if (this._ignore) { return }
+
+      var vm = this.vm
+      var keypath = this._keypath
+      var validator = this.arg ? this.arg : this.expression
+      var $validator = vm[componentName]
+
+      this._teardownValidator(vm, $validator, keypath, validator)
+    },
+
+    _parseModelAttribute: function (attr) {
+      var res = Vue.parsers.directive.parse(attr)
+      return res[0].arg ? res[0].arg : res[0].expression
+    },
+
+    _checkValidator: function (validator, validates, customs) {
+      var items = Object.keys(validates).concat(Object.keys(customs))
+      return items.some(function (item) {
+        return item === validator
+      })
+    },
+
+    _setupValidator: function ($validator, keypath, validation, validator, el, arg, init) {
+      var vm = this.vm
+
+      if (!getVal($validator[validation], keypath)) {
+        $validator._defineModelValidationScope(keypath)
+        if (el.tagName === 'INPUT' && el.type === 'radio') {
+          if (getVal(vm, keypath) === init) {
+            $validator._setInitialValue(keypath, init)
+          }
+        } else {
+          $validator._setInitialValue(keypath, init)
+        }
+      }
+
+      if (!getVal($validator[validation], [keypath, validator].join('.'))) {
+        $validator._defineValidatorToValidationScope(keypath, validator)
+        $validator._addValidator(keypath, validator, getVal(vm, arg) || arg)
+      }
+    },
+
+    _updateValidator: function ($validator, validator, keypath) {
+      var value = $validator.$get(keypath)
+      var el = this.el
+
+      if (this._init) {
+        value = this._init
+        delete this._init
+      }
+
+      if (el.tagName === 'INPUT' && el.type === 'radio') {
+        if (value === $validator.$get(keypath)) {
+          $validator._updateDirtyProperty(keypath, value)
+        }
+      } else {
+        $validator._updateDirtyProperty(keypath, value)
+      }
+
+      $validator._doValidate(keypath, validator, $validator.$get(keypath))
+    },
+
+    _teardownValidator: function (vm, $validator, keypath, validator) {
+      $validator._undefineValidatorToValidationScope(keypath, validator)
+      $validator._undefineModelValidationScope(keypath, validator)
+    }
+  })
+}
+
+},{"./lib/util":23,"./lib/validates":24,"./lib/validator":25}],23:[function(require,module,exports){
+/**
+ * Utilties
+ */
+
+
+/**
+ * warn
+ *
+ * @param {String} msg
+ * @param {Error} [err]
+ *
+ */
+
+exports.warn = function (msg, err) {
+  if (window.console) {
+    console.warn('[vue-validator] ' + msg)
+    if (err) {
+      console.warn(err.stack)
+    }
+  }
+}
+
+/**
+ * Get target validatable object
+ *
+ * @param {Object} validation
+ * @param {String} keypath
+ * @return {Object} validatable object
+ */
+
+exports.getTarget = function (validation, keypath) {
+  var last = validation
+  var keys = keypath.split('.')
+  var key, obj
+  for (var i = 0; i < keys.length; i++) {
+    key = keys[i]
+    obj = last[key]
+    last = obj
+    if (!last) {
+      break
+    }
+  }
+  return last
+}
+
+/**
+ * Get custom validators
+ *
+ * @param {Object} options
+ * @return {Object}
+ */
+
+exports.getCustomValidators = function (options) {
+  var opts = options
+  var validators = {}
+  var key
+  var context
+  do {
+    if (opts['validator'] && opts['validator']['validates']) {
+      for (key in opts['validator']['validates']) {
+        if (!validators.hasOwnProperty(key)) {
+          validators[key] = opts['validator']['validates'][key]
+        }
+      }
+    }
+    context = opts._context || opts._parent
+    if (context) {
+      opts = context.$options
+    }
+  } while (context || opts._parent)
+  return validators
+}
+
+},{}],24:[function(require,module,exports){
+/**
+ * Fundamental validate functions
+ */
+
+
+/**
+ * required
+ *
+ * This function validate whether the value has been filled out.
+ *
+ * @param val
+ * @return {Boolean}
+ */
+
+function required (val) {
+  if (Array.isArray(val)) {
+    return val.length > 0
+  } else if (typeof val === 'number') {
+    return true
+  } else if ((val !== null) && (typeof val === 'object')) {
+    return Object.keys(val).length > 0
+  } else {
+    return !val
+      ? false
+      : true
+  }
+}
+
+
+/**
+ * pattern
+ *
+ * This function validate whether the value matches the regex pattern
+ *
+ * @param val
+ * @param {String} pat
+ * @return {Boolean}
+ */
+
+function pattern (val, pat) {
+  if (typeof pat !== 'string') { return false }
+
+  var match = pat.match(new RegExp('^/(.*?)/([gimy]*)$'))
+  if (!match) { return false }
+
+  return new RegExp(match[1], match[2]).test(val)
+}
+
+
+/**
+ * minLength
+ *
+ * This function validate whether the minimum length of the string.
+ *
+ * @param {String} val
+ * @param {String|Number} min
+ * @return {Boolean}
+ */
+
+function minLength (val, min) {
+  return typeof val === 'string' &&
+    isInteger(min, 10) &&
+    val.length >= parseInt(min, 10)
+}
+
+
+/**
+ * maxLength
+ *
+ * This function validate whether the maximum length of the string.
+ *
+ * @param {String} val
+ * @param {String|Number} max
+ * @return {Boolean}
+ */
+
+function maxLength (val, max) {
+  return typeof val === 'string' &&
+    isInteger(max, 10) &&
+    val.length <= parseInt(max, 10)
+}
+
+
+/**
+ * min
+ *
+ * This function validate whether the minimum value of the numberable value.
+ *
+ * @param {*} val
+ * @param {*} arg minimum
+ * @return {Boolean}
+ */
+
+function min (val, arg) {
+  return !isNaN(+(val)) && !isNaN(+(arg)) && (+(val) >= +(arg))
+}
+
+
+/**
+ * max
+ *
+ * This function validate whether the maximum value of the numberable value.
+ *
+ * @param {*} val
+ * @param {*} arg maximum
+ * @return {Boolean}
+ */
+
+function max (val, arg) {
+  return !isNaN(+(val)) && !isNaN(+(arg)) && (+(val) <= +(arg))
+}
+
+
+/**
+ * isInteger
+ *
+ * This function check whether the value of the string is integer.
+ *
+ * @param {String} val
+ * @return {Boolean}
+ * @private
+ */
+
+function isInteger (val) {
+  return /^(-?[1-9]\d*|0)$/.test(val)
+}
+
+
+/**
+ * export(s)
+ */
+module.exports = {
+  required: required,
+  pattern: pattern,
+  minLength: minLength,
+  maxLength: maxLength,
+  min: min,
+  max: max
+}
+
+},{}],25:[function(require,module,exports){
+/**
+ * Import(s)
+ */
+
+var validates = require('./validates')
+var _ = require('./util')
+
+
+/**
+ * Export(s)
+ */
+
+
+/**
+ * `v-validator` component with mixin
+ */
+
+module.exports = {
+  inherit: true,
+
+  created: function () {
+    this._initValidationVariables()
+    this._initOptions()
+    this._mixinCustomValidates()
+    this._defineProperties()
+    this._defineValidationScope()
+  },
+
+  methods: {
+    _getValidationNamespace: function (key) {
+      return this._namespace[key]
+    },
+
+    _initValidationVariables: function () {
+      this._validators = {}
+      this._validates = {}
+      this._initialValues = {}
+      for (var key in validates) {
+        this._validates[key] = validates[key]
+      }
+      this._validatorWatchers = {}
+      this._readyEvents = {}
+    },
+
+    _initOptions: function () {
+      this._namespace = getCustomNamespace(this.$options)
+      this._namespace.validation = this._namespace.validation || 'validation'
+      this._namespace.valid = this._namespace.valid || 'valid'
+      this._namespace.invalid = this._namespace.invalid || 'invalid'
+      this._namespace.dirty = this._namespace.dirty || 'dirty'
+    },
+
+    _mixinCustomValidates: function () {
+      var customs = _.getCustomValidators(this.$options)
+      for (var key in customs) {
+        this._validates[key] = customs[key]
+      }
+    },
+
+    _defineValidProperty: function (target, getter) {
+      Object.defineProperty(target, this._getValidationNamespace('valid'), {
+        enumerable: true,
+        configurable: true,
+        get: getter
+      })
+    },
+
+    _undefineValidProperty: function (target) {
+      delete target[this._getValidationNamespace('valid')]
+    },
+
+    _defineInvalidProperty: function (target) {
+      var self = this
+      Object.defineProperty(target, this._getValidationNamespace('invalid'), {
+        enumerable: true,
+        configurable: true,
+        get: function () {
+          return !target[self._getValidationNamespace('valid')]
+        }
+      })
+    },
+
+    _undefineInvalidProperty: function (target) {
+      delete target[this._getValidationNamespace('invalid')]
+    },
+
+    _defineDirtyProperty: function (target, getter) {
+      Object.defineProperty(target, this._getValidationNamespace('dirty'), {
+        enumerable: true,
+        configurable: true,
+        get: getter
+      })
+    },
+
+    _undefineDirtyProperty: function (target) {
+      delete target[this._getValidationNamespace('dirty')]
+    },
+
+    _defineProperties: function () {
+      var self = this
+
+      var walk = function (obj, propName, namespaces) {
+        var ret = false
+        var keys = Object.keys(obj)
+        var i = keys.length
+        var key, last
+        while (i--) {
+          key = keys[i]
+          last = obj[key]
+          if (!(key in namespaces) && typeof last === 'object') {
+            ret = walk(last, propName, namespaces)
+            if ((propName === self._getValidationNamespace('valid') && !ret) ||
+                (propName === self._getValidationNamespace('dirty') && ret)) {
+              break
+            }
+          } else if (key === propName && typeof last !== 'object') {
+            ret = last
+            if ((key === self._getValidationNamespace('valid') && !ret) ||
+                (key === self._getValidationNamespace('dirty') && ret)) {
+              break
+            }
+          }
+        }
+        return ret
+      }
+
+      this._defineValidProperty(this.$parent, function () {
+        var validationName = self._getValidationNamespace('validation')
+        var validName = self._getValidationNamespace('valid')
+        return walk(this[validationName], validName, self._namespace)
+      })
+
+      this._defineInvalidProperty(this.$parent)
+
+      this._defineDirtyProperty(this.$parent, function () {
+        var validationName = self._getValidationNamespace('validation')
+        var dirtyName = self._getValidationNamespace('dirty')
+        return walk(this[validationName], dirtyName, self._namespace)
+      })
+    },
+
+    _undefineProperties: function () {
+      this._undefineDirtyProperty(this.$parent)
+      this._undefineInvalidProperty(this.$parent)
+      this._undefineValidProperty(this.$parent)
+    },
+
+    _defineValidationScope: function () {
+      this.$parent.$add(this._getValidationNamespace('validation'), {})
+    },
+
+    _undefineValidationScope: function () {
+      var validationName = this._getValidationNamespace('validation')
+      this.$parent.$delete(validationName)
+    },
+
+    _defineModelValidationScope: function (keypath) {
+      var self = this
+      var validationName = this._getValidationNamespace('validation')
+      var dirtyName = this._getValidationNamespace('dirty')
+
+      var keys = keypath.split('.')
+      var last = this[validationName]
+      var obj, key
+      for (var i = 0; i < keys.length; i++) {
+        key = keys[i]
+        obj = last[key]
+        if (!obj) {
+          obj = {}
+          last.$add(key, obj)
+        }
+        last = obj
+      }
+      last.$add(dirtyName, false)
+
+      this._defineValidProperty(last, function () {
+        var ret = true
+        var validators = self._validators[keypath]
+        var i = validators.length
+        var validator
+        while (i--) {
+          validator = validators[i]
+          if (last[validator.name]) {
+            ret = false
+            break
+          }
+        }
+        return ret
+      })
+      this._defineInvalidProperty(last)
+      
+      this._validators[keypath] = []
+
+      this._watchModel(keypath, function (val, old) {
+        self._updateDirtyProperty(keypath, val)
+        self._validators[keypath].forEach(function (validator) {
+          self._doValidate(keypath, validator.name, val)
+        })
+      })
+    },
+
+    _undefineModelValidationScope: function (keypath, validator) {
+      if (this.$parent) {
+        var targetPath = [this._getValidationNamespace('validation'), keypath].join('.')
+        var target = this.$parent.$get(targetPath)
+        if (target && Object.keys(target).length === 3 &&
+            this._getValidationNamespace('valid') in target &&
+            this._getValidationNamespace('invalid') in target &&
+            this._getValidationNamespace('dirty') in target) {
+          this._unwatchModel(keypath)
+          this._undefineDirtyProperty(target)
+          this._undefineInvalidProperty(target)
+          this._undefineValidProperty(target)
+          removeValidationProperties(
+            this.$parent.$get(this._getValidationNamespace('validation')),
+            keypath
+          )
+        }
+      }
+    },
+
+    _defineValidatorToValidationScope: function (keypath, validator) {
+      var target = _.getTarget(this[this._getValidationNamespace('validation')], keypath)
+      target.$add(validator, null)
+    },
+
+    _undefineValidatorToValidationScope: function (keypath, validator) {
+      var validationName = this._getValidationNamespace('validation')
+      if (this.$parent) {
+        var targetPath = [validationName, keypath].join('.')
+        var target = this.$parent.$get(targetPath)
+        if (target) {
+          target.$delete(validator)
+        }
+      }
+    },
+
+    _getInitialValue: function (keypath) {
+      return this._initialValues[keypath]
+    },
+
+    _setInitialValue: function (keypath, val) {
+      this._initialValues[keypath] = val
+    },
+
+    _addValidator: function (keypath, validator, arg) {
+      this._validators[keypath].push({ name: validator, arg: arg })
+    },
+
+    _changeValidator: function (keypath, validator, arg) {
+      var validators = this._validators[keypath]
+      var i = validators.length
+      while (i--) {
+        if (validators[i].name === validator) {
+          validators[i].arg = arg
+          break
+        }
+      }
+    },
+
+    _findValidator: function (keypath, validator) {
+      var found = null
+      var validators = this._validators[keypath]
+      var i = validators.length
+      while (i--) {
+        if (validators[i].name === validator) {
+          found = validators[i]
+          break
+        }
+      }
+      return found
+    },
+
+    _watchModel: function (keypath, fn) {
+      this._validatorWatchers[keypath] =
+        this.$watch(keypath, fn, { deep: false, immediate: true })
+    },
+
+    _unwatchModel: function (keypath) {
+      var unwatch = this._validatorWatchers[keypath]
+      if (unwatch) {
+        unwatch()
+        delete this._validatorWatchers[keypath]
+      }
+    },
+    
+    _addReadyEvents: function (id, event) {
+      this._readyEvents[id] = event
+    },
+
+    _getReadyEvents: function (id) {
+      return this._readyEvents[id]
+    },
+
+    _isRegistedReadyEvent: function (id) {
+      return id in this._readyEvents
+    },
+
+    _updateDirtyProperty: function (keypath, val) {
+      var validationName = this._getValidationNamespace('validation')
+      var dirtyName = this._getValidationNamespace('dirty')
+
+      var target = _.getTarget(this[validationName], keypath)
+      if (target) {
+        target.$set(dirtyName, this._getInitialValue(keypath) !== val)
+      }
+    },
+
+    _doValidate: function (keypath, validateName, val) {
+      var validationName = this._getValidationNamespace('validation')
+
+      var target = _.getTarget(this[validationName], keypath)
+      var validator = this._findValidator(keypath, validateName)
+      if (target && validator) {
+        this._invokeValidator(
+          this._validates[validateName],
+          val, validator.arg,
+          function (result) {
+            target.$set(validateName, !result)
+          })
+      }
+    },
+    
+    _invokeValidator: function (validator, val, arg, fn) {
+      var future = validator.call(this, val, arg)
+      if (typeof future === 'function') { // async
+        if (future.resolved) {
+          // cached
+          fn(future.resolved)
+        } else if (future.requested) {
+          // pool callbacks
+          future.pendingCallbacks.push(fn)
+        } else {
+          future.requested = true
+          var fns = future.pendingCallbacks = [fn]
+          future(function resolve () {
+            future.resolved = true
+            for (var i = 0, l = fns.length; i < l; i++) {
+              fns[i](true)
+            }
+          }, function reject () {
+            fn(false)
+          })
+        }
+      } else { // sync
+        fn(future)
+      }
+    }
+  }
+}
+
+/**
+ * Remove properties from target validation
+ *
+ * @param {Object} validation
+ * @param {String} keypath
+ */
+
+function removeValidationProperties (validation, keypath) {
+  var keys = keypath.split('.')
+  var key, obj
+  while (keys.length) {
+    key = keys.pop()
+    if (keys.length !== 0) {
+      obj = _.getTarget(validation, keys.join('.'))
+      obj.$delete(key)
+    } else {
+      validation.$delete(key)
+    }
+  }
+}
+
+/**
+ * Get custom namespace
+ *
+ * @param {Object} options
+ * @return {Object}
+ */
+
+function getCustomNamespace (options) {
+  var namespace = {}
+  var key
+  var context
+  do {
+    if (options['validator'] && options['validator']['namespace']) {
+      for (key in options['validator']['namespace']) {
+        if (!namespace.hasOwnProperty(key)) {
+          namespace[key] = options['validator']['namespace'][key]
+        }
+      }
+    }
+    context = options._context || options._parent
+    if (context) {
+      options = context.$options
+    }
+  } while (context || options._parent)
+  return namespace
+}
+
+},{"./util":23,"./validates":24}],26:[function(require,module,exports){
 (function (process){
 /*!
  * Vue.js v1.0.13
@@ -11173,7 +12005,7 @@ if (process.env.NODE_ENV !== 'production' && inBrowser) {
 
 module.exports = Vue;
 }).call(this,require('_process'))
-},{"_process":1}],23:[function(require,module,exports){
+},{"_process":1}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11200,14 +12032,151 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/AppFooter.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/AppFooter.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./OverlayMenu.vue":31,"vue":22,"vue-hot-reload-api":2}],24:[function(require,module,exports){
+},{"./OverlayMenu.vue":36,"vue":26,"vue-hot-reload-api":2}],28:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+
+	props: ['package'],
+
+	data: function data() {
+
+		return {
+
+			siteUrl: $('meta[name="site_url"]').attr('content'),
+
+			token: $('meta[name="token"]').attr('content'),
+
+			timings: ['8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM', '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'],
+
+			bookedPackages: [],
+
+			buttonText: 'Book Now',
+
+			buttonIsEnabled: true,
+
+			bookAnewPackage: {
+
+				package_id: $('meta[name="package_id"]').attr('content'),
+
+				date: '',
+
+				date_submit: '',
+
+				time: '',
+
+				quantity: 1,
+
+				child_quantity: 0
+			}
+
+		};
+	},
+	ready: function ready() {},
+
+	methods: {
+		bookCurrentPackage: function bookCurrentPackage() {
+
+			this.buttonText = 'Processing...';
+
+			this.buttonIsEnabled = false;
+
+			if (this.bookAnewPackage.date == '') {
+
+				swal({
+					title: "Eclipse Tourism",
+					text: "Please select your required date.",
+					type: "error",
+					timer: 3000,
+					showConfirmButton: false
+				});
+
+				this.resetButtonState();
+
+				return;
+			}
+
+			if (this.bookAnewPackage.quantity < 1) {
+
+				swal({
+					title: "Eclipse Tourism",
+					text: "Adult quantity must be greater than zero.",
+					type: "error",
+					timer: 3000,
+					showConfirmButton: false
+				});
+
+				this.resetButtonState();
+
+				return;
+			}
+
+			return this.$http.post(this.formRoute, this.bookAnewPackage).then(function (response) {
+
+				this.bookedPackages.push(response.data);
+
+				this.resetButtonState();
+
+				swal({
+					title: "Eclipse Tourism",
+					text: "The Package has been successfully added to your cart.",
+					type: "success",
+					timer: 5000,
+					showConfirmButton: false
+				});
+			}, function (response) {
+
+				swal({
+					title: "Eclipse Tourism",
+					text: "There was some error in processing your request.",
+					type: "error",
+					timer: 3000,
+					showConfirmButton: false
+				});
+
+				this.resetButtonState();
+			});
+		},
+		resetButtonState: function resetButtonState() {
+
+			this.buttonText = 'Book Now';
+
+			this.buttonIsEnabled = true;
+		}
+	},
+
+	computed: {
+		formRoute: function formRoute() {
+
+			return this.package.confirm_availability ? this.siteUrl + 'booking' : this.siteUrl + 'cart';
+		}
+	}
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"book-a-package-form\">\n\n\t\t<h3 class=\"book-a-package-form__title\">Book this package</h3>\n\n\t\t\t<form method=\"POST\" @submit.prevent=\"bookCurrentPackage\">\n\n\t\t\t<input type=\"hidden\" name=\"_token\" value=\"{{ token }}\">\n\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col m12 mb-0\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<label for=\"date\">Preferred Date:</label>\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n\t\t\t\t\t\t\t<input type=\"text\" v-model=\"bookAnewPackage.date\" class=\"form-control datepicker\">\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"col m12 mb-0\" v-if=\"package.has_time_options\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<label for=\"time\">Preferred Time:</label>\n\t\t\t\t\t\t<select v-model=\"bookAnewPackage.time\" class=\"form-control\">\n\t\t\t\t\t\t\t<option value=\"\" disabled=\"\" selected=\"\">Choose your option</option>\n\t\t\t\t\t\t\t<option v-for=\"time in timings\" value=\"{{ time }}\">\n\t\t\t\t\t\t\t\t{{ time }}\n\t\t\t\t\t\t\t</option>\n\t\t\t\t\t\t</select>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\t\t\t\t\t\t\t\t\t\t\t\n\n\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<div class=\"col m6 s6 mb-0\">\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<label for=\"adult\">Adult</label>\n\t\t\t\t\t\t\t\t<select v-model=\"bookAnewPackage.quantity\" class=\"form-control\">\n\t\t\t\t\t\t\t\t\t<option v-for=\"quantity in 31\" value=\"{{ quantity }}\">\n\t\t\t\t\t\t\t\t\t\t{{ quantity }}\n\t\t\t\t\t\t\t\t\t</option>\n\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"col m6 s6 mb-0\">\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<label for=\"child\">Child</label>\n\t\t\t\t\t\t\t\t<select v-model=\"bookAnewPackage.child_quantity\" class=\"form-control\">\n\t\t\t\t\t\t\t\t\t<option v-for=\"quantity in 31\" value=\"{{ quantity }}\">\n\t\t\t\t\t\t\t\t\t\t{{ quantity }}\n\t\t\t\t\t\t\t\t\t</option>\n\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\n\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-large waves-effect waves-light full-width\" :class=\"{ 'disabled' : ! buttonIsEnabled }\">\n\t\t\t\t\t\t\t{{ buttonText }}\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</form>\n\n\t</div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/BookPackage.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":26,"vue-hot-reload-api":2}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11237,14 +12206,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/CategoriesFilter.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/CategoriesFilter.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Category.vue":25,"vue":22,"vue-hot-reload-api":2}],25:[function(require,module,exports){
+},{"./Category.vue":30,"vue":26,"vue-hot-reload-api":2}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11282,14 +12251,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/Category.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/Category.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./CategoryPackages.vue":26,"vue":22,"vue-hot-reload-api":2}],26:[function(require,module,exports){
+},{"./CategoryPackages.vue":31,"vue":26,"vue-hot-reload-api":2}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11306,14 +12275,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/CategoryPackages.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/CategoryPackages.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],27:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":2}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11323,13 +12292,14 @@ exports.default = {
 
 	props: ['package'],
 
-	components: {},
-
+	ready: function ready() {},
 	data: function data() {
 
 		return {
 
-			uploadsPath: $('meta[name="uploads_path"]').attr('content')
+			uploadsPath: $('meta[name="uploads_path"]').attr('content'),
+
+			currentCurrency: $('meta[name="current_currency"]').attr('content')
 
 		};
 	},
@@ -11343,19 +12313,19 @@ exports.default = {
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col s12 m4\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__container card__container--closed\">\n\t\t\t\t<svg class=\"card__image\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 1920 500\" preserveAspectRatio=\"xMidYMid slice\">\n\t\t\t\t\t<defs>\n\t\t\t\t\t\t<clipPath id=\"clipPath{{ package.id }}\">\n\t\t\t\t\t\t\t<circle class=\"clip\" cx=\"960\" cy=\"250\" r=\"992\"></circle>\n\t\t\t\t\t\t</clipPath>\n\t\t\t\t\t</defs>\n\t\t\t\t\t<image clip-path=\"url(#clipPath{{ package.id }})\" width=\"1920\" height=\"650\" xlink:href=\"{{ imagePath }}\"></image>\n\t\t\t\t</svg>\n\t\t\t\t<div class=\"card__content\">\n\n\t\t\t\t\t<i class=\"card__btn-close fa fa-times\"></i>\n\t\t\t\t\n\t\t\t\t\t<div class=\"card__caption\">\n\t\t\t\t\t\t<h2 class=\"card__title\">{{ package.name }}</h2>\n\t\t\t\t\t\t<p class=\"card__subtitle\">{{ package.subtitle }}</p>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__copy\">\n\t\t\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t\t\t<div class=\"package\">\n\t\t\t\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t\t\t<div class=\"col m9 s12\">\n\t\t\t\t\t\t\t\t\t\t{{{ package.description }}}\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t<div class=\"col m3 s12\">\n\t\t\t\t\t\t\t\t\t\t<h3 class=\"package__price\">\n\t\t\t\t\t\t\t\t\t\t\t{{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t</h3>\n\n\t\t\t\t\t\t\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Adult:</strong> {{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Child:</strong> {{ package.child_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\t\t\t\t\t\t\t\t\tSubject for Availability\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t</ul>\n\n\t\t\t\t\t\t\t\t\t\t<a href=\"/package/{{ package.slug }}\" class=\"btn btn-large btn-block waves-effect waves-light blue\">View Package</a>\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"share-package\">\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<h6>Share this package</h6>\n\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\t\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\t\t\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col s12 m4\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__container card__container--closed\">\n\t\t\t\t<svg class=\"card__image\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 1920 500\" preserveAspectRatio=\"xMidYMid slice\">\n\t\t\t\t\t<defs>\n\t\t\t\t\t\t<clipPath id=\"clipPath{{ package.id }}\">\n\t\t\t\t\t\t\t<circle class=\"clip\" cx=\"960\" cy=\"250\" r=\"992\"></circle>\n\t\t\t\t\t\t</clipPath>\n\t\t\t\t\t</defs>\n\t\t\t\t\t<image clip-path=\"url(#clipPath{{ package.id }})\" width=\"1920\" height=\"650\" xlink:href=\"{{ imagePath }}\"></image>\n\t\t\t\t</svg>\n\t\t\t\t<div class=\"card__content\">\n\n\t\t\t\t\t<i class=\"card__btn-close fa fa-times\"></i>\n\t\t\t\t\n\t\t\t\t\t<div class=\"card__caption\">\n\t\t\t\t\t\t<h2 class=\"card__title\">{{ package.name }}</h2>\n\t\t\t\t\t\t<p class=\"card__subtitle\">{{ package.subtitle }}</p>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__copy\">\n\t\t\t\t\t\t<div class=\"col m12 s12\">\n\t\t\t\t\t\t\t<div class=\"package\">\n\t\t\t\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t\t\t<div class=\"col m9 s12\">\n\t\t\t\t\t\t\t\t\t\t{{{ package.description }}}\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t<div class=\"col m3 s12\">\n\t\t\t\t\t\t\t\t\t\t<h3 class=\"package__price\">\n\t\t\t\t\t\t\t\t\t\t\t{{ package.adult_price | currency currentCurrency }}\n\t\t\t\t\t\t\t\t\t\t</h3>\n\n\t\t\t\t\t\t\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Adult:</strong> {{ package.adult_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\">\n\t\t\t\t\t\t\t\t\t\t\t\t<strong>Child:</strong> {{ package.child_price }}\n\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\t\t\t\t\t\t\t\t\tSubject for Availability\n\t\t\t\t\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t</ul>\n\n\t\t\t\t\t\t\t\t\t\t<a href=\"/package/{{ package.slug }}\" class=\"btn btn-large btn-block waves-effect waves-light blue\">View Package</a>\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"share-package\">\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<h6>Share this package</h6>\n\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\t\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\t\t\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackage.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackage.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],28:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":2}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11385,14 +12355,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackages.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/FeaturedPackages.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./FeaturedPackage.vue":27,"vue":22,"vue-hot-reload-api":2}],29:[function(require,module,exports){
+},{"./FeaturedPackage.vue":32,"vue":26,"vue-hot-reload-api":2}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11423,14 +12393,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/MainMenu.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/MainMenu.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./MegaMenu.vue":30,"vue":22,"vue-hot-reload-api":2}],30:[function(require,module,exports){
+},{"./MegaMenu.vue":35,"vue":26,"vue-hot-reload-api":2}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11447,14 +12417,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/MegaMenu.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/MegaMenu.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],31:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":2}],36:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11467,14 +12437,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/OverlayMenu.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/OverlayMenu.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],32:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":2}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11507,14 +12477,62 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/Package.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/Package.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],33:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":2}],38:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _BookPackage = require('./BookPackage.vue');
+
+var _BookPackage2 = _interopRequireDefault(_BookPackage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+	props: ['package'],
+
+	data: function data() {
+
+		return {
+
+			uploadsPath: $('meta[name="uploads_path"').attr('content'),
+
+			currentCurrency: $('meta[name="current_currency"]').attr('content')
+
+		};
+	},
+
+	components: {
+
+		BookPackage: _BookPackage2.default
+
+	}
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col m9 s12\">\n\n\t\t<h1 class=\"package__title\">{{ package.name }}</h1>\n\n\t\t<div v-for=\"photo in package.photos\">\n\t\t\t<img v-bind=\"{ src: uploadsPath + photo.path }\" alt=\"{{ package.name }}\" title=\"{{ package.name }}\" class=\"img-responsive img-rounded\">\n\t\t</div>\n\n\n\t\t<div class=\"package__description\">\n\t\t\t<h3>{{ package.subtitle }}</h3>\n\t\t\t<div v-html=\"package.description\"></div>\n\t\t</div>\n\n\t</div>\n\n\n\t<div class=\"col m3 s12\">\n\n\t\t<h3 class=\"package__price\">\n\t\t\t{{ package.adult_price | currency currentCurrency }}\n\t\t</h3>\n\n\t\t<ul class=\"collection\">\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Adult:</strong> {{ package.adult_price | currency currentCurrency }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Child:</strong> {{ package.child_price | currency currentCurrency }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\tSubject for Availability\n\t\t\t</li>\t\t\t\n\t\t</ul>\n\n\t\t<book-package :package=\"package\"></book-package>\n\n\t\t<div class=\"share-package\">\n\n\t\t\t<h6>Share this package</h6>\n\n\t\t</div>\t\t\n\n\t</div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/PackageInfo.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./BookPackage.vue":28,"vue":26,"vue-hot-reload-api":2}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11531,6 +12549,14 @@ exports.default = {
 
 	props: ['packages'],
 
+	data: function data() {
+
+		return {
+
+			filterPackage: ''
+		};
+	},
+
 	components: {
 
 		Package: _Package2.default
@@ -11544,14 +12570,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/PackageLists.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/PackageLists.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Package.vue":32,"vue":22,"vue-hot-reload-api":2}],34:[function(require,module,exports){
+},{"./Package.vue":37,"vue":26,"vue-hot-reload-api":2}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11581,14 +12607,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/RelatedPackages.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/RelatedPackages.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Package.vue":32,"vue":22,"vue-hot-reload-api":2}],35:[function(require,module,exports){
+},{"./Package.vue":37,"vue":26,"vue-hot-reload-api":2}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11630,14 +12656,14 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/mark/Desktop/code/eclipse/resources/assets/js/components/Slideshow.vue"
+  var id = "/Users/Mark/Desktop/code/eclipse/resources/assets/js/components/Slideshow.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":22,"vue-hot-reload-api":2}],36:[function(require,module,exports){
+},{"vue":26,"vue-hot-reload-api":2}],42:[function(require,module,exports){
 'use strict';
 
 var _MainMenu = require('./components/MainMenu.vue');
@@ -11660,6 +12686,10 @@ var _PackageLists = require('./components/PackageLists.vue');
 
 var _PackageLists2 = _interopRequireDefault(_PackageLists);
 
+var _PackageInfo = require('./components/PackageInfo.vue');
+
+var _PackageInfo2 = _interopRequireDefault(_PackageInfo);
+
 var _RelatedPackages = require('./components/RelatedPackages.vue');
 
 var _RelatedPackages2 = _interopRequireDefault(_RelatedPackages);
@@ -11673,6 +12703,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Vue = require('vue');
 
 Vue.use(require('vue-resource'));
+Vue.use(require('vue-validator'));
+
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="token"]').attr('content');
 
 new Vue({
 
@@ -11690,6 +12723,8 @@ new Vue({
 
     PackageLists: _PackageLists2.default,
 
+    PackageInfo: _PackageInfo2.default,
+
     RelatedPackages: _RelatedPackages2.default,
 
     AppFooter: _AppFooter2.default
@@ -11706,13 +12741,11 @@ new Vue({
 
     currentPackage: [],
 
-    package_slug: ''
+    package_slug: $('meta[name="package_slug"]').attr('content')
 
   },
 
   ready: function ready() {
-
-    // alert('Ready to go!');
 
     this.fetchCategories();
 
@@ -11720,7 +12753,7 @@ new Vue({
 
     this.fetchFeaturedPackages();
 
-    // this.getPackage();
+    this.getPackage();
   },
 
   methods: {
@@ -11753,17 +12786,19 @@ new Vue({
     },
     getPackage: function getPackage() {
 
-      this.$http.get('/api/v1/package/' + this.slug).then(function (response) {
+      if (this.package_slug) {
+        this.$http.get('/api/v1/package/' + this.package_slug).then(function (response) {
 
-        console.log('getPackage()');
+          console.log('getPackage()');
 
-        this.$set('currentPackage', response.data);
-      });
+          this.$set('currentPackage', response.data);
+        });
+      }
     }
   }
 
 });
 
-},{"./components/AppFooter.vue":23,"./components/CategoriesFilter.vue":24,"./components/FeaturedPackages.vue":28,"./components/MainMenu.vue":29,"./components/PackageLists.vue":33,"./components/RelatedPackages.vue":34,"./components/Slideshow.vue":35,"vue":22,"vue-resource":7}]},{},[36]);
+},{"./components/AppFooter.vue":27,"./components/CategoriesFilter.vue":29,"./components/FeaturedPackages.vue":33,"./components/MainMenu.vue":34,"./components/PackageInfo.vue":38,"./components/PackageLists.vue":39,"./components/RelatedPackages.vue":40,"./components/Slideshow.vue":41,"vue":26,"vue-resource":7,"vue-validator":22}]},{},[42]);
 
 //# sourceMappingURL=main.js.map

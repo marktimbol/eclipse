@@ -48,18 +48,20 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        if( ! $request->date )
-        {
-            flash()->error('Preferred Date!', 'Please select your preferred date.');
+        // if( ! $request->date )
+        // {
+        //     flash()->error('Preferred Date!', 'Please select your preferred date.');
             
-            return redirect()->back();
-        }
+        //     return redirect()->back();
+        // }
 
-        $this->dispatchFrom(AddItemInCart::class, $request);
+        // $this->dispatchFrom(AddItemInCart::class, $request);
 
-        flash()->success(companyName(), 'The Packages has been successfully added to your cart.');
+        // flash()->success(companyName(), 'The Packages has been successfully added to your cart.');
 
-        return redirect()->route('cart.index');
+        // return redirect()->route('cart.index');
+
+        return $this->dispatchFrom(AddItemInCart::class, $request);
 
     }
 

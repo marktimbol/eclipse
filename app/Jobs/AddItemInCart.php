@@ -21,7 +21,7 @@ class AddItemInCart extends Job implements SelfHandling
 
     public $time;
 
-    public function __construct($package_id, $quantity, $child_quantity, $date, $date_submit, $time = '')
+    public function __construct($package_id, $quantity, $child_quantity, $date, $date_submit = '', $time = '')
     {
         $this->package_id = $package_id;
         $this->quantity = $quantity;
@@ -40,20 +40,22 @@ class AddItemInCart extends Job implements SelfHandling
     {
         $selectedPackage = $package->find($this->package_id);
         
-        $cart->add([
+        $newItem = [
             'id'            => $selectedPackage->id,
             'name'          => $selectedPackage->name,
-            'qty'           => (int) $this->quantity, //adult_quantity
-            'price'         => $selectedPackage->adult_price,     //adult_price
+            'qty'           => (int) $this->quantity,               //adult_quantity
+            'price'         => $selectedPackage->adult_price,       //adult_price
             'options'       => [
                 'child_quantity'        => $this->child_quantity,
                 'date'                  => $this->date,
                 'date_submit'           => $this->date_submit,
                 'time'                  => $this->time ?: '',
-                //package option should be required, we're getting the child_price from
-                //here to compute the subtotal
                 'package'               => $selectedPackage 
             ]
-        ]);
+        ];
+
+        $cart->add($newItem);
+
+        return $newItem;
     }
 }

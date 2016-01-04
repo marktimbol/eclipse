@@ -17,20 +17,11 @@ class PagesController extends Controller
         $this->package = $package;
     }
 
-    public function homeOld()
-    {        
-        setDefaultCurrency();
-        
-        $packages = $this->package->take(9);
-
-        return view('public.home', compact('packages'));
-    }
-
     public function home()
     {        
         setDefaultCurrency();
 
-        return view('public.home-vue');
+        return view('public.home');
     }    
     
     public function deals()

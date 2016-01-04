@@ -11,7 +11,8 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct() {
+    public function __construct()
+    {
     	view()->share('currentUser', auth()->user());
     }
 }

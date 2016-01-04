@@ -19,7 +19,7 @@ class AddItemInBooking extends Job implements SelfHandling
 
     public $date_submit;
 
-    public function __construct($package_id, $quantity, $child_quantity, $date, $date_submit)
+    public function __construct($package_id, $quantity, $child_quantity, $date, $date_submit = '')
     {
         $this->package_id = $package_id;
         $this->quantity = $quantity;
@@ -36,8 +36,8 @@ class AddItemInBooking extends Job implements SelfHandling
     public function handle(PackageRepositoryInterface $package, ShoppingCart $cart)
     {
         $selectedPackage = $package->find($this->package_id);
-        
-        $cart->addBooking([
+            
+        $newItem = [
             'id'            => $selectedPackage->id,
             'name'          => $selectedPackage->name,
             'qty'           => (int) $this->quantity,               //adult_quantity
@@ -45,11 +45,13 @@ class AddItemInBooking extends Job implements SelfHandling
             'options'       => [
                 'child_quantity'        => $this->child_quantity,
                 'date'                  => $this->date,
-                'date_submit'           => $this->date_submit,
-                //package option should be required, we're getting the child_price from
-                //here to compute the subtotal                
+                'date_submit'           => $this->date_submit,          
                 'package'               => $selectedPackage
             ]
-        ]);
+        ];
+
+        $cart->addBooking($newItem);
+
+        return $newItem;
     }
 }

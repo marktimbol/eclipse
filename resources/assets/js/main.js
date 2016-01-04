@@ -2,15 +2,18 @@
 var Vue = require('vue');
 
 Vue.use( require('vue-resource') );
+Vue.use( require('vue-validator') );
 
 import MainMenu from './components/MainMenu.vue';
 import Slideshow from './components/Slideshow.vue';
 import FeaturedPackages from './components/FeaturedPackages.vue';
 import CategoriesFilter from './components/CategoriesFilter.vue';
 import PackageLists from './components/PackageLists.vue';
+import PackageInfo from './components/PackageInfo.vue';
 import RelatedPackages from './components/RelatedPackages.vue';
-
 import AppFooter from './components/AppFooter.vue';
+
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="token"]').attr('content');
 
 new Vue({
 
@@ -28,6 +31,8 @@ new Vue({
 
 		PackageLists,
 
+        PackageInfo,
+
         RelatedPackages,
 
         AppFooter
@@ -44,13 +49,11 @@ new Vue({
 
 		currentPackage: [],
 
-		package_slug: ''
+		package_slug: $('meta[name="package_slug"]').attr('content')
 
 	},
 
     ready() {
-
-    	// alert('Ready to go!');
 
     	this.fetchCategories();
 
@@ -58,7 +61,7 @@ new Vue({
 
     	this.fetchFeaturedPackages();
 
-    	// this.getPackage();
+    	this.getPackage();
 
     },
 
@@ -104,13 +107,16 @@ new Vue({
 
     	getPackage() {
 
-    		this.$http.get('/api/v1/package/' + this.slug).then(function(response) {
+            if( this.package_slug )
+            {
+                this.$http.get('/api/v1/package/' + this.package_slug).then(function(response) {
 
-    			console.log('getPackage()');
+                    console.log('getPackage()');
 
-    			this.$set('currentPackage', response.data);
+                    this.$set('currentPackage', response.data);
 
-    		});
+                });    
+            }
 
     	}
 

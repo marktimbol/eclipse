@@ -39,7 +39,7 @@
 
 									<div class="col m3 s12">
 										<h3 class="package__price">
-											{{ package.adult_price }}
+											{{ package.adult_price | currency currentCurrency }}
 										</h3>
 
 										<ul class="collection">
@@ -91,16 +91,19 @@
 
 		props: ['package'],
 
-		components: {
+		ready() {
 
 			
+
 		},
 
 		data() {
 
 			return {
 
-				uploadsPath: $('meta[name="uploads_path"]').attr('content')
+				uploadsPath: $('meta[name="uploads_path"]').attr('content'),
+
+				currentCurrency: $('meta[name="current_currency"]').attr('content')
 
 			}
 

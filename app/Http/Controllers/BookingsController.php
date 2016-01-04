@@ -26,18 +26,22 @@ class BookingsController extends Controller
 
     public function store(Request $request)
     {	
-        if( ! $request->date )
-        {
-            flash()->error('Preferred Date!', 'Please select your preferred date.');
+
+        // if( ! $request->date )
+        // {
+        //     flash()->error('Preferred Date!', 'Please select your preferred date.');
             
-            return redirect()->back();
-        }	
+        //     return redirect()->back();
+        // }	
 
-        $this->dispatchFrom(AddItemInBooking::class, $request);
+        // $this->dispatchFrom(AddItemInBooking::class, $request);
 
-        flash()->success(companyName(), 'The Packages has been successfully added to the booked items.');
+        // flash()->success(companyName(), 'The Packages has been successfully added to the booked items.');
 
-        return redirect()->route('booking.checkout');
+        // return redirect()->route('booking.checkout');
+
+        return $this->dispatchFrom(AddItemInBooking::class, $request);
+
     }	
 
     public function update(Request $request, $rowId)

@@ -23,6 +23,15 @@
 
 		props: ['packages'],
 
+		data() {
+
+			return {
+
+				filterPackage: ''
+			}
+
+		},
+
 		components: {
 
 			Package

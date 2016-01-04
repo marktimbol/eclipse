@@ -55,16 +55,12 @@ header {
 	    top: 0;
 	    left: 0;
 	    background-position: top left;    
-
-	    background-image: url('../../images/top-left-corner.png');
     }
 
     #bottomRightCorner {
 		bottom: 0;
 		right: 0;
 		background-position: bottom right;
-
-		background-image: url('../../images/bottom-right-corner.png');
     }    
 
     #topLeftCorner, #bottomRightCorner {
@@ -99,13 +95,17 @@ header {
     #topLeftCorner {
 	    top: 0;
 	    left: 0;
-	    background-position: top left;    	 
+	    background-position: top left;    	
+
+	    background-image: url('../../images/top-left-corner.png') !important; 
     }
 
     #bottomRightCorner {
 		bottom: 0;
 		right: 0;
 		background-position: bottom right;
+
+		background-image: url('../../images/bottom-right-corner.png') !important;
     }    
 
     #topLeftCorner, #bottomRightCorner {
@@ -147,9 +147,8 @@ header {
 
 	.package__price {
 		color: #333;
-		font-size: 50px;	
+		font-size: 36px;	
 		font-weight: bold;
-	    margin-top: 0;
 	    margin-bottom: 0;
 	    span {
 	    	font-size: 20px;
