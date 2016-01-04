@@ -590,6 +590,7 @@ header nav {
 
 @media screen and (max-width: 700px) {
   .slideshow {
+    height: 600px;
     background-image: url("../../images/video-cover-for-mobile.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -598,16 +599,19 @@ header nav {
       width: 70%; }
     .slideshow .logo {
       left: 20px;
-      top: 25px;
-      width: 34%;
-      max-width: none; }
+      top: 0;
+      width: 42%;
+      max-width: none;
+      z-index: 9999; }
     .slideshow #top_video {
       display: none; }
     .slideshow #intro-title {
-      width: 85%;
-      text-align: center; }
+      top: 30%;
+      left: 0;
+      width: 100%;
+      padding: 20px; }
       .slideshow #intro-title img {
-        width: 75%; } }
+        width: 100%; } }
 
 /* Define mobile styles */
 @media only screen and (max-width: 40em) {
