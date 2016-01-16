@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Eclipse\Repositories\Package\PackageRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -41,15 +42,17 @@ class PhotosController extends Controller
 
     protected function makeThumbnail(UploadedFile $photo)
     {   
-        $filename = sprintf('%s-%s', time(), $photo->getClientOriginalName()); //87947839749.jpg
+        $filename = sprintf('%s-%s', time(), str_replace(' ', '-', $photo->getClientOriginalName()));
 
         $image = Image::make($photo->getRealPath());
 
         $image->resize(800, null, function($constraint) {
-
             $constraint->aspectRatio();
-        
-        })->save( $this->fullPath($filename) );  
+        })
+        ->save( $this->fullPath($filename) )
+        ->stream();  
+
+        Storage::disk('s3')->put($this->uploadsDirectory . $filename, $image->__toString());
 
         return $filename;
         

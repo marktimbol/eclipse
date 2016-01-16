@@ -12,7 +12,8 @@
         "laravel/cashier": "~5.0",
         "laracasts/generators": "^1.1",
         "florianv/laravel-swap": "^0.1.0",
-        "2checkout/2checkout-php": "^0.3.0"
+        "2checkout/2checkout-php": "^0.3.0",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

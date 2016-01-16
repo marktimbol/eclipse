@@ -73,7 +73,6 @@ Event::listen('illuminate.query', function($query)
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
-
 Route::post('change-currency', ['as' => 'change-currency', 'uses' => 'PagesController@changeCurrency']);
 
 Route::get('deals', ['as' => 'deals', 'uses' => 'PagesController@deals']);

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Eclipse\Repositories\Package\PackageRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class PagesController extends Controller
 {
@@ -26,7 +28,17 @@ class PagesController extends Controller
     
     public function deals()
     {
-        return view('public.deals');
+        $command = Storage::disk('s3')->getDriver()->getAdapter()->getClient()->getCommand('GetObject', [
+            'Bucket'                     => env('S3_BUCKET'),
+            'Key'                        => 'images/uploads/1452846732-Desert-Safari.jpg',
+            'ResponseContentDisposition' => 'attachment;'
+        ]);
+
+        $request = Storage::disk('s3')->getDriver()->getAdapter()->getClient()->createPresignedRequest($command, '+5 minutes');
+
+        $path = $request->getUri();
+        
+        return view('public.deals', compact('path'));
     }
 
     public function touristInformation()
