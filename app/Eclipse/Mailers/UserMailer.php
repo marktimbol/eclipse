@@ -2,6 +2,7 @@
 
 namespace Eclipse\Mailers;
 
+use App\Message;
 use App\User;
 use Eclipse\Repositories\Booking\BookingRepositoryInterface;
 use Eclipse\Repositories\User\UserRepositoryInterface;
@@ -87,5 +88,14 @@ class UserMailer extends Mailer {
 		$this->sendTo($user->email, $subject, $view, $data);
 
 	}		
+
+	public function sendAutoReplyToTheEnquiry(Message $message)
+	{
+		$subject = 'Thank you for contacting Eclipse Tourism.';
+
+		$view = 'emails.auto-reply';
+
+		$this->sendTo($message->email, $subject, $view, [], $message);
+	}
 
 }

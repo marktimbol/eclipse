@@ -1,0 +1,27 @@
+.filter-package {
+	.filter-package__title {
+		color: #333;
+		margin-bottom: 30px;
+	}
+
+	ul {
+		margin-bottom: 20px;
+		li {
+			line-height: 1.5em;
+			margin-bottom: 0;
+
+			.category__title {
+				color: $blue;
+				cursor: pointer;
+			}
+
+			ul {
+				margin-left: 10px;
+			}
+
+			a {
+				color: #333;
+			}
+		}
+	}
+}

@@ -89,68 +89,43 @@
 
 
 <script>
-
 	export default {
-
 		props: ['package'],
-
 		data() {
-
 			return {
-
 				siteUrl: $('meta[name="site_url"]').attr('content'),
-
 				token: $('meta[name="token"]').attr('content'),
-
 				timings: [
 					'8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM',
 					'01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM',
 					'05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM', '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM',
 					'10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'
 				],
-
 				bookedPackages: [],
-
 				buttonText: 'Book Now',
-
 				buttonIsEnabled: true,
-
 				bookAnewPackage: {
-
 					package_id: $('meta[name="package_id"]').attr('content'),
-
 					date: '',
-
 					date_submit: '',
-
 					time: '',
-
 					quantity: 1,
-
 					child_quantity: 0
 				}
-
 			}
 		},
 
 		ready() {
-
-
-
+			console.log(this.formRoute);
 		},
 
 		methods: {
-
 			bookCurrentPackage() {
-
 				this.buttonText = 'Processing...';
-
 				this.buttonIsEnabled = false;
-
 
 				if( this.bookAnewPackage.date == '' )
 				{
-
 					swal({
 						title: "Eclipse Tourism",  
 						text: "Please select your required date.",  
@@ -183,9 +158,7 @@
 				}				
 
 				return this.$http.post(this.formRoute, this.bookAnewPackage).then(function(response) {
-
 					this.bookedPackages.push(response.data);
-
 					this.resetButtonState();
 
 					swal({
@@ -197,7 +170,6 @@
 					});
 
 				}, function(response) {
-
 					swal({
 						title: "Eclipse Tourism",  
 						text: "There was some error in processing your request.",  
@@ -207,29 +179,20 @@
 					});
 
 					this.resetButtonState();
-
 				});		
-
 			},
 
-
 			resetButtonState() {
-
 				this.buttonText = 'Book Now';
-
 				this.buttonIsEnabled = true;
 			}
 		},
 
 		computed: {
-
 			formRoute() {
-
 				return this.package.confirm_availability ? this.siteUrl + 'booking' : this.siteUrl + 'cart';
-
 			}
 		}
-
 
 	}
 

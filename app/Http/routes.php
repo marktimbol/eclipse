@@ -80,6 +80,7 @@ Route::get('tourist-information', ['as' => 'tourist-information', 'uses' => 'Pag
 Route::get('corporate', ['as' => 'corporate', 'uses' => 'PagesController@corporate']);
 Route::get('about', ['as' => 'about', 'uses' => 'PagesController@about']);
 Route::get('contact', ['as' => 'contact', 'uses' => 'PagesController@contact']);
+Route::post('contact', ['as' => 'contact.submit', 'uses' => 'PagesController@submitContact']);
 
 /*========= PACKAGES or TOURS =========*/
 Route::get('category/{category}', ['as' => 'category', 'uses' => 'CategoriesController@getPackagesPerCategory']);
@@ -138,11 +139,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 			]);		
 	
 	Route::resource('categories', 'Admin\CategoriesController');
-
 	Route::resource('packages', 'Admin\PackagesController');
-
 	Route::post('bookings/{booking_reference}/user/{user_id}/confirm', ['as' => 'bookings.confirm', 'uses' => 'Admin\BookingsController@confirm']);
-
 	Route::resource('bookings', 'Admin\BookingsController');
 	
 });
@@ -150,11 +148,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 Route::group(['prefix' => 'api/v1'], function()
 {
 	Route::get('categories', ['as' => 'api.v1.categories', 'uses' => 'Api\CategoriesController@index']);
-
 	Route::get('packages', ['as' => 'api.v1.packages', 'uses' => 'Api\PackagesController@index']);
-
 	Route::get('featured-packages', ['as' => 'api.v1.featured-packages', 'uses' => 'Api\PackagesController@featuredPackages']);
-
 	Route::get('package/{package}', ['as' => 'api.v1.package', 'uses' => 'Api\PackagesController@package']);
 });
 

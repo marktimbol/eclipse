@@ -14,7 +14,7 @@
 		</li>
 	</ul>
 </section> --}}
-
+	
 <div class="slideshow">
 	
 	<div id="topLeftCorner" 
@@ -33,20 +33,22 @@
 	>
 	</div>	
 
-	<video id="top_video" autoplay loop preload muted poster="">
-		<source src="{{ asset('videos/video.mp4') }}" type="video/mp4">
-		<source src="{{ asset('videos/video') }}" type="video/ogv">
-		<source src="{{ asset('videos/video.webm') }}" type="video/webm">
-	</video>
+	<div class="video_container">
+		<video id="top_video" autoplay loop preload muted poster="">
+			<source src="{{ asset('videos/video.mp4') }}" type="video/mp4">
+			<source src="{{ asset('videos/video') }}" type="video/ogv">
+			<source src="{{ asset('videos/video.webm') }}" type="video/webm">
+		</video>
 
-	<div id="intro-title">
-		<div>
-			{!! getPhoto('memorable-experience.png', 'A Memorable Experience', '') !!}
+		<div id="intro-title">
+			<div>
+				{!! getPhoto('memorable-experience.png', 'A Memorable Experience', '') !!}
+			</div>
+
+			<p>
+				<a href="{{ route('packages') }}" class="btn waves-effect waves-light">View our Packages</a>
+			</p>
 		</div>
-
-		<p>
-			<a href="{{ route('packages') }}" class="btn waves-effect waves-light">View our Packages</a>
-		</p>
 	</div>
 
 </div>

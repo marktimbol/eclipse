@@ -1,0 +1,11 @@
+.card {
+	.card-action {
+		a {
+			color: #333;
+			text-transform: capitalize;
+			&:hover {
+				color: #333;
+			}
+		}
+	}
+}

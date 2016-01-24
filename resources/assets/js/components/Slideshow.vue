@@ -16,7 +16,7 @@
 			<source v-bind="{ src: videoMp4Path }" type="video/mp4">
 			<source v-bind="{ src: videoWebmPath }" type="video/webm">
 		</video>
-
+		
 		<div id="intro-title">
 			<div>
 				<img 
@@ -30,7 +30,7 @@
 				<a href="/packages" class="btn waves-effect waves-light">View our Packages</a>
 			</p>
 		</div>
-
+	
 	</div>
 
 	<p>&nbsp;</p>

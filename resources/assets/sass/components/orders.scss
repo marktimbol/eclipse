@@ -1,0 +1,32 @@
+.orders {
+
+	.orders__title {
+		a {
+			color: #aaa;
+		}
+	}
+	.order {
+		display: flex;
+	    margin-bottom: 20px;
+	    padding-bottom: 20px;	
+
+		.order__image {
+			margin-right: 10px;
+		}
+
+		.order__title {
+			font-size: 16px;
+			margin-top: 0;
+		}
+
+		.order__price {
+		    font-size: 18px;
+		    font-weight: bold;		
+		}
+	}
+
+	.orders__total {
+		font-weight: bold;
+		text-align: center;
+	}	
+}

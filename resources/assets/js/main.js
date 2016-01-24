@@ -20,106 +20,62 @@ new Vue({
 	el: '#eclipseApp',
 
 	components: { 
-
         MainMenu,
-
         Slideshow,
-
 		FeaturedPackages,
-
 		CategoriesFilter,
-
 		PackageLists,
-
         PackageInfo,
-
         RelatedPackages,
-
         AppFooter
-
 	},
 
 	data: {
-
 		categories: [],
-
 		packages: [],
-
 		featuredPackages: [],
-
 		currentPackage: [],
-
 		package_slug: $('meta[name="package_slug"]').attr('content')
-
 	},
 
     ready() {
-
     	this.fetchCategories();
-
     	this.fetchPackages();
-
     	this.fetchFeaturedPackages();
-
     	this.getPackage();
-
     },
 
     methods: {
-
     	fetchCategories() {
-
 			this.$http.get('/api/v1/categories').then(function (response) {
-
 				console.log('fetchCategories()');
-
 				this.$set('categories', response.data)
-
-
 			});
-
     	},
 
     	fetchPackages() {
-
     		this.$http.get('/api/v1/packages').then(function( response) {
-
     			console.log('fetchPackages()');
-
     			this.$set('packages', response.data);
-
     		});
 
     	},
 
     	fetchFeaturedPackages() {
-
     		this.$http.get('/api/v1/featured-packages').then(function( response) {
-
     			console.log('fetchFeaturedPackages()');
-
     			this.$set('featuredPackages', response.data);
-
     		});
 
     	},
 
-
     	getPackage() {
-
-            if( this.package_slug )
-            {
+            if( this.package_slug ) {
                 this.$http.get('/api/v1/package/' + this.package_slug).then(function(response) {
-
                     console.log('getPackage()');
-
                     this.$set('currentPackage', response.data);
-
                 });    
             }
-
     	}
-
     }
-
 })

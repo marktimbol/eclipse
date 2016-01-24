@@ -1,0 +1,46 @@
+header {
+	a {
+		font-size: 1em;
+		&:hover {
+			color: white;
+			text-decoration: none !important;
+		}
+	}
+
+	nav {
+		background: $blue;
+		background-color: $blue;
+	}
+
+    .logo {
+	    z-index: 9999;
+	    position: absolute;
+	    left: 10px;
+	    top: 10px;
+	    width: 24%;
+	    max-width: 250px;  	 	
+    }   	
+
+    #topLeftCorner {
+	    top: 0;
+	    left: 0;
+	    background-position: top left;    
+    }
+
+    #bottomRightCorner {
+		bottom: 0;
+		right: 0;
+		background-position: bottom right;
+    }    
+
+    #topLeftCorner, #bottomRightCorner {
+	    position: absolute;
+	    max-width: 600px;
+	    max-height: 350px;
+	    width: 50%;
+	    height: 40%;
+	    background-size: contain;
+	    background-repeat: no-repeat;	    
+    }  	
+
+}

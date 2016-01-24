@@ -9,6 +9,8 @@ use Eclipse\Repositories\Booking\BookingRepository;
 use Eclipse\Repositories\Booking\BookingRepositoryInterface;
 use Eclipse\Repositories\Category\CategoryRepository;
 use Eclipse\Repositories\Category\CategoryRepositoryInterface;
+use Eclipse\Repositories\Messages\MessageRepository;
+use Eclipse\Repositories\Messages\MessageRepositoryInterface;
 use Eclipse\Repositories\Package\PackageRepository;
 use Eclipse\Repositories\Package\PackageRepositoryInterface;
 use Eclipse\Repositories\User\UserRepository;
@@ -40,5 +42,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(BookingRepositoryInterface::class, BookingRepository::class);
         $this->app->bind(BillingGateway::class, StripeBilling::class);
+        $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
     }
 }

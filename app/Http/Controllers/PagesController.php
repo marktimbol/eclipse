@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Http\Requests\SendMessageRequest;
+use App\Jobs\SendMessage;
 use Eclipse\Repositories\Package\PackageRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -38,12 +40,9 @@ class PagesController extends Controller
 
         $request = Storage::disk('s3')->getDriver()->getAdapter()->getClient()->createPresignedRequest($command, '+5 minutes');
 
-        $imagePath = $request->getUri();
+        $path = $request->getUri();
 
-        return $imagePath;
-
-
-        return view('public.deals', compact('path'));
+        return view('public.deals');
     }
 
     public function touristInformation()
@@ -64,6 +63,14 @@ class PagesController extends Controller
     public function contact()
     {
     	return view('public.contact');
+    }
+
+    public function submitContact(SendMessageRequest $request)
+    {
+        $this->dispatchFrom(SendMessage::class, $request);
+        flash()->overlay( companyName(), 'Your inquiry was sent successfully. One of our customer representative will get back to you soon.');
+
+        return redirect()->route('contact');
     }
 
     public function changeCurrency(Request $request)

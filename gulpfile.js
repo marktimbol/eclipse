@@ -33,14 +33,14 @@ elixir(function(mix) {
           'app.js'
       ], 'public/js/public.js')
 
-      .styles([
-        'libs/accordion-menu.css'
-        ], 'public/css/accordion-menu.css')
+      // .styles([
+      //   'libs/accordion-menu.css'
+      //   ], 'public/css/accordion-menu.css')
 
-      .scripts([
-        'libs/multilevel-accordion.js',
-        'libs/accordion-menu.js'
-        ], 'public/js/accordion-menu.js')
+      // .scripts([
+      //   'libs/multilevel-accordion.js',
+      //   'libs/accordion-menu.js'
+      //   ], 'public/js/accordion-menu.js')
 
       .scripts([
         'libs/stripe-billing.js'
@@ -54,15 +54,15 @@ elixir(function(mix) {
         bowers + 'owl-carousel/owl-carousel/owl.carousel.css',
         bowers + 'owl-carousel/owl-carousel/owl.theme.css'
         ], 'public/css/owl-carousel.css')
-
-      .scripts([
-        'libs/home-video.js'
-        ], 'public/js/home-video.js')      
-
+      
       .scripts([
         bowers + 'owl-carousel/owl-carousel/owl.carousel.js',
         'libs/owl-carousel.js'
         ], 'public/js/owl-carousel.js')
+
+      .scripts([
+        'libs/home-video.js'
+        ], 'public/js/home-video.js')      
 
       .styles([
         'libs/triangle/card.css',
@@ -129,8 +129,8 @@ elixir(function(mix) {
       'css/public.css',
       'js/public.js',
 
-      'css/accordion-menu.css',
-      'js/accordion-menu.js',
+      // 'css/accordion-menu.css',
+      // 'js/accordion-menu.js',
 
       'js/stripe-billing.js',
       'js/twocheckout-billing.js',

@@ -33,7 +33,12 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\BookingWasConfirmed' => [
             'App\Listeners\SendBookingConfirmation',
-        ],                                    
+        ],  
+
+        'App\Events\UserSubmittedAnEnquiry' => [
+            'App\Listeners\SendEnquiryToAdmin',
+            'App\Listeners\SendAutoReplyToTheEnquiry'
+        ],  
     ];
 
     /**

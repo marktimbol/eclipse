@@ -1,0 +1,44 @@
+.package {
+
+	.package__title {
+	    font-size: 40px;
+	    margin-bottom: 20px;
+	}
+
+	.package__price {
+		color: #333;
+		font-size: 36px;	
+		font-weight: bold;
+	    margin-bottom: 0;
+	    span {
+	    	font-size: 20px;
+	    }
+	}
+
+    .package__price__notice {
+    	font-size: 13px;
+    }
+
+	.package__description {
+		h3 {
+			font-size: 2rem;
+		}
+
+		ul {
+			margin-left: 20px;
+			li {
+				list-style: disc;
+			}
+		}
+	}
+
+	.package__related {
+		.package__related__title {
+			font-size: 2rem;
+		}
+	}
+
+	.share-package {
+		margin-top: 20px;
+	}
+}

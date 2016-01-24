@@ -31,26 +31,28 @@
 					<div class="row">
 						<div class="col s12 m6">
 							<h3>Send us a message</h3>
-							<form method="POST" action="#">
+							@include('errors.forms')
+
+							<form method="POST" action="{{ route('contact.submit') }}">
 								{!! csrf_field() !!}
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input type="text" name="name" id="name" class="form-control" placeholder="Full Name" />
+									<input type="text" name="name" id="name" class="form-control" placeholder="Full Name" value="{{ old('name') }}" />
 								</div>
 
 								<div class="form-group">
 									<label for="email">eMail</label>
-									<input type="email" name="email" id="email" class="form-control" placeholder="Email Address" />
+									<input type="email" name="email" id="email" class="form-control" placeholder="Email Address" value="{{ old('email') }}" />
 								</div>
 
 								<div class="form-group">
 									<label for="phone">Phone</label>
-									<input type="text" name="phone" id="phone" class="form-control" placeholder="Contact Number" />
+									<input type="text" name="phone" id="phone" class="form-control" placeholder="Contact Number" value="{{ old('phone') }}" />
 								</div>
 
 								<div class="form-group">
 									<label for="message">Message</label>
-									<textarea name="message" class="form-control" rows="5" placeholder="Ask us questions"></textarea>
+									<textarea name="message" class="form-control" rows="5" placeholder="Ask us questions">{{ old('message') }}</textarea>
 								</div>
 
 								<div class="form-group">

@@ -12046,53 +12046,35 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = {
-
 	props: ['package'],
-
 	data: function data() {
-
 		return {
-
 			siteUrl: $('meta[name="site_url"]').attr('content'),
-
 			token: $('meta[name="token"]').attr('content'),
-
 			timings: ['8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM', '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'],
-
 			bookedPackages: [],
-
 			buttonText: 'Book Now',
-
 			buttonIsEnabled: true,
-
 			bookAnewPackage: {
-
 				package_id: $('meta[name="package_id"]').attr('content'),
-
 				date: '',
-
 				date_submit: '',
-
 				time: '',
-
 				quantity: 1,
-
 				child_quantity: 0
 			}
-
 		};
 	},
-	ready: function ready() {},
+	ready: function ready() {
+		console.log(this.formRoute);
+	},
 
 	methods: {
 		bookCurrentPackage: function bookCurrentPackage() {
-
 			this.buttonText = 'Processing...';
-
 			this.buttonIsEnabled = false;
 
 			if (this.bookAnewPackage.date == '') {
-
 				swal({
 					title: "Eclipse Tourism",
 					text: "Please select your required date.",
@@ -12122,9 +12104,7 @@ exports.default = {
 			}
 
 			return this.$http.post(this.formRoute, this.bookAnewPackage).then(function (response) {
-
 				this.bookedPackages.push(response.data);
-
 				this.resetButtonState();
 
 				swal({
@@ -12135,7 +12115,6 @@ exports.default = {
 					showConfirmButton: false
 				});
 			}, function (response) {
-
 				swal({
 					title: "Eclipse Tourism",
 					text: "There was some error in processing your request.",
@@ -12148,16 +12127,13 @@ exports.default = {
 			});
 		},
 		resetButtonState: function resetButtonState() {
-
 			this.buttonText = 'Book Now';
-
 			this.buttonIsEnabled = true;
 		}
 	},
 
 	computed: {
 		formRoute: function formRoute() {
-
 			return this.package.confirm_availability ? this.siteUrl + 'booking' : this.siteUrl + 'cart';
 		}
 	}
@@ -12498,29 +12474,20 @@ var _BookPackage2 = _interopRequireDefault(_BookPackage);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-
 	props: ['package'],
-
 	data: function data() {
-
 		return {
-
 			uploadsPath: $('meta[name="uploads_path"').attr('content'),
-
 			currentCurrency: $('meta[name="current_currency"]').attr('content')
-
 		};
 	},
 
 	components: {
-
 		BookPackage: _BookPackage2.default
-
 	}
-
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col m9 s12\">\n\n\t\t<h1 class=\"package__title\">{{ package.name }}</h1>\n\n\t\t<div v-for=\"photo in package.photos\">\n\t\t\t<img v-bind=\"{ src: uploadsPath + photo.path }\" alt=\"{{ package.name }}\" title=\"{{ package.name }}\" class=\"img-responsive img-rounded\">\n\t\t</div>\n\n\n\t\t<div class=\"package__description\">\n\t\t\t<h3>{{ package.subtitle }}</h3>\n\t\t\t<div v-html=\"package.description\"></div>\n\t\t</div>\n\n\t</div>\n\n\n\t<div class=\"col m3 s12\">\n\n\t\t<h3 class=\"package__price\">\n\t\t\t{{ package.adult_price | currency currentCurrency }}\n\t\t</h3>\n\n\t\t<ul class=\"collection\">\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Adult:</strong> {{ package.adult_price | currency currentCurrency }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Child:</strong> {{ package.child_price | currency currentCurrency }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\tSubject for Availability\n\t\t\t</li>\t\t\t\n\t\t</ul>\n\n\t\t<book-package :package=\"package\"></book-package>\n\n\t\t<div class=\"share-package\">\n\n\t\t\t<h6>Share this package</h6>\n\n\t\t</div>\t\t\n\n\t</div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"col m9 s12\">\n\n\t\t<h1 class=\"package__title\">{{ package.name }}</h1>\n\n\t\t<div v-for=\"photo in package.photos\">\n\t\t\t<img v-bind=\"{ src: uploadsPath + photo.path }\" alt=\"{{ package.name }}\" title=\"{{ package.name }}\" class=\"img-responsive img-rounded\">\n\t\t</div>\n\n\t\t<div class=\"package__description\">\n\t\t\t<h3>{{ package.subtitle }}</h3>\n\t\t\t<div v-html=\"package.description\"></div>\n\t\t</div>\n\n\t</div>\n\n\n\t<div class=\"col m3 s12\">\n\n\t\t<h3 class=\"package__price\">\n\t\t\t{{ package.adult_price | currency currentCurrency }}\n\t\t</h3>\n\n\t\t<span class=\"package__price__notice\"><em>Prices are subject to change without prior notice</em></span>\n\n\t\t<ul class=\"collection\">\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Departs:</strong> {{ package.departs }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Returns:</strong> {{ package.returns }}\n\t\t\t</li>\t\t\t\t\t\t\t\t\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Duration:</strong> {{ package.duration }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Adult:</strong> {{ package.adult_price | currency currentCurrency }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\">\n\t\t\t\t<strong>Child:</strong> {{ package.child_price | currency currentCurrency }}\n\t\t\t</li>\n\t\t\t<li class=\"collection-item\" v-if=\"package.confirm_availability\">\n\t\t\t\tSubject for Availability\n\t\t\t</li>\t\t\t\n\t\t</ul>\n\n\t\t<book-package :package=\"package\"></book-package>\n\n\t\t<div class=\"share-package\">\n\t\t\t<h6>Share this package</h6>\n\t\t</div>\t\t\n\n\t</div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -12651,7 +12618,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"slideshow\">\n\t\t\n\t\t<div id=\"topLeftCorner\"></div>\n\n\t\t<div class=\"logo\">\n\t\t\t<a href=\"/\">\n\t\t\t\t<img v-bind=\"{ src: logoPath }\" alt=\"Eclipse Tourism\" title=\"Eclipse Tourism\" class=\"img-responsive\">\n\t\t\t</a>\n\t\t</div>\n\n\t\t<div id=\"bottomRightCorner\"></div>\t\n\n\t\t<video id=\"top_video\" autoplay=\"\" loop=\"\" preload=\"\" muted=\"\" poster=\"\">\n\t\t\t<source v-bind=\"{ src: videoMp4Path }\" type=\"video/mp4\">\n\t\t\t<source v-bind=\"{ src: videoWebmPath }\" type=\"video/webm\">\n\t\t</video>\n\n\t\t<div id=\"intro-title\">\n\t\t\t<div>\n\t\t\t\t<img v-bind=\"{src: memorableExperiencePath}\" alt=\"A Memorable Experience\" title=\"A Memorable Experience\" class=\"img-responsive\">\n\t\t\t</div>\n\n\t\t\t<p>\n\t\t\t\t<a href=\"/packages\" class=\"btn waves-effect waves-light\">View our Packages</a>\n\t\t\t</p>\n\t\t</div>\n\n\t</div>\n\n\t<p>&nbsp;</p>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n\t<div class=\"slideshow\">\n\t\t\n\t\t<div id=\"topLeftCorner\"></div>\n\n\t\t<div class=\"logo\">\n\t\t\t<a href=\"/\">\n\t\t\t\t<img v-bind=\"{ src: logoPath }\" alt=\"Eclipse Tourism\" title=\"Eclipse Tourism\" class=\"img-responsive\">\n\t\t\t</a>\n\t\t</div>\n\n\t\t<div id=\"bottomRightCorner\"></div>\t\n\n\t\t<video id=\"top_video\" autoplay=\"\" loop=\"\" preload=\"\" muted=\"\" poster=\"\">\n\t\t\t<source v-bind=\"{ src: videoMp4Path }\" type=\"video/mp4\">\n\t\t\t<source v-bind=\"{ src: videoWebmPath }\" type=\"video/webm\">\n\t\t</video>\n\t\t\n\t\t<div id=\"intro-title\">\n\t\t\t<div>\n\t\t\t\t<img v-bind=\"{src: memorableExperiencePath}\" alt=\"A Memorable Experience\" title=\"A Memorable Experience\" class=\"img-responsive\">\n\t\t\t</div>\n\n\t\t\t<p>\n\t\t\t\t<a href=\"/packages\" class=\"btn waves-effect waves-light\">View our Packages</a>\n\t\t\t</p>\n\t\t</div>\n\t\n\t</div>\n\n\t<p>&nbsp;</p>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -12712,91 +12679,59 @@ new Vue({
   el: '#eclipseApp',
 
   components: {
-
     MainMenu: _MainMenu2.default,
-
     Slideshow: _Slideshow2.default,
-
     FeaturedPackages: _FeaturedPackages2.default,
-
     CategoriesFilter: _CategoriesFilter2.default,
-
     PackageLists: _PackageLists2.default,
-
     PackageInfo: _PackageInfo2.default,
-
     RelatedPackages: _RelatedPackages2.default,
-
     AppFooter: _AppFooter2.default
-
   },
 
   data: {
-
     categories: [],
-
     packages: [],
-
     featuredPackages: [],
-
     currentPackage: [],
-
     package_slug: $('meta[name="package_slug"]').attr('content')
-
   },
 
   ready: function ready() {
-
     this.fetchCategories();
-
     this.fetchPackages();
-
     this.fetchFeaturedPackages();
-
     this.getPackage();
   },
 
   methods: {
     fetchCategories: function fetchCategories() {
-
       this.$http.get('/api/v1/categories').then(function (response) {
-
         console.log('fetchCategories()');
-
         this.$set('categories', response.data);
       });
     },
     fetchPackages: function fetchPackages() {
-
       this.$http.get('/api/v1/packages').then(function (response) {
-
         console.log('fetchPackages()');
-
         this.$set('packages', response.data);
       });
     },
     fetchFeaturedPackages: function fetchFeaturedPackages() {
-
       this.$http.get('/api/v1/featured-packages').then(function (response) {
-
         console.log('fetchFeaturedPackages()');
-
         this.$set('featuredPackages', response.data);
       });
     },
     getPackage: function getPackage() {
-
       if (this.package_slug) {
         this.$http.get('/api/v1/package/' + this.package_slug).then(function (response) {
-
           console.log('getPackage()');
-
           this.$set('currentPackage', response.data);
         });
       }
     }
   }
-
 });
 
 },{"./components/AppFooter.vue":27,"./components/CategoriesFilter.vue":29,"./components/FeaturedPackages.vue":33,"./components/MainMenu.vue":34,"./components/PackageInfo.vue":38,"./components/PackageLists.vue":39,"./components/RelatedPackages.vue":40,"./components/Slideshow.vue":41,"vue":26,"vue-resource":7,"vue-validator":22}]},{},[42]);

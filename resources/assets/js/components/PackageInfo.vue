@@ -1,5 +1,3 @@
-
-
 <template>
 
 	<div class="col m9 s12">
@@ -15,7 +13,6 @@
 				/>
 		</div>
 
-
 		<div class="package__description">
 			<h3>{{ package.subtitle }}</h3>
 			<div v-html="package.description"></div>
@@ -29,6 +26,8 @@
 		<h3 class="package__price">
 			{{ package.adult_price | currency currentCurrency }}
 		</h3>
+
+		<span class="package__price__notice"><em>Prices are subject to change without prior notice</em></span>
 
 		<ul class="collection">
 			<li class="collection-item">
@@ -54,40 +53,28 @@
 		<book-package :package="package"></book-package>
 
 		<div class="share-package">
-
 			<h6>Share this package</h6>
-
 		</div>		
 
 	</div>
 
 </template>
 
-
 <script>
 
 	import BookPackage from './BookPackage.vue';
 
 	export default {
-
 		props: ['package'],
-
 		data() {
-
 			return {
-
 				uploadsPath: $('meta[name="uploads_path"').attr('content'),
-
 				currentCurrency: $('meta[name="current_currency"]').attr('content')
-
 			}
 		},
 
 		components: {
-
 			BookPackage
-			
 		}
-
 	}
 </script>	

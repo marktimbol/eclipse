@@ -1,0 +1,25 @@
+footer {
+	background: $yellow;
+	padding: 20px;
+	margin-top: 50px;
+
+	.footer__title {
+		color: black;
+		font-size: 20px;
+	}
+
+	.footer__links {
+		list-style: none;
+		margin-left: 0;
+		padding-left: 0;
+		li {
+			a {
+				color: black;
+				font-size: 13px;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

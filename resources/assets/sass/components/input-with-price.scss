@@ -1,0 +1,17 @@
+.input-with-price {
+	position: relative;
+
+	span {
+	    position: absolute;
+	    color: #ddd;
+	    top: 7px;
+	    right: 10px;	
+
+	    &.current-currency {
+			font-size: 10px;
+			position: relative;
+			top: 0;
+			right: 0;
+	    }	
+	}
+}

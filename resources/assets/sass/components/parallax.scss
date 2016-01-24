@@ -1,0 +1,18 @@
+.parallax {
+	display: flex;
+	align-items: center;
+	align-content: center;	
+
+	img {
+		z-index: -1;
+	}
+
+	.parallax__title {
+		margin-top: 0;
+	}
+
+	.white-transparent {
+		background: rgba(255,255,255,0.8);
+		padding: 20px;
+	}
+}
