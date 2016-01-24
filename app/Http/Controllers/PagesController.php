@@ -28,16 +28,21 @@ class PagesController extends Controller
     
     public function deals()
     {
+        $filename = 'images/uploads/1452846732-Desert-Safari.jpg';
+
         $command = Storage::disk('s3')->getDriver()->getAdapter()->getClient()->getCommand('GetObject', [
             'Bucket'                     => env('S3_BUCKET'),
-            'Key'                        => 'images/uploads/1452846732-Desert-Safari.jpg',
+            'Key'                        => $filename,
             'ResponseContentDisposition' => 'attachment;'
         ]);
 
         $request = Storage::disk('s3')->getDriver()->getAdapter()->getClient()->createPresignedRequest($command, '+5 minutes');
 
-        $path = $request->getUri();
-        
+        $imagePath = $request->getUri();
+
+        return $imagePath;
+
+
         return view('public.deals', compact('path'));
     }
 

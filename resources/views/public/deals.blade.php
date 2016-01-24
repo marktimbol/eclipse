@@ -12,6 +12,7 @@
 
 				<div class="page__description">
 					<p>Coming soon.</p>
+					<img src="{{ $path }}" alt="" title="" width="800" />
 				</div>
 
 			</div>
